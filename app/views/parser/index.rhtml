@@ -1,0 +1,66 @@
+<%= render_partial 'shared/header' %>
+<center>
+<%= image_tag("yubnub") %>
+<div style="margin-top:30px;margin-bottom:30px">
+  <%= render_partial 'shared/input_box', nil, 'size' => 55 %>
+</div>
+<table>
+  <tr><td>Some examples of what you can do with YubNub:</td></tr>
+  <tr><td>
+    <table style="border-top:thin solid #60A63A;border-bottom:thin solid #60A63A;">
+      <tr>
+        <td>
+          <a href="/parser/parse?command=gim+porsche+911">gim porsche 911</a>
+        </td>
+        <td class="hint">
+          Do a Google Image search for Porsche 911's.
+        </td>
+        <td>
+          <a href="/parser/parse?command=create">create</a>
+        </td>
+        <td class="hint">
+          Create a new command<span style="vertical-align: super; font-size: x-small; color: red;">Cool!</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/parser/parse?command=random+100">random 100</a>
+        </td>
+        <td class="hint">
+          Pick a random number between 1 and 100.
+        </td>
+        <td>
+          <a href="/parser/parse?command=ls">ls</a>
+        </td>
+        <td class="hint">
+          List all available commands.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/parser/parse?command=man+random">man random</a>
+        </td>
+        <td class="hint">
+          Display help for the "random" command.
+        </td>
+        <td colspan="2">
+          <a href="/parser/parse?command=xe+-amount+100+-from+USD+-to+EUR">xe -amount 100 -from USD -to EUR</a>
+        </td>
+      </tr>
+    </table>
+  </td></tr>
+  <tr><td style="padding-top:20px">Popular Searches</td></tr>
+  <tr><td>
+    <table class="hint" width="100%" style="border-top:thin solid #60A63A;border-bottom:thin solid #60A63A;">
+      <tr><td>Google</td><td>g</td><td>Google News</td><td>gnews</td><td>Yahoo!</td><td>y</td></tr>
+      <tr><td>Wikipedia</td><td>wp</td><td>Technorati</td><td>tec</td><td>Amazon</td><td>am</td></tr>
+      <tr><td>CNN</td><td>cnn</td><td>Weather for zip code</td><td>weather</td><td>eBay</td><td>ebay</td></tr>
+      <tr><td>AllMusic.com</td><td>allmusic</td><td>del.icio.us tag</td><td>deli</td><td>Flickr</td><td>flk</td></tr>
+      <tr><td>ESPN</td><td>espn</td><td>Yahoo! Stock Quote</td><td>stock</td><td>Dictionary (Answers.com)</td><td>a</td></tr>     
+    </table>
+  </td></tr>
+  <tr><td><center><a class="hint" href="/documentation/jeremys_picks">More commands...</a></center></td></tr>  
+  <tr><td><center><a class="hint" href="/parser/parse?command=ge">Yet more commands...</a></center></td></tr>  
+</table>
+</center>
+<%= render_partial 'shared/footer', nil, 'display_rails_day_notice' => false %>

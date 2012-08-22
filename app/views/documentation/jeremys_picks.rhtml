@@ -1,0 +1,280 @@
+<style>
+ body {
+  background-color: white;
+  color: black;
+  font-family: arial, sans-serif;
+ }
+ div.indent {
+  border: none;
+  margin: 0px 0px 1em 1em;
+  padding: 0px;
+ }
+
+ b { font-size: 16px; }
+
+</style>
+
+<table width="500" style="background-color:#efefef"><tr><td>
+Jeremy Hussell is a familiar presence on the YubNub forums and YubNub blog. He has a remarkable understanding of
+what YubNub commands are available, gleaned from his 
+<a href="http://yubnub.blogspot.com/2005/06/50-most-popular-commands.html">statistical analyses</a> of the corpus.
+Here Jeremy shares his picks of the best YubNub commands. (Updated 2006-03-14)
+</td></tr></table>
+
+<p>First, a few words on how commands make it to this list. Because there are so many commands, 10500+ as I write this, I don't have the time to review every command. I ignore all but the most frequently used commands, and even then only look at commands I judge to be useful, working correctly, and easy to use.</p>
+<p>If you have corrections or comments, post to the <a href=http://groups-beta.google.com/group/YubNub>YubNub Google group.</a></p>
+<p>
+ <a href=#CoreCommands>Core Commands</a><br>
+ <a href=#SearchtheWeb>Search the Web</a><br>
+ <a href=#SearchforImages>Search for Images</a><br>
+ <a href=#MakingNewCommands>Making New Commands</a><br>
+ <a href=#Encyclopedias>Encyclopedias</a><br>
+ <a href=#ChangetheBehaviourofYubnubCommands>Change the Behaviour of Yubnub Commands</a><br>
+ <a href=#Movies>Movies</a><br>
+ <a href=#Email>Email</a><br>
+ <a href=#Merchandise>Merchandise</a><br>
+ <a href=#UniqueandPowerful>Unique and Powerful</a><br>
+ <a href=#Blogs>Blogs</a><br>
+ <a href=#Maps>Maps</a><br>
+ <a href=#Dictionaries>Dictionaries</a><br>
+ <a href=#Finance>Finance</a><br>
+ <a href=#Translation>Translation</a><br>
+ <a href=#Links>Links</a><br>
+ <a href=#PageCompression>Page Compression</a><br>
+ <a href=#Weather>Weather</a><br>
+ <a href=#Torrents>Torrents</a><br>
+ <a href=#News>News</a><br>
+ <a href=#ParameterizedBookmarks>Parameterized Bookmarks</a><br>
+ <a href=#Music>Music</a><br>
+ <a href=#Games>Games</a><br>
+ <a href=#UniqueSearches>Unique Searches</a><br>
+ <a href=#Whois>Whois</a><br>
+ <a href=#ProgrammersReference>Programmer's Reference</a><br>
+ <a href=#Bookmarks>Bookmarks</a><br>
+ <a href=#Telephone>Telephone</a><br>
+</p>
+<b><a name=CoreCommands>Core Commands:</a></b>
+<div class=indent>
+ If you don't already know these, you need to.<br>
+ <a href=http://yubnub.org/kernel/man?args=ls>ls</a> searches for commands. <a href=http://yubnub.org/kernel/man?args=ge>ge</a> restricts the search to commands on the Golden Eggs list.<br>
+ <a href=http://yubnub.org/kernel/man?args=man>man</a> tells you what they do.<br>
+ <a href=http://yubnub.org/kernel/man?args=create>create</a> makes a new command.<br>
+</div>
+<b><a name=SearchtheWeb>Search the Web:</a></b>
+<div class=indent>
+ The first thing everybody wants to do is search the web. Fortunately, making searches easy is Yubnub's forte!<br>
+ <a href=http://yubnub.org/kernel/man?args=g>g</a> and <a href=http://yubnub.org/kernel/man?args=gfl>gfl</a> google the web, using standard search and "I'm Feeling Lucky", respectively.<br>
+ You don't even need to use <a href=http://yubnub.org/kernel/man?args=g>g</a> if you don't want to. Any search that can't be interpreted as a yubnub command is treated as a google search.<br>
+ <a href=http://yubnub.org/kernel/man?args=y>y</a>, <a href=http://yubnub.org/kernel/man?args=a9>a9</a>, and <a href=http://yubnub.org/kernel/man?args=bgo>bgo</a> search using Yahoo, A9, and Blingo, respectively.<br>
+ Many language-specific Google searches also exist, e.g. <a href=http://yubnub.org/kernel/man?args=gde>gde</a> or <a href=http://yubnub.org/kernel/man?args=ges>ges</a>.<br>
+ <a href=http://yubnub.org/kernel/man?args=gok>gok</a> displays a google search side-by-side with common variants of your search.<br>
+ <a href=http://yubnub.org/kernel/man?args=scro>scro</a> scrapes the ads off the Google results page.<br>
+</div>
+<b><a name=SearchforImages>Search for Images:</a></b>
+<div class=indent>
+ The second thing everyone wants to search for is images. Personally, I use <a href=http://yubnub.org/kernel/man?args=gim>gim</a>, or sometimes <a href=http://yubnub.org/kernel/man?args=xim>xim</a>, but some may prefer <a href=http://yubnub.org/kernel/man?args=yim>yim</a>.<br>
+ <a href=http://yubnub.org/kernel/man?args=fl>fl</a> and <a href=http://yubnub.org/kernel/man?args=flk>flk</a> search tags and titles/descriptions/tags on Flickr, respectively. <a href=http://yubnub.org/kernel/man?args=flint>flint</a> searches by tags, but sorts by interestingness.<br>
+ <a href=http://yubnub.org/kernel/man?args=gimflint>gimflint</a> does <a href=http://yubnub.org/kernel/man?args=gim>gim</a> and <a href=http://yubnub.org/kernel/man?args=flint>flint</a> at the same time, much as <a href=http://yubnub.org/kernel/man?args=gimyim>gimyim</a> does <a href=http://yubnub.org/kernel/man?args=gim>gim</a> and <a href=http://yubnub.org/kernel/man?args=yim>yim</a> at the same time.<br>
+ <a href=http://yubnub.org/kernel/man?args=&gt;%26>&gt;&amp;</a> finds you all the images on a given site.<br>
+ <a href=http://yubnub.org/kernel/man?args=gima>gima</a> is the advanced google image search, with lots of options.<br>
+</div>
+<b><a name=MakingNewCommands>Making New Commands:</a></b>
+<div class=indent>
+ Some Yubnub commands are used to create other commands:<br>
+ <a href=http://yubnub.org/kernel/man?args=url>url</a> returns the URL a Yubnub command would have redirected you to.<br>
+ <a href=http://yubnub.org/kernel/man?args=&#37;>&#37;</a> extracts tokens from a string, allowing you to parse your own argument string.<br>
+ <a href=http://yubnub.org/kernel/man?args=filterstring>filterstring</a> deletes tokens from a string, the opposite of <a href=http://yubnub.org/kernel/man?args=&#37;>&#37;</a>.<br>
+ <a href=http://yubnub.org/kernel/man?args=ifthen>ifthen</a> is the type of command that might lead to YubNub becoming Turing complete.<br>
+ <a href=http://yubnub.org/kernel/man?args=random>random</a> generates random numbers. <a href=http://yubnub.org/kernel/man?args=randwd>randwd</a> generates a random word.<br>
+ <a href=http://yubnub.org/kernel/man?args=scrape>scrape</a> extracts the bit of text you want from a web page.<br>
+ <a href=http://yubnub.org/kernel/man?args=split>split</a>, <a href=http://yubnub.org/kernel/man?args=splith>splith</a>, and <a href=http://yubnub.org/kernel/man?args=splitv>splitv</a> display several webpages at the same time.<br>
+ <a href=http://yubnub.org/kernel/man?args=date>date</a> prints a date (today by default) in whatever format you need.<br>
+ <a href=http://yubnub.org/kernel/man?args=delw>delw</a> deletes the specified text wherever it appears.<br>
+ <a href=http://yubnub.org/kernel/man?args=extractdomainname>extractdomainname</a> pulls the domain out of a URL.<br>
+ <a href=http://yubnub.org/kernel/man?args=ifempty>ifempty</a> checks for empty strings.<br>
+ <a href=http://yubnub.org/kernel/man?args=strlength>strlength</a> returns the length of a string. (Duh, but what else can I say?)<br>
+ <a href=http://yubnub.org/kernel/man?args=strreplace>strreplace</a> replaces part of a string with something else.<br>
+ <a href=http://yubnub.org/kernel/man?args=ucase>ucase</a> and <a href=http://yubnub.org/kernel/man?args=lcase>lcase</a> make text UPPER CASE or lower case, respectively.<br>
+</div>
+<b><a name=Encyclopedias>Encyclopedias:</a></b>
+<div class=indent>
+ Wikipedia rules! <a href=http://yubnub.org/kernel/man?args=wp>wp</a> searches article titles, <a href=http://yubnub.org/kernel/man?args=wiki>wiki</a> does a full-text search. <a href=http://yubnub.org/kernel/man?args=wikigo>wikigo</a> sends you directly to the first result (but you should check out <a href=http://yubnub.org/kernel/man?args=&gt;>&gt;</a>). <a href=http://yubnub.org/kernel/man?args=wpde>wpde</a> searches the German version.<br>
+ <a href=http://yubnub.org/kernel/man?args=a>a</a> (Answers.com) searches several sources, including Wikipedia. <a href=http://yubnub.org/kernel/man?args=amo>amo</a> is the version optimized for mobile browsers.<br>
+ <a href=http://yubnub.org/kernel/man?args=brain>brain</a> parses naturally worded questions and searches webpages for the answer.<br>
+</div>
+<b><a name=ChangetheBehaviourofYubnubCommands>Change the Behaviour of Yubnub Commands:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=!>!</a> and the related commands <a href=http://yubnub.org/kernel/man?args=!ls>!ls</a>, <a href=http://yubnub.org/kernel/man?args=!set>!set</a>, <a href=http://yubnub.org/kernel/man?args=!bm>!bm</a>, <a href=http://yubnub.org/kernel/man?args=!unset>!unset</a>, and <a href=http://yubnub.org/kernel/man?args=!seta>!seta</a> allow you to use aliases for Yubnub commands.<br>
+ <a href=http://yubnub.org/kernel/man?args=mash>mash</a> runs several Yubnub commands on one argument, opening them in different frames.<br>
+ <a href=http://yubnub.org/kernel/man?args=mo>mo</a> optimizes the output of other yubnub commands for mobile browsers.<br>
+ <a href=http://yubnub.org/kernel/man?args=&gt;>&gt;</a> makes a Yubnub command work better than it did before. No, seriously.<br>
+ <a href=http://yubnub.org/kernel/man?args=multi>multi</a> executes a Yubnub command on multiple arguments.<br>
+ <a href=http://yubnub.org/kernel/man?args=\\>\\</a> checks the spelling of a Yubnub command's arguments before executing it.<br>
+ <a href=http://yubnub.org/kernel/man?args=newwin>newwin</a> opens the result of a Yubnub command in a new window.<br>
+ <a href=http://yubnub.org/kernel/man?args=sidebarload>sidebarload</a> loads the result of a Yubnub command into your browser's sidebar.<br>
+</div>
+<b><a name=Movies>Movies:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=imdb>imdb</a> (the Internet Movie DataBase) is the place to go for information about movies, actors and actresses, directors, producers, and more.<br>
+ <a href=http://yubnub.org/kernel/man?args=m>m</a> uses Yahoo to search for movies playing near a US zip code or Canadian postal code.<br>
+</div>
+<b><a name=Email>Email:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=gma>gma</a> is a bookmark for GMail. <a href=http://yubnub.org/kernel/man?args=sgma>sgma</a> is the secure variant.<br>
+ <a href=http://yubnub.org/kernel/man?args=ym>ym</a> is a bookmark for Yahoo mail.<br>
+ <a href=http://yubnub.org/kernel/man?args=send>send</a> sends an email!<br>
+ <a href=http://yubnub.org/kernel/man?args=gmails>gmails</a> searches your GMail account (after you log in).<br>
+</div>
+<b><a name=Merchandise>Merchandise:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=am>am</a> (Amazon) is famous for books, but you can find lots of other stuff there too.<br>
+ You can buy <i>anything</i> on <a href=http://yubnub.org/kernel/man?args=ebay>ebay</a>.<br>
+ <a href=http://yubnub.org/kernel/man?args=amr>amr</a> searches Amazon for customer reviews.<br>
+ Google does it again with <a href=http://yubnub.org/kernel/man?args=froogle>froogle</a>, a price comparison search engine.<br>
+</div>
+<b><a name=UniqueandPowerful>Unique and Powerful:</a></b>
+<div class=indent>
+ Many Yubnub commands are both powerful and unique. Many can be embedded in other commands. Here are some of the most popular:<br>
+ <a href=http://yubnub.org/kernel/man?args=simpsons>simpsons</a> fetches random quotes from the Simpsons.<br>
+ <a href=http://yubnub.org/kernel/man?args=spllw>spllw</a> uses Google to check your spelling.<br>
+ <a href=http://yubnub.org/kernel/man?args=cmd>cmd</a> opens a YubNub command line in a frame along the bottom of your browser.<br>
+ <a href=http://yubnub.org/kernel/man?args=script>script</a> runs some javascript in your browser. Use with caution!<br>
+ <a href=http://yubnub.org/kernel/man?args=fspell>fspell</a> spells what you type with letter images retrieved from Flickr.<br>
+ <a href=http://yubnub.org/kernel/man?args=qq:>qq:</a> returns the status of a QQ user. (QQ is an instant messenger.)<br>
+ <a href=http://yubnub.org/kernel/man?args=yubnublet>yubnublet</a> can help you create bookmarklets in Yubnub.<br>
+ <a href=http://yubnub.org/kernel/man?args=speak>speak</a> speaks a single english word, courtesy of Merriam-Webster.<br>
+ <a href=http://yubnub.org/kernel/man?args=login>login</a> attempts to retrieve a username and password for a website.<br>
+ <a href=http://yubnub.org/kernel/man?args=skype>skype</a> displays the status of a Skype user.<br>
+ <a href=http://yubnub.org/kernel/man?args=ascii>ascii</a> renders the phrase you provide with a very large collection of ASCII fonts.<br>
+ <a href=http://yubnub.org/kernel/man?args=lipsum>lipsum</a> generates Lorem Ipsum text - meaningless latin-like filler.<br>
+ <a href=http://yubnub.org/kernel/man?args=gmt>gmt</a> retrieves the local time at a location.<br>
+ <a href=http://yubnub.org/kernel/man?args=convert>convert</a> converts from one unit of measurement to another.<br>
+</div>
+<b><a name=Blogs>Blogs:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=bl>bl</a> is a bookmark for the Bloglines RSS reader.<br>
+ <a href=http://yubnub.org/kernel/man?args=tec>tec</a> (technorati) seems to be the most popular way to search blogs.<br>
+ <a href=http://yubnub.org/kernel/man?args=gbs>gbs</a> does a simple google blog search.<br>
+ <a href=http://yubnub.org/kernel/man?args=glog>glog</a> displays google search results side-by-side with google blog search results.<br>
+ <a href=http://yubnub.org/kernel/man?args=blub>blub</a> subscribes you to a blog via Bloglines.<br>
+ <a href=http://yubnub.org/kernel/man?args=bps>bps</a> finds blogs that link to a URL.<br>
+ <a href=http://yubnub.org/kernel/man?args=rssread>rssread</a> uses Google's RSS reader to open an RSS feed.<br>
+</div>
+<b><a name=Maps>Maps:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=gm>gm</a> (Google Maps). If you still think MapQuest is cool, you should really check this out.<br>
+ <a href=http://yubnub.org/kernel/man?args=gearth>gearth</a> starts Google Earth (if you have it installed) and zooms you in to the address you provide.<br>
+ <a href=http://yubnub.org/kernel/man?args=gloc>gloc</a> searches the yellow pages and puts the results on a map, although you can do the same thing with Google Maps.<br>
+</div>
+<b><a name=Dictionaries>Dictionaries:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=d>d</a> is an english dictionary meta-search command.<br>
+ <a href=http://yubnub.org/kernel/man?args=dict>dict</a> and <a href=http://yubnub.org/kernel/man?args=mw>mw</a> also search english dictionaries.<br>
+ <a href=http://yubnub.org/kernel/man?args=rae>rae</a> searches a spanish dictionary, I think.<br>
+ <a href=http://yubnub.org/kernel/man?args=thes>thes</a> will find another way to say something.<br>
+ <a href=http://yubnub.org/kernel/man?args=sss>sss</a> finds italian synonyms and antonyms.<br>
+</div>
+<b><a name=Finance>Finance:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=xe>xe</a> converts currencies at the current exchange rate.<br>
+ <a href=http://yubnub.org/kernel/man?args=stock>stock</a> will retrieve current information about a particular stock ticker symbol.<br>
+</div>
+<b><a name=Translation>Translation:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=leo>leo</a> is a German <-> English word lookup.<br>
+ <a href=http://yubnub.org/kernel/man?args=gproxy>gproxy</a> translating from english to english can be used as a proxy :-)<br>
+ <a href=http://yubnub.org/kernel/man?args=guess>guess</a> takes a sample of text, and guesses what language it is.<br>
+ <a href=http://yubnub.org/kernel/man?args=autotr>autotr</a> is Google's attempt to translate anything into English.<br>
+ <a href=http://yubnub.org/kernel/man?args=tr>tr</a> can translate some language pairs.<br>
+</div>
+<b><a name=Links>Links:</a></b>
+<div class=indent>
+ Want to know what other people are bookmarking? Del.icio.us is the place to go.<br>
+ <a href=http://yubnub.org/kernel/man?args=deli>deli</a> finds the links with the tags you specify.<br>
+ <a href=http://yubnub.org/kernel/man?args=dpop>dpop</a> looks for recently popular links with the tags you specify.<br>
+ <a href=http://yubnub.org/kernel/man?args=dgdt>dgdt</a> is a bookmark for diggdot.us, a meta-meta-links site.<br>
+</div>
+<b><a name=PageCompression>Page Compression:</a></b>
+<div class=indent>
+ Sometimes you don't want the hassle of downloading the graphics.<br>
+ <a href=http://yubnub.org/kernel/man?args=mo>mo</a> optimizes the output of other yubnub commands for mobile browsers.<br>
+ <a href=http://yubnub.org/kernel/man?args=gmobile>gmobile</a> strips images, CSS, and javascript from a page.<br>
+ <a href=http://yubnub.org/kernel/man?args=lynx>lynx</a> displays HTML source.<br>
+</div>
+<b><a name=Weather>Weather:</a></b>
+<div class=indent>
+ If you want to know the weather in a US zipcode, these commands will give it to you:<br>
+ <a href=http://yubnub.org/kernel/man?args=w>w</a> (The Weather Channel)<br>
+ <a href=http://yubnub.org/kernel/man?args=wu>wu</a> (Weather Underground)<br>
+</div>
+<b><a name=Torrents>Torrents:</a></b>
+<div class=indent>
+ Finding bittorrents is a little tricky because there's no one definitive search.<br>
+ <a href=http://yubnub.org/kernel/man?args=ts>ts</a> (TorrentSpy) is currently the most popular torrent search command.<br>
+ <a href=http://yubnub.org/kernel/man?args=tor>tor</a> is a meta-searcher, but it also requires you to verify your humanity before you can use Yubnub.<br>
+</div>
+<b><a name=News>News:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=gn>gn</a> grabs news from many sources, courtesy of Google. As usual, you can do language specific searches too, e.g. <a href=http://yubnub.org/kernel/man?args=gnewse>gnewse</a>.<br>
+ <a href=http://yubnub.org/kernel/man?args=cnn>cnn</a> (Cable News Network) searches the eponymous news site. (You must provide a search term.)<br>
+</div>
+<b><a name=ParameterizedBookmarks>Parameterized Bookmarks:</a></b>
+<div class=indent>
+ One step beyond bookmarks, these commands require that you know exactly what to type in, and are intollerant of misformated parameters.<br>
+ <a href=http://yubnub.org/kernel/man?args=php>php</a> will retrieve the manual page for the PHP function you name. But you have to know the correct name.<br>
+ <a href=http://yubnub.org/kernel/man?args=paview>paview</a> is the <a href=http://yubnub.blogspot.com/2005/07/ok-weve-got-pipes-how-to-combine.html>canonical example</a> of how YubNub makes parameterized bookmarks obsolete. With a little work you can end up with <a href=http://yubnub.org/kernel/man?args=paview3>paview3</a> instead.<br>
+ The most common type of parameterized bookmark takes you to a particular user's page, if you know the username. E.g. <a href=http://yubnub.org/kernel/man?args=lj>lj</a>.<br>
+</div>
+<b><a name=Music>Music:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=cd2>cd2</a> searches Djangos and Spun for used CDs. Or you can do them separately with <a href=http://yubnub.org/kernel/man?args=spuncd>spuncd</a> and <a href=http://yubnub.org/kernel/man?args=djangos>djangos</a>.<br>
+ <a href=http://yubnub.org/kernel/man?args=allmusic>allmusic</a> searches for music by artist name.<br>
+ <a href=http://yubnub.org/kernel/man?args=gmp3>gmp3</a> searches for mp3s, courtesy of Google.<br>
+ <a href=http://yubnub.org/kernel/man?args=hit>hit</a> find the date when an artist or song made the UK top 40.<br>
+</div>
+<b><a name=Games>Games:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=sudoku>sudoku</a> generates a sudoku puzzle for you to solve.<br>
+ <a href=http://yubnub.org/kernel/man?args=wih>wih</a> is a bookmark for the warishellgaming forums.<br>
+ <a href=http://yubnub.org/kernel/man?args=thott>thott</a> searches a World of Warcraft database.<br>
+ <a href=http://yubnub.org/kernel/man?args=omerta>omerta</a> is a bookmark for the text RPG of the same name.<br>
+</div>
+<b><a name=UniqueSearches>Unique Searches:</a></b>
+<div class=indent>
+ Just a few of the other interesting things you can search with Yubnub:<br>
+ <a href=http://yubnub.org/kernel/man?args=gig>gig</a> searches Google homepages, I think.<br>
+ <a href=http://yubnub.org/kernel/man?args=g-ism>g-ism</a> finds out what the web thinks of your search term.<br>
+ <a href=http://yubnub.org/kernel/man?args=moz>moz</a> searches for FireFox extensions.<br>
+ <a href=http://yubnub.org/kernel/man?args=dpts>dpts</a> (Debian Package Tracking System) retrieves the complete status of any Debian package.<br>
+ <a href=http://yubnub.org/kernel/man?args=groups>groups</a> searches Google Groups, aka Usenet.<br>
+ <a href=http://yubnub.org/kernel/man?args=gl>gl</a> uses Google's Linux-specific search.<br>
+ <a href=http://yubnub.org/kernel/man?args=gs>gs</a> (Google Scholar) searches academic papers you can get online.<br>
+</div>
+<b><a name=Whois>Whois:</a></b>
+<div class=indent>
+ Find out who owns a particular domain name or IP address.<br>
+ <a href=http://yubnub.org/kernel/man?args=dd>dd</a> (Domain Dossier) provides the most complete information, but runs the slowest.<br>
+ <a href=http://yubnub.org/kernel/man?args=whois>whois</a> and <a href=http://yubnub.org/kernel/man?args=who>who</a> provide basic results, quickly.<br>
+</div>
+<b><a name=ProgrammersReference>Programmer's Reference:</a></b>
+<div class=indent>
+ Programmers are always looking up the details of a particular module or language feature, and Yubnub tends to attract programmers.<br>
+ <a href=http://yubnub.org/kernel/man?args=flex2c>flex2c</a> and <a href=http://yubnub.org/kernel/man?args=flex2p>flex2p</a> find class and package information for Flex 2 from the Macromedia LiveDocs.<br>
+ <a href=http://yubnub.org/kernel/man?args=flex1c>flex1c</a> and <a href=http://yubnub.org/kernel/man?args=flex1p>flex1p</a> find class and package information for Flex 1.5 from the Macromedia LiveDocs.<br>
+ <a href=http://yubnub.org/kernel/man?args=jd>jd</a> finds the man page for a Java class, courtesy of javadocs.org.<br>
+</div>
+<b><a name=Bookmarks>Bookmarks:</a></b>
+<div class=indent>
+ Here are some popular bookmark commands that don't fit into the other categories:<br>
+ <a href=http://yubnub.org/kernel/man?args=/%2E>/.</a> is a bookmark for slashdot.<br>
+ <a href=http://yubnub.org/kernel/man?args=&#37;s>&#37;s</a> is a bookmark for Yahoo. (WTF?)<br>
+ <a href=http://yubnub.org/kernel/man?args=bark>bark</a> is a bookmark for an mp3 of a small dog barking.<br>
+ <a href=http://yubnub.org/kernel/man?args=porn>porn</a> is a popular bookmark for a popular site for, you guessed it, porn.<br>
+ <a href=http://yubnub.org/kernel/man?args=6>6</a> is a bookmark for myspace.<br>
+ <a href=http://yubnub.org/kernel/man?args=gread>gread</a> is a bookmark for Google Reader.<br>
+</div>
+<b><a name=Telephone>Telephone:</a></b>
+<div class=indent>
+ <a href=http://yubnub.org/kernel/man?args=revs>revs</a> does a reverse lookup on a US telephone number.<br>
+ <a href=http://yubnub.org/kernel/man?args=phone>phone</a> looks up a US or Canadian phone number by name or address.<br>
+</div>

@@ -1,0 +1,11 @@
+<form name="form" action="http://translate.google.com/translate_t" method="post">
+  <input type="hidden" name="text" value="<%=h @text %>">
+  <input type="hidden" name="langpair" value="<%=h @from %>|<%=h @to %>">
+  <input type="hidden" name="hl" value="en" />
+  <input type="hidden" name="c2coff" value="1" />
+  <input type="hidden" name="ie" value="UTF-8" />
+  <input type="hidden" name="oe" value="UTF-8" />
+</form>
+<script>
+  document.form.submit();
+</script>

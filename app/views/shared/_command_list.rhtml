@@ -1,0 +1,43 @@
+<br />
+<% @commands.each do |@command| %>
+  <span style="font-size:16px;font-weight:bold"><%=h @command.name %></span>
+  <% if @show_golden_egg_labels and not @command.golden_egg_date.nil? then %>
+    <span style="color:red">(<a class="hint" style="color:red" href="/parser/parse?command=ge">Golden Egg</a>)</span>
+  <% end %>
+  <br />
+  <% description = @command.description.gsub(/\s+/, " ") %>
+  <% description = description =~ /DESCRIPTION(.*)/ ? $1 : description %>
+  <%=h truncate_with_ellipses(description, 500) %><br />
+  <span class="hint">
+  <%= @command.uses %> uses
+  -
+  Created <%= @command.creation_date.strftime('%Y-%m-%d %H:%M') %>
+  -
+  Last used <%= (@command.last_use_date.nil? ? @command.creation_date : @command.last_use_date).strftime('%Y-%m-%d %H:%M') %>
+  -
+  </span>
+  <% if @command.golden_egg_date.nil? then %>
+    <span class="nominate hint"><a class="hint" href="mailto:jonathan.aquino@gmail.com?subject=Nomination for a YubNub Golden Egg: <%=CGI.escape(@command.name)%>&body=Hey Jon, there's a great command that I want to see on the Golden Egg list: <%=CGI.escape(@command.name)%>">
+    Nominate</a> - </span>
+  <% end %>
+  <%= link_to('Description', {:action => 'man', :args => @command.name}, {:class => 'description hint'}) %>
+  -
+  <span class="implementation hint"><%=h @command.display_url %></span><br />
+  <br />
+<% end %>
+<% if not @command_pages.nil? %>
+  <div style="margin-top:30px">
+  Pages:
+  <span style="font-size:22px">
+  <%
+    pagination_params = @params.delete_if {|key,value| key=='page'}
+    previous_params, next_params = @params.dup, @params.dup
+    previous_params[:page] = @command_pages.current.previous
+    next_params[:page] = @command_pages.current.next
+  %>
+  <%= link_to "<b>Previous</b>", previous_params if @command_pages.current.previous %>
+  <%= pagination_links(@command_pages, :window_size => 10, :params => pagination_params) %>
+  <%= link_to "<b>Next</b>", next_params if @command_pages.current.next %>
+<% end %>
+</span>
+</div>

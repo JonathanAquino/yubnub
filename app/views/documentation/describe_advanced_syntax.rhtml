@@ -1,0 +1,107 @@
+You probably already know that you can use %s to let the user specify
+parameters for your command. For example, if you make a command called gim
+with the following URL...
+<div class="blockquote">http://images.google.com/images?q=%s</div>
+...when the user types...
+<div class="blockquote">gim porsche 911</div>
+...they will be taken to...
+<div class="blockquote">http://images.google.com/images?q=porsche+911</div>
+Below are some advanced tricks that you can use when making a new command. If you have any suggestions for advanced
+YubNub syntax, <a href="mailto:jonathan.aquino@gmail.com">send me an email</a>.
+
+<h2>Multiple Parameters</h2>
+Finally YubNub now has multiple parameters. This is best explained with an example. Andrew MacDaniel
+wanted to make a <a href="http://www.google.com/lochp">Google Local</a> command called "gloc".
+Google Local takes two parameters: a "what" and a "where". You can now make such a command using
+the following URL:<br/>
+<div class="blockquote">http://www.google.com/local?sc=1&hl=en&q=<span style="color:red">${what}</span>&near=<span style="color:red">${where}</span>&btnG=Google+Search&rl=1</div>
+Note the two parameters: <span style="color:red">${what}</span> and <span style="color:red">${where}</span>. So now people can type...
+<div class="blockquote">gloc -what <span style="color:red">pizza</span> -where <span style="color:red">Poughkeepsie, NY</span></div>
+...and they will be taken to...
+<div class="blockquote">http://www.google.com/local?sc=1&hl=en&q=<span style="color:red">pizza</span>&near=<span style="color:red">Poughkeepsie%2C+NY</span>&btnG=Google+Search&rl=1</div>
+Neat, hey? <i>Note the dashes on "-what" and "-where". This is a tribute to YubNub's command-line heritage. In the
+command-line world, these are called "switches". "-what" and "-where" would be referred to as the "what switch" and the
+"where switch".</i>
+
+<h2>Default Values</h2>
+Continuing our above example, what if the user doesn't specify a "what" or a "where"? There is now a way to specify
+default values (syntax suggested by Christopher Church).
+<div class="blockquote">http://www.google.com/local?sc=1&hl=en&q=<span style="color:red">${what=tennis shoes}</span>&near=<span style="color:red">${where=Washington, DC}</span>&btnG=Google+Search&rl=1</div>
+Now if the user does not specify a "what"...
+<div class="blockquote">gloc -where Poughkeepsie, NY</div>
+...it will default to "tennis shoes" and they will be taken to...
+<div class="blockquote">http://www.google.com/local?sc=1&hl=en&q=<span style="color:red">tennis+shoes</span>&near=<span style="color:red">Poughkeepsie%2C+NY</span>&btnG=Google+Search&rl=1</div>
+Similarly, if they do not specify a "where", it will default to "Washington, DC".
+
+<h2>Converting GET to POST</h2>
+Sometimes you can't turn a web submission form into a YubNub command because it is a POST form (the source code says
+<i>method="post"</i>) rather than a GET form (the regular kind). Well, Sean O'Hagan has made a way to create YubNub
+commands from POST forms. All you have to do is include the following text somewhere in your URL: [post]<br />
+<br />
+For example, here is the URL for the stlclib command, which searches the St. Louis County Library:
+<div class="blockquote">http://webpac.slcl.org/search/~a?a&searchtype=Y&searcharg=%s&searchscope=22[post]</div>
+Thanks Sean for contributing the get2post.php script! (<a href="http://jonaquino.textdriven.com/sean_ohagan/get2post.php.html">Source code</a>)<br />
+<br />
+<b>Tip:</b> It can be a headache to try to construct the URL by looking at the HTML source. So go to
+<a href="http://ostermiller.org/bookmarklets/form.html">Stephen Ostermiller's bookmarklets</a> and drag his "Forms To GET"
+bookmarklet to your toolbar. Then press it to convert the POST form to a GET form so you can see the parameters in your
+address bar when you submit it.<br />
+<br />
+<b>Update:</b> Joshua H. reports that when using [post] you may need to replace your "&amp;" with a "?":
+<i>"I suspect that this wasn't noticed before because most search forms take more than one
+parameter and the important one with the search terms was not the first one in the list."</i>
+Some commands need it to be "&amp;" (like <a href="http://yubnub.org/kernel/man?args=ibands">ibands</a>);
+others need it to be "?" (like <a href="http://yubnub.org/kernel/man?args=desa">desa</a>).
+
+<h2>Using a Character Other Than + for Spaces</h2>
+Normally YubNub will convert spaces to + signs, like in the example above ("porsche 911" is converted to "porsche+911").
+This is what most websites expect (like Google and Yahoo). But there are some websites that expect %20 instead of + signs --
+for example, the National Library of Singapore. To tell YubNub to use %20 instead of + for spaces, include the following
+text somewhere in your URL: [use %20 for spaces].<br/>
+<br/>
+For example, if you make a command called nlb with the following URL...
+<div class="blockquote">http://vistaweb.nlb.gov.sg/cgi-bin/cw_cgi?10100+REDIRX+useDatabase_3002_w_%s[use %20 for spaces]</div>
+...when the user types...
+<div class="blockquote">nlb harry potter</div>
+...they will be taken to...
+<div class="blockquote">http://vistaweb.nlb.gov.sg/cgi-bin/cw_cgi?10100+REDIRX+useDatabase_3002_w_harry<span style="color:red">%20</span>potter</div>
+Note that YubNub converted "harry potter" to "harry%20potter" instead of "harry+potter". <br />
+<br />
+<b>Update:</b> You can now use other characters besides %20. For example, to use - signs, say [use - for spaces].
+
+<h2>Turning off URL Encoding</h2>
+Normally YubNub will apply "URL encoding" to parameters. For example, "gim Mork &amp; Mindy" gets turned into
+http://images.google.com/images?q=Mork<span style="color:red">+%26+</span>Mindy (note that the &amp; became +%26+).
+This is what works for most websites. However, W. Van Hooste pointed out that this does not work for the Internet
+Archive Wayback Machine. To tell YubNub to turn off URL encoding, include the following text somewhere in your URL:
+[no url encoding]<br />
+<br />
+For example, if you make a command called arch with the following URL...
+<div class="blockquote">http://web.archive.org/web/*/%s[no url encoding]</div>
+...when the user types...
+<div class="blockquote">arch http://www.ing.be/</div>
+...they will be taken to...
+<div class="blockquote">http://web.archive.org/web/*/http://www.ing.be/</span></div>
+If you hadn't specified [no url encoding], the user would have been taken to http://web.archive.org/web/*/http%3A%2F%2Fwww.ing.be%2F
+
+<h2>Combining Commands</h2>
+You can now
+<a href="http://yubnub.blogspot.com/2005/07/ok-weve-got-pipes-how-to-combine.html">combine commands together</a>.
+For example, g {random 100}.
+
+<h2>Going to a Different URL Depending on Whether the User Supplies Parameters</h2>
+Fuska has developed a <a href="http://yubnub.blogspot.com/2005/08/first-command-to-use-ifthen-command.html">technique</a>
+for going to one URL if the user provides arguments, and another URL
+if they do not provide arguments. For example, you can make a command that takes you to the CNN search
+page if you specify keywords to search for, and if you don't specify any keywords, it will take you to
+the CNN main page. Fuska's technique uses
+<a href="http://yubnub.blogspot.com/2005/08/allen-ormonds-programmatic-commands.html">Allen Ormond's ifthen command</a>.
+
+<h2>Positional Parameters</h2>
+Fuska has also developed a technique for <a href="http://yubnub.blogspot.com/2005/12/positional-parameters-problem-solved.html">positional parameters</a>
+e.g. gloc -what <span style="color:red">{% 1 %s}</span> -where <span style="color:red">{% 2 %s}</span>[no url encoding]
+
+<h2>Switch Statements</h2>
+Here's how to do a switch statement using the <a href="http://yubnub.org/kernel/man?args=switch">switch</a> command:<br/>
+<div class="blockquote">http://www.gamefaqs.com/search/index.html?game=%s&platform={ switch ${plat} | xbox => 13, dreamcast => 1, * => 0 }</div>
+If plat is "xbox", the platform will be set to 13. If plat is "dreamcast", the platform will be set to 1. Otherwise the platform will be set to 0.

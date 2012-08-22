@@ -1,0 +1,22 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+gim:
+  id: 1
+  name: gim
+  url: http://images.google.com/images?q=%s
+  creation_date: 2005-06-05
+  description: Google Image search
+  
+foo:
+  id: 2
+  name: g
+  url: http://www.google.com/search?ie=UTF-8&sourceid=navclient&gfns=1&q=%s
+  creation_date: 2005-06-06
+  description: Google "Browse By Name" search
+
+bar:
+  id: 3
+  name: bar
+  url: http://bar.com?q=%s[use %20 for spaces]
+  creation_date: 2005-06-04
+  description: bardy, bar, bar!
+  spam: 1
