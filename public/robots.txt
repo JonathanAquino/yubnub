@@ -1,0 +1,13 @@
+User-agent: Yahoo Pipes 1.0
+Disallow: /
+
+User-agent: Yahoo Pipes
+Disallow: /
+
+User-agent: *
+Disallow: /parser/
+Crawl-delay: 10
+
+
+
+
