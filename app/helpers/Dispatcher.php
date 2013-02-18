@@ -25,7 +25,7 @@ class Dispatcher {
     public function dispatch($url) {
         list($controllerClass, $action) = $this->parse($url);
         $controller = new $controllerClass($this->config);
-        $controller->action();
+        $controller->$action();
     }
 
     /**
@@ -35,6 +35,9 @@ class Dispatcher {
      * @return array  a controller class name and action method name
      */
     protected function parse($url) {
+        if ($url == '/') {
+            return array('WelcomeController', 'action_show');
+        }
         if (!preg_match('!^/([^/?]+)/([^/?]+)!', $url, $matches)) {
             throw new Exception('Could not parse URL ' . $url);
         }
