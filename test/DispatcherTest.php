@@ -5,7 +5,7 @@ require_once 'app/helpers/Dispatcher.php';
 class DispatcherTest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->dispatcher = new TestDispatcher();
+        $this->dispatcher = new TestDispatcher(null);
     }
 
     public function testParse_ParsesTwoPartPath() {

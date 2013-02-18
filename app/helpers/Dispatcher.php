@@ -5,6 +5,18 @@
  */
 class Dispatcher {
 
+    /** Configuration variables for the current environment. */
+    protected $config;
+
+    /**
+     * Creates the dispatcher.
+     *
+     * @param Config $config  configuration variables for the current environment
+     */
+    public function __construct($config) {
+        $this->config = $config;
+    }
+
     /**
      * Dispatches the URL to an appropriate controller.
      *
@@ -12,7 +24,7 @@ class Dispatcher {
      */
     public function dispatch($url) {
         list($controllerClass, $action) = $this->parse($url);
-        $controller = new $controllerClass();
+        $controller = new $controllerClass($this->config);
         $controller->action();
     }
 
