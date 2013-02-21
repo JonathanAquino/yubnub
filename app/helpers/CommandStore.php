@@ -20,14 +20,27 @@ class CommandStore {
     /**
      * Retrieves a page of Command objects.
      *
-     * @param integer $start  the inclusive start index
-     * @param integer $count  the number of Commands to retrieve
+     * @param array $args  an array of arguments:
+     *   - start - the inclusive start index
+     *   - count - the number of Commands to retrieve
+     *   - q - the search term (optional)
+     *   - orderBy - the ORDER BY clause
      * @return array  a two-element array: the Commands, and the total count
      */
-    public function findCommands($start, $count) {
-        $query = $this->pdo->prepare('SELECT * FROM yubnub.commands LIMIT :start, :count');
-        $query->bindValue(':start', $start, PDO::PARAM_INT);
-        $query->bindValue(':count', $count, PDO::PARAM_INT);
+    public function findCommands($args) {
+        $q = isset($args['q']) ? $args['q'] : '';
+        $where = '';
+        if (strlen($q) > 0) {
+            $where = "WHERE name LIKE :q1 OR description LIKE :q2 OR url LIKE :q3";
+        }
+        $query = $this->pdo->prepare('SELECT * FROM yubnub.commands ' . $where . ' ORDER BY ' . $args['orderBy'] . ' LIMIT :start, :count');
+        $query->bindValue(':start', $args['start'], PDO::PARAM_INT);
+        $query->bindValue(':count', $args['count'], PDO::PARAM_INT);
+        if (strlen($q) > 0) {
+            $query->bindValue(':q1', '%' . $q . '%', PDO::PARAM_STR);
+            $query->bindValue(':q2', '%' . $q . '%', PDO::PARAM_STR);
+            $query->bindValue(':q3', '%' . $q . '%', PDO::PARAM_STR);
+        }
         $query->execute();
         $commands = array();
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
@@ -47,9 +60,9 @@ class CommandStore {
         $command->url = $args['url'];
         $command->description = $args['description'];
         $command->uses = $args['uses'];
-        $command->creationDate = date('c', strtotime($args['creationDate']));
-        $command->lastUseDate = date('c', strtotime($args['lastUseDate']));
-        $command->goldenEggDate = date('c', strtotime($args['goldenEggDate']));
+        $command->creationDate = $args['creation_date'];
+        $command->lastUseDate = $args['last_use_date'];
+        $command->goldenEggDate = $args['golden_egg_date'];
         return $command;
     }
 

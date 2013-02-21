@@ -19,7 +19,9 @@ interface Config {
     public function shouldDisplayErrors();
 
     /**
-     * Returns the database object.
+     * Returns the database object. The Config should keep a single copy of
+     * the PDO and return it, instead of creating a new one each time this
+     * method is called.
      *
      * @return PDO  a connection to the MySQL database
      */
