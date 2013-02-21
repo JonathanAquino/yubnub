@@ -50,6 +50,38 @@ class CommandStore {
     }
 
     /**
+     * Retrieves a page of featured Command objects.
+     *
+     * @param array $args  an array of arguments:
+     *   - start - the inclusive start index
+     *   - count - the number of Commands to retrieve
+     *   - q - the search term (optional)
+     *   - orderBy - the ORDER BY clause
+     * @return array  the Commands
+     */
+    public function findGoldenEggs($args) {
+        $q = isset($args['q']) ? $args['q'] : '';
+        $where = 'WHERE golden_egg_date IS NOT NULL';
+        if (strlen($q) > 0) {
+            $where .= " AND (name LIKE :q1 OR description LIKE :q2 OR url LIKE :q3)";
+        }
+        $query = $this->pdo->prepare('SELECT * FROM yubnub.commands ' . $where . ' ORDER BY ' . $args['orderBy'] . ' LIMIT :start, :count');
+        $query->bindValue(':start', $args['start'], PDO::PARAM_INT);
+        $query->bindValue(':count', $args['count'], PDO::PARAM_INT);
+        if (strlen($q) > 0) {
+            $query->bindValue(':q1', '%' . $q . '%', PDO::PARAM_STR);
+            $query->bindValue(':q2', '%' . $q . '%', PDO::PARAM_STR);
+            $query->bindValue(':q3', '%' . $q . '%', PDO::PARAM_STR);
+        }
+        $query->execute();
+        $commands = array();
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $commands[] = $this->createCommand($row);
+        }
+        return $commands;
+    }
+
+    /**
      * Creates a Command object based on the given arguments.
      *
      * @param array  key-value pairs from the database

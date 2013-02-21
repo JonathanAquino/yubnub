@@ -1,0 +1,20 @@
+{{> app/views/shared/header.mustache }}
+{{> app/views/shared/heading.mustache }}
+{{^searching}}
+  <div id="golden_egg_graphic">
+    <img src="/images/ge.jpg" alt="golden egg" />
+    <p>Thanks to <a href="http://jjefferydesign.com">Jacob Ensor</a> <br />for the beautiful egg logo</p>
+  </div>
+  <table width="500"><tr><td>
+  Welcome to YubNub Golden Eggs! The Golden Eggs are YubNub commands that people seem to find particularly
+  useful and interesting. If you want to nominate a YubNub command for this list,
+  <a href="mailto:jonathan.aquino@gmail.com?subject=Nomination for a YubNub Golden Egg&body=Hey Jon, there's a great command that I want to see on the Golden Egg list: [insert command here]">email Jon</a>
+  about it.
+  </td></tr></table>
+  <br />
+  <div class="hint">
+    <span style="color:red">Tip:</span> You can search the Golden Eggs -- for example: ge dictionary
+  </div>
+{{/searching}}
+{{> app/views/shared/commandList.mustache }}
+{{> app/views/shared/footer.mustache }}
