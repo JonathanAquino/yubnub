@@ -25,7 +25,7 @@ class CommandStore {
      *   - count - the number of Commands to retrieve
      *   - q - the search term (optional)
      *   - orderBy - the ORDER BY clause
-     * @return array  a two-element array: the Commands, and the total count
+     * @return array  the Commands
      */
     public function findCommands($args) {
         $q = isset($args['q']) ? $args['q'] : '';

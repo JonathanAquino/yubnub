@@ -20,15 +20,21 @@ class KernelController extends Controller {
         $start = ($page-1) * self::PAGE_SIZE;
         $commandStore = new CommandStore($this->config->getPdo());
         $q = isset($_GET['args']) ? $_GET['args'] : '';
+        $extra = 1;
+        $commands = $commandStore->findCommands(array(
+                'start' => $start,
+                'count' => self::PAGE_SIZE + $extra,
+                'q' => $q,
+                'orderBy' => strlen($q) > 0 ? 'uses DESC' : 'creation_date DESC'));
+        $hasNextPage = count($commands) > self::PAGE_SIZE;
+        $commands = array_slice($commands, 0, self::PAGE_SIZE - $extra);
         $this->render('ls', array(
             'pageTitle' => 'Command List (ls)',
             'showGoldenEggLabels' => true,
             'searching' => strlen($q) > 0,
-            'commands' => $commandStore->findCommands(array(
-                'start' => $start,
-                'count' => self::PAGE_SIZE,
-                'q' => $q,
-                'orderBy' => strlen($q) > 0 ? 'uses DESC' : 'creation_date DESC'))
+            'commands' => $commands,
+            'previousPage' => $page > 1 ? $page - 1 : null,
+            'nextPage' => $hasNextPage ? $page + 1 : null,
         ));
     }
 

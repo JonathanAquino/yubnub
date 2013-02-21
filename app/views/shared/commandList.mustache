@@ -2,7 +2,7 @@
 {{#commands}}
   <span style="font-size:16px;font-weight:bold">{{name}}</span>
   {{#goldenEggDate}}
-    {{#showGoldenEggLabels}}{{!jontodo: check}}
+    {{#showGoldenEggLabels}}
         <span style="color:red">(<a class="hint" style="color:red" href="/parser/parse?command=ge">Golden Egg</a>)</span>
     {{/showGoldenEggLabels}}
   {{/goldenEggDate}}
@@ -18,7 +18,7 @@
   {{^lastUseDate}}{{creationDate}}{{/lastUseDate}}
   -
   </span>
-  {{^goldenEggDate}}{{!jontodo: check}}
+  {{^goldenEggDate}}
     <span class="nominate hint"><a class="hint" href="mailto:jonathan.aquino@gmail.com?subject=Nomination for a YubNub Golden Egg: {{getRawurlencodedName}}&body=Hey Jon, there's a great command that I want to see on the Golden Egg list: {{getRawurlencodedName}}">
     Nominate</a> - </span>
   {{/goldenEggDate}}
@@ -27,29 +27,9 @@
   <span class="implementation hint">{{getDisplayUrl}}</span><br />
   <br />
 {{/commands}}
-{{#pagination}}{{!jontodo: check}}
-  <div style="margin-top:30px">
-  Pages:
-  <span style="font-size:22px">
-  {{#previous}}
-    <a href="?page={{.}}"><b>Previous</b></a>
-  {{/previous}}
-  {{#pages}}
-    {{#ellipsis}}
-      …
-    {{/ellipsis}}
-    {{^ellipsis}}
-      {{#current}}
-        {{page}}
-      {{/current}}
-      {{^current}}
-        <a href="?page={{page}}">{{page}}</a>
-      {{/current}}
-    {{/ellipsis}}
-  {{/pages}}
-  {{#next}}
-    <a href="?page={{.}}"><b>Next</b></a>
-  {{/next}}
-  </span>
-{{/pagination}}
-</div>
+{{#previousPage}}
+<a href="?page={{.}}" style="padding-top:30px; padding-right: 15px; font-size:22px"><b>Previous Page</b></a>
+{{/previousPage}}
+{{#nextPage}}
+<a href="?page={{.}}" style="padding-top:30px; font-size:22px"><b>Next Page</b></a>
+{{/nextPage}}
