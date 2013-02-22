@@ -82,6 +82,23 @@ class CommandStore {
     }
 
     /**
+     * Returns a Command by name
+     *
+     * @param string $name  the name of the command to retrieve
+     * @return Command  the Command, or null if not found
+     */
+    public function findCommand($name) {
+        $query = $this->pdo->prepare('SELECT * FROM yubnub.commands WHERE name = :name');
+        $query->bindValue(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+        if ($query->rowCount() > 0) {
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+            return $this->createCommand($row);
+        }
+        return null;
+    }
+
+    /**
      * Creates a Command object based on the given arguments.
      *
      * @param array  key-value pairs from the database

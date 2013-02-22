@@ -30,6 +30,17 @@ class Controller {
         $options['partials_loader'] = new Mustache_Loader_FilesystemLoader(SERVER_ROOT);
         $mustacheEngine = new Mustache_Engine($options);
         echo $mustacheEngine->render($template, $args);
+        exit;
+    }
+
+    /**
+     * 302s to the given URL.
+     *
+     * @param string $url  the relative URL to redirect to
+     */
+    public function redirectTo($url) {
+        header('Location: ' . $url);
+        exit;
     }
 
     /**

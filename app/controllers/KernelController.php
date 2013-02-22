@@ -95,4 +95,30 @@ class KernelController extends Controller {
         ));
     }
 
+    /**
+     * Displays help for the given command.
+     *
+     * Expected GET variables:
+     *     - args - the name of the command; defaults to 'man'
+     */
+    public function action_man() {
+        $name = isset($_GET['args']) ? $_GET['args'] : null;
+        if (strlen($name) == 0) {
+            $this->redirectTo('/kernel/man?args=man');
+        }
+        $commandStore = new CommandStore($this->config->getPdo());
+        $command = $commandStore->findCommand($name);
+        if (!$command) {
+            $this->render('no_manual_entry', array(
+                'pageTitle' => 'man ' . $name,
+                'name' => $name,
+                'lsUrl' => '/parser/parse?command=' . rawurlencode('ls ' . $name)
+            ));
+        }
+        $this->render('man', array(
+            'pageTitle' => $name,
+            'command' => $command,
+        ));
+    }
+
 }

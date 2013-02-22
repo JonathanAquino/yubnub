@@ -1,0 +1,28 @@
+{{> app/views/shared/header.mustache }}
+{{> app/views/shared/heading.mustache }}
+{{#command}}
+    {{#goldenEggDate}}
+        <div class="hint">(This command has been awarded a <a class="hint" href="/parser/parse?command=ge">YubNub Golden Egg</a>)</div>
+        <br />
+    {{/goldenEggDate}}
+    <span class="muted">{{getDisplayUrl}}</span><br />
+    <pre>
+{{description}}
+    </pre>
+    <div class="hint" style="padding-top: 30px">
+        {{uses}} uses
+        -
+        Created {{creationDate}}
+        -
+        Last used
+        {{#lastUseDate}}{{lastUseDate}}{{/lastUseDate}}
+        {{^lastUseDate}}{{creationDate}}{{/lastUseDate}}
+    </div>
+    {{^goldenEggDate}}
+      <div class="hint" style="padding-top:15px">Like this command? <a class="hint" href="mailto:jonathan.aquino@gmail.com?subject=Nomination for a YubNub Golden Egg: {{getRawurlencodedName}}>&body=Hey Jon, there's a great command that I want to see on the Golden Egg list: <%=CGI.escape(@command.name)%>">
+      Nominate it</a> for a <a class="hint" href="/parser/parse?command=ge">YubNub Golden Egg</a></div>
+      <div class="hint">Do you find this command offensive? <a class="hint" href="mailto:jonathan.aquino@gmail.com?subject=YubNub - I find this command offensive: {{getRawurlencodedName}}&body=Jon, please review this command: {{getRawurlencodedName}}
+      Let Jon know</a>.</div>
+    {{/goldenEggDate}}
+{{/command}}
+{{> app/views/shared/footer.mustache }}
