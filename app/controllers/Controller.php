@@ -39,6 +39,9 @@ class Controller {
      * @param string $url  the relative URL to redirect to
      */
     public function redirectTo($url) {
+        if ($url[0] == '/') {
+            $url = 'http://' . $_SERVER['HTTP_HOST'] . $url;
+        }
         header('Location: ' . $url);
         exit;
     }
