@@ -97,7 +97,7 @@ class Command {
             } else {
                 // Remove initial -
                 $name = mb_substr($name, 1);
-                $url = preg_replace('/\$\{' . preg_quote($name) . '(=[^}]*)?\}/', $value, $url);
+                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', $value, $url);
             }
         }
         // Clear unused switches.
