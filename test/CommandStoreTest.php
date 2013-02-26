@@ -16,10 +16,10 @@ class CommandStoreTest extends PHPUnit_Framework_TestCase {
                     'url' => null,
                     'description' => null,
                     'uses' => null,
-                    'creationDate' => '2005-02-04 20:39:14',
-                    'lastUseDate' => null,
-                    'goldenEggDate' => null));
-        $this->assertSame('2005-02-04T20:39:14-08:00',
+                    'creation_date' => '2005-02-04 20:39:14',
+                    'last_use_date' => null,
+                    'golden_egg_date' => null));
+        $this->assertSame('2005-02-04 20:39:14',
                 $command->creationDate);
     }
 

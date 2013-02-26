@@ -43,5 +43,32 @@ Foo';
         $this->assertEquals('gg %s site:nbr.tumblr.com', $this->command->getDisplayUrl());
     }
 
+    public function testGetSwitches_ReturnsPercentSwitch_IfNoExplicitSwitches() {
+        $this->command->url = 'http://google.com/';
+        $this->assertSame(array('%s' => null), $this->command->getSwitches());
+    }
+
+    public function testGetSwitches_ReturnsExplicitSwitch() {
+        $this->command->url = 'http://google.com/?a=${foo}&b=${bar}';
+        $this->assertSame(array('%s' => null, '-foo' => null, '-bar' => null), $this->command->getSwitches());
+    }
+
+    public function testGetSwitches_ReturnsDefaultValues() {
+        $this->command->url = 'http://google.com/?a=${foo=baz=qux}&b=${bar}';
+        $this->assertSame(array('%s' => null, '-foo' => 'baz=qux', '-bar' => null), $this->command->getSwitches());
+    }
+
+    public function testApplySwitches() {
+        $this->command->url = 'http://google.com/?a=${foo=baz=qux}&b=${bar}&c=%s&d=${hello}';
+        $url = $this->command->applySwitches(array('%s' => 'A', '-foo' => 'B', '-bar' => 'C'));
+        $this->assertSame('http://google.com/?a=B&b=C&c=A&d=', $url);
+    }
+
+    public function testApplySwitches_DoesMultipleReplacements() {
+        $this->command->url = 'http://google.com/?a=%s&b=%s&c=${foo}&d=${foo}';
+        $url = $this->command->applySwitches(array('%s' => 'A', '-foo' => 'B'));
+        $this->assertSame('http://google.com/?a=A&b=A&c=B&d=B', $url);
+    }
+
 }
 

@@ -65,4 +65,44 @@ class Command {
         return preg_replace('/^\{url(?:\[no url encoding\])? (.*)\}$/', '\1', $this->url);
     }
 
+    /**
+     * Returns the switches present in the URL.
+     *
+     * @return array  a map of switch name to default value; example:
+     *                {'%s' => null, '-foo' => null, '-bar' => 'baz'}
+     */
+    public function getSwitches() {
+        $switches = array('%s' => null);
+        if (preg_match_all('/\$\{([^}]+)\}/', $this->url, $matches)) {
+            foreach($matches[1] as $match) {
+                $parts = explode('=', $match, 2);
+                $switch = '-' . $parts[0];
+                $defaultValue = count($parts) > 1 ? $parts[1] : null;
+                $switches[$switch] = $defaultValue;
+            }
+        };
+        return $switches;
+    }
+
+    /**
+     * Substitutes the switches into the URL.
+     *
+     * @param array  a map of switches; example: {%s => 'foo', 'bar' => 'baz', 'qux' => null}
+     */
+    public function applySwitches($switches) {
+        $url = $this->url;
+        foreach ($switches as $name => $value) {
+            if ($name == '%s') {
+                $url = str_replace('%s', $value, $url);
+            } else {
+                // Remove initial -
+                $name = mb_substr($name, 1);
+                $url = preg_replace('/\$\{' . preg_quote($name) . '(=[^}]*)?\}/', $value, $url);
+            }
+        }
+        // Clear unused switches.
+        $url = preg_replace('/\$\{.*?\}/', '', $url);
+        return $url;
+    }
+
 }
