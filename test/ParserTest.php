@@ -17,10 +17,33 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expectedUrl, $actualUrl);
     }
 
+    public function testApplySubcommands_ThrowsException_IfTooManyCommands() {
+        $parser = $this->getMock('TestParser', array('parseProper'));
+        $parser->expects($this->exactly(2))->method('parseProper')
+                ->with($this->equalTo('foo bar'))
+                ->will($this->returnValue('baz'));
+        $this->setExpectedException('Exception');
+        $parser->applySubcommands('http://google.com?a={foo bar}&b={foo bar}&c={foo bar}');
+    }
+
+    public function testApplySubcommands_DoesNotThrowException_IfNotTooManyCommands() {
+        $parser = $this->getMock('TestParser', array('parseProper'));
+        $parser->expects($this->exactly(2))->method('parseProper')
+                ->with($this->equalTo('foo bar'))
+                ->will($this->returnValue('baz'));
+        $expectedUrl = 'http://google.com?a=baz&b=baz';
+        $actualUrl = $parser->applySubcommands('http://google.com?a={foo bar}&b={foo bar}');
+        $this->assertEquals($expectedUrl, $actualUrl);
+    }
+
 }
 
 class TestParser extends Parser {
+    protected $maxCommandCount = 2;
     public function applyArgs($command, $args) {
         return parent::applyArgs($command, $args);
+    }
+    public function applySubcommands($url) {
+        return parent::applySubcommands($url);
     }
 }
