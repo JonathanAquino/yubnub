@@ -93,11 +93,11 @@ class Command {
         $url = $this->url;
         foreach ($switches as $name => $value) {
             if ($name == '%s') {
-                $url = str_replace('%s', $value, $url);
+                $url = str_replace('%s', urlencode($value), $url);
             } else {
                 // Remove initial -
                 $name = mb_substr($name, 1);
-                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', $value, $url);
+                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', urlencode($value), $url);
             }
         }
         // Clear unused switches.

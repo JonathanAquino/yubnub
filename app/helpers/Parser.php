@@ -46,6 +46,7 @@ class Parser {
         foreach ($parts as $part) {
             if (array_key_exists($part, $switches)) {
                 $currentSwitch = $part;
+                $switches[$currentSwitch] = null;
             } else {
                 $switches[$currentSwitch] = trim($switches[$currentSwitch] . ' ' . $part);
             }
