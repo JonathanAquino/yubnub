@@ -17,6 +17,18 @@ class Parser {
      */
     protected $maxCommandCount = 10;
 
+    /** * Data-access object for Command objects. */
+    protected $commandStore;
+
+    /**
+     * Creates the Parser.
+     *
+     * @param CommandStore $commandStore  data-access object for Command objects
+     */
+    public function __construct($commandStore) {
+        $this->commandStore = $commandStore;
+    }
+
     /**
      * Returns a URL corresponding to the given command, performing any
      * required initialization.
@@ -32,7 +44,30 @@ class Parser {
             return $this->prefixWithHttp($commandString);
         }
         $this->commandCount = 0;
-        $this->parseProper($commandString, $defaultCommand);
+        return $this->parseProper($commandString, $defaultCommand);
+    }
+
+    /**
+     * Returns whether the given command appears to be a URL.
+     *
+     * @param string $commandString  the command entered by the user
+     * @return boolean  whether the command looks like a URL
+     */
+    protected function looksLikeUrl($commandString) {
+        return preg_match('/^[^ ]+\.[a-z]{2,4}(\/[^ ]*)?$/', $commandString) ? true : false;
+    }
+
+    /**
+     * Prefixes the given URL with http:// if needed.
+     *
+     * @param string $url  a URL or partial URL, such as google.com
+     * @return string  the URL with http:// prefixed: http://google.com
+     */
+    protected function prefixWithHttp($url) {
+        if (mb_strpos($url, '://') == false) {
+            return 'http://' . $url;
+        }
+        return $url;
     }
 
     /**
@@ -46,13 +81,12 @@ class Parser {
         $parts = preg_split('/\s+/', $commandString);
         $name = $parts[0];
         $args = implode(' ', array_slice($parts, 1));
-        $commandStore = new CommandStore();
-        $command = $commandStore->findCommand($name);
+        $command = $this->commandStore->findCommand($name);
         if (!$command && !$defaultCommand) {
             throw new Exception('Could not find command ' . $name);
         }
         if (!$command) {
-            $command = $commandStore->findCommand($defaultCommand);
+            $command = $this->commandStore->findCommand($defaultCommand);
             $args = $commandString;
         }
         $url = $this->applyArgs($command, $args);

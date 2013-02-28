@@ -23,7 +23,7 @@ class ParserController extends Controller {
             echo 'YubNub is currently blocking Yahoo Pipes. Contact jonathan.aquino@gmail.com for more info.';
             exit;
         }
-        $parser = new Parser();
+        $parser = new Parser(new CommandStore($this->config->getPdo()));
         $this->redirectTo($parser->parse($command, $defaultCommand));
     }
 

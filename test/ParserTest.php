@@ -36,6 +36,22 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($expectedUrl, $actualUrl);
     }
 
+    public function testLooksLikeUrl_ReturnsTrue_ForUrl() {
+        $this->assertTrue($this->parser->looksLikeUrl('google.com'));
+    }
+
+    public function testLooksLikeUrl_ReturnsFalse_ForCommand() {
+        $this->assertFalse($this->parser->looksLikeUrl('g porsche'));
+    }
+
+    public function testPrefixWithHttp_AddsPrefix_IfNeeded() {
+        $this->assertEquals('http://google.com', $this->parser->prefixWithHttp('google.com'));
+    }
+
+    public function testPrefixWithHttp_DoesNotAddPrefix_IfNotNeeded() {
+        $this->assertEquals('http://google.com', $this->parser->prefixWithHttp('http://google.com'));
+    }
+
 }
 
 class TestParser extends Parser {
@@ -45,5 +61,11 @@ class TestParser extends Parser {
     }
     public function applySubcommands($url) {
         return parent::applySubcommands($url);
+    }
+    public function looksLikeUrl($commandString) {
+        return parent::looksLikeUrl($commandString);
+    }
+    public function prefixWithHttp($url) {
+        return parent::prefixWithHttp($url);
     }
 }
