@@ -64,6 +64,18 @@ Foo';
         $this->assertSame('http://google.com/?a=B&b=C&c=A&d=', $url);
     }
 
+    public function testApplySwitches_DoesUrlencoding() {
+        $this->command->url = 'http://google.com/?a=%s';
+        $url = $this->command->applySwitches(array('%s' => 'A&W'));
+        $this->assertSame('http://google.com/?a=A%26W', $url);
+    }
+
+    public function testApplySwitches_HeedsNoUrlEncoding() {
+        $this->command->url = 'http://google.com/?a=%s[no url encoding]';
+        $url = $this->command->applySwitches(array('%s' => 'A&W'));
+        $this->assertSame('http://google.com/?a=A&W', $url);
+    }
+
     public function testApplySwitches_DoesMultipleReplacements() {
         $this->command->url = 'http://google.com/?a=%s&b=%s&c=${foo}&d=${foo}';
         $url = $this->command->applySwitches(array('%s' => 'A', '-foo' => 'B'));

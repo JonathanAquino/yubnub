@@ -38,6 +38,7 @@ class Parser {
      *                                a recognized command
      */
     public function parse($commandString, $defaultCommand) {
+        $commandString = trim($commandString);
         // Great idea from Michele Trimarchi: if the user types in something that looks like
         // a URL, just go to it. [Jon Aquino 2005-06-23]
         if ($this->looksLikeUrl($commandString)) {
@@ -123,7 +124,7 @@ class Parser {
      * @param string $url  a URL which may contain subcommands
      */
     protected function applySubcommands($url) {
-        $pattern = '/\{(.*?)\}/';
+        $pattern = '/\{([^{}]+)\}/';
         while (preg_match($pattern, $url)) {
             $url = preg_replace_callback($pattern, array($this, 'parseSubcommand'), $url, 1);
         }
@@ -141,7 +142,21 @@ class Parser {
         if ($this->commandCount > $this->maxCommandCount) {
             throw new Exception('Too many subcommands: ' . $subcommandString);
         }
-        return $this->parseProper($subcommandString, null);
+        // Optimization for the url command: just do it inline
+        if (preg_match('/^url (.*)/', $subcommandString, $matches2)) {
+            return $this->parseProper(trim($matches2[1]), null);
+        }
+        return $this->get($this->parseProper($subcommandString, null));
+    }
+
+    /**
+     * Returns the response from the given URL.
+     *
+     * @param string $url  the URL to get
+     * @return string  the response body
+     */
+    protected function get($url) {
+        return file_get_contents($url);
     }
 
 }

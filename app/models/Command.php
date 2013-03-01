@@ -91,13 +91,21 @@ class Command {
      */
     public function applySwitches($switches) {
         $url = $this->url;
+        $urlencodeValues = true;
+        if (strpos($url, '[no url encoding]') !== false) {
+            $url = str_replace('[no url encoding]', '', $url);
+            $urlencodeValues = false;
+        }
         foreach ($switches as $name => $value) {
+            if ($urlencodeValues) {
+                $value = urlencode($value);
+            }
             if ($name == '%s') {
-                $url = str_replace('%s', urlencode($value), $url);
+                $url = str_replace('%s', $value, $url);
             } else {
                 // Remove initial -
                 $name = mb_substr($name, 1);
-                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', urlencode($value), $url);
+                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', $value, $url);
             }
         }
         // Clear unused switches.
