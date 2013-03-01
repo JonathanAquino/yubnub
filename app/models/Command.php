@@ -92,13 +92,20 @@ class Command {
     public function applySwitches($switches) {
         $url = $this->url;
         $urlencodeValues = true;
+        $rawurlencodeValues = false;
         if (strpos($url, '[no url encoding]') !== false) {
             $url = str_replace('[no url encoding]', '', $url);
+            $urlencodeValues = false;
+        } elseif (strpos($url, '[use %20 for spaces]') !== false) {
+            $url = str_replace('[use %20 for spaces]', '', $url);
+            $rawurlencodeValues = true;
             $urlencodeValues = false;
         }
         foreach ($switches as $name => $value) {
             if ($urlencodeValues) {
                 $value = urlencode($value);
+            } elseif ($rawurlencodeValues) {
+                $value = rawurlencode($value);
             }
             if ($name == '%s') {
                 $url = str_replace('%s', $value, $url);

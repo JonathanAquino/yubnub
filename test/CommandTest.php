@@ -82,5 +82,17 @@ Foo';
         $this->assertSame('http://google.com/?a=A&b=A&c=B&d=B', $url);
     }
 
+    public function testApplySwitches_UsesPlusForSpaces() {
+        $this->command->url = 'http://google.com/?a=%s';
+        $url = $this->command->applySwitches(array('%s' => 'A B'));
+        $this->assertSame('http://google.com/?a=A+B', $url);
+    }
+
+    public function testApplySwitches_UsesPercent20ForSpaces() {
+        $this->command->url = 'http://google.com/?a=%s[use %20 for spaces]';
+        $url = $this->command->applySwitches(array('%s' => 'A B'));
+        $this->assertSame('http://google.com/?a=A%20B', $url);
+    }
+
 }
 
