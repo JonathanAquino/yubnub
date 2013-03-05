@@ -24,7 +24,14 @@ class ParserController extends Controller {
             exit;
         }
         $parser = new Parser(new CommandStore($this->config->getPdo()));
-        $this->redirectTo($parser->parse($command, $defaultCommand));
+        $url = $parser->parse($command, $defaultCommand);
+        if (strpos($url, '[post]') !== false) {
+            $url = str_replace('[post]', '', $url);
+            $this->render('get2post', array(
+                'url' => new Url($url)
+            ));
+        }
+        $this->redirectTo($url);
     }
 
 }

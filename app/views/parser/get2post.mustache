@@ -1,0 +1,8 @@
+{{! Converts a URL to a POST form submission, passing URL parameters as both
+    GET and POST variables. }}
+<form id="form" action="{{url.toString}}" method="post">
+    {{#url.getParameters}}
+    <input type="hidden" name="{{name}}" value="{{value}}" />
+    {{/url.getParameters}}
+</form>
+<script>document.getElementById('form').submit()</script>
