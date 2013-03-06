@@ -44,4 +44,17 @@ class ParserController extends Controller {
         echo $parser->parse($command, null);
     }
 
+    /**
+     * Outputs 'success' if Yubnub seems to be healthy.
+     */
+    public function action_uptime() {
+        $commandStore = new CommandStore($this->config->getPdo());
+        $commands = $commandStore->findCommands(array('start' => 0, 'count' => 1,
+                'orderBy' => 'creation_date DESC'));
+        if (count($commands) == 1) {
+            header('Content-Type: text/plain');
+            echo 'success';
+        }
+    }
+
 }
