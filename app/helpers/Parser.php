@@ -5,6 +5,9 @@
  */
 class Parser {
 
+    /** Max number of bytes allowed for the response body of a subcommand. */
+    const MAX_SUBCOMMAND_RESPONSE_SIZE = 200;
+
     /**
      * The number of commands executed. A command can contain one or more
      * subcommands, each of which can contain subcommands of their own.
@@ -90,8 +93,20 @@ class Parser {
             $command = $this->commandStore->findCommand($defaultCommand);
             $args = $commandString;
         }
+        $debugging = false;
+        if ($debugging) {
+            header('Content-Type: text/plain');
+            echo $commandString . "\n";
+        }
         $url = $this->applyArgs($command, $args);
+        if ($debugging) {
+            echo $url . "\n";
+        }
         $url = $this->applySubcommands($url);
+        if ($debugging) {
+            echo $url . "\n";
+            echo "-----------\n";
+        }
         return $url;
     }
 
@@ -146,7 +161,12 @@ class Parser {
         if (preg_match('/^url (.*)/', $subcommandString, $matches2)) {
             return $this->parseProper(trim($matches2[1]), null);
         }
-        return $this->get($this->parseProper($subcommandString, null));
+        $url = $this->parseProper($subcommandString, null);
+        $response = $this->get($url);
+        if (strlen($response) > self::MAX_SUBCOMMAND_RESPONSE_SIZE) {
+            throw new Exception('Response body size exceeds limit: ' . $url);
+        }
+        return $response;
     }
 
     /**

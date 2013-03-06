@@ -77,7 +77,7 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('http://google.com', $this->parser->prefixWithHttp('http://google.com'));
     }
 
-    public function testApplySubcommands_AppliesUrlOptimization() {
+    public function testParseSubcommand_AppliesUrlOptimization() {
         $parser = $this->getMock('TestParser', array('parseProper', 'get'));
         $parser->expects($this->once())->method('parseProper')
                 ->with($this->equalTo('foo bar'))
@@ -86,7 +86,7 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('http://foo.com/', $parser->parseSubcommand(array('{url foo bar}', 'url foo bar')));
     }
 
-    public function testApplySubcommands_DoesNotApplyUrlOptimization() {
+    public function testParseSubcommand_DoesNotApplyUrlOptimization() {
         $parser = $this->getMock('TestParser', array('parseProper', 'get'));
         $parser->expects($this->once())->method('parseProper')
                 ->with($this->equalTo('foo bar'))
@@ -95,6 +95,18 @@ class ParserTest extends PHPUnit_Framework_TestCase {
                 ->with($this->equalTo('http://foo.com/'))
                 ->will($this->returnValue('baz'));
         $this->assertEquals('baz', $parser->parseSubcommand(array('{foo bar}', 'foo bar')));
+    }
+
+public function testParseSubcommand_ThrowsException_IfResponseBodyExceedsLimit() {
+        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
+        $parser->expects($this->once())->method('parseProper')
+                ->with($this->equalTo('foo bar'))
+                ->will($this->returnValue('http://foo.com/'));
+        $parser->expects($this->once())->method('get')
+                ->with($this->equalTo('http://foo.com/'))
+                ->will($this->returnValue(str_repeat('a', 201)));
+        $this->setExpectedException('Exception');
+        $parser->parseSubcommand(array('{foo bar}', 'foo bar'));
     }
 
 }

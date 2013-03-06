@@ -34,4 +34,14 @@ class ParserController extends Controller {
         $this->redirectTo($url);
     }
 
+    /**
+     * Outputs the URL that the given command resolves to.
+     */
+    public function action_url() {
+        $command = isset($_GET['command']) ? trim($_GET['command']) : null;
+        $parser = new Parser(new CommandStore($this->config->getPdo()));
+        header('Content-Type: text/plain');
+        echo $parser->parse($command, null);
+    }
+
 }
