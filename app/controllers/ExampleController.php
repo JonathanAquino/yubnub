@@ -37,4 +37,28 @@ class ExampleController extends Controller {
         ));
     }
 
+    /**
+     * SYNOPSIS
+     *         dnow [YYYY-MMDD]
+     *
+     * EXAMPLE
+     *         dnow 2005-0607
+     *         dnow
+     *
+     * DESCRIPTION
+     *         Play the Democracy Now archive from archive.org. Democracy Now
+     *         is a daily radio and TV news program on over 300 stations,
+     *         pioneering the largest community media collaboration in the US.
+     *
+     *         Specify a date in YYYY-MMDD format. Or leave out the date
+     *         for today's show.
+     */
+    public function action_dnow() {
+        $yyyy_mmdd = isset($_GET['args']) ? $_GET['args'] : '';
+        if (!$yyyy_mmdd) {
+            $yyyy_mmdd = date('Y-md');
+        }
+        $this->redirectTo("http://www.archive.org/download/dn{$yyyy_mmdd}/dn{$yyyy_mmdd}_vbr.m3u");
+    }
+
 }
