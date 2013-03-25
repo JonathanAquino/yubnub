@@ -1,0 +1,12 @@
+<html>
+<head></head>
+<frameset rows="{{rowPercentages}}">
+    {{#rows}}
+        <frameset cols="{{columnPercentages}}">
+            {{#columns}}
+                <frame src="{{.}}">
+            {{/columns}}
+        </frameset>
+    {{/rows}}
+</frameset>
+</html>

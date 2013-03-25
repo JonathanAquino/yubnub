@@ -156,4 +156,46 @@ class ExampleController extends Controller {
         echo mb_strtolower($text);
     }
 
+    /**
+     * NAME
+     *        split - displays several webpages on a single screen
+     *
+     * SYNOPSIS
+     *        split [URL] [URL] [URL] ...
+     *
+     * EXAMPLE
+     *        split http://google.com http://yahoo.com http://answers.com
+     *        split {url g porsche} {url y porsche} {url a porsche}
+     */
+    public function action_split() {
+        $type = isset($_GET['type']) ? $_GET['type'] : '';
+        $urls = isset($_GET['urls']) ? $_GET['urls'] : '';
+        $urls = preg_split('/\s+/', $urls);
+        if ($type == 'h') {
+            $columnCount = 1;
+        } elseif ($type == 'v') {
+            $columnCount = count($urls);
+        } else {
+            $columnCount = ceil(sqrt(count($urls)));
+        }
+        $rows = array();
+        foreach ($urls as $url) {
+            if (count($rows) == 0 || count($rows[count($rows)-1]['columns']) == $columnCount) {
+                $rows[] = array('columnPercentages' => '', 'columns' => '');
+            }
+            $rows[count($rows)-1]['columns'][] = $url;
+        }
+        $rowCount = count($rows);
+        $rowPercentages = array_fill(0, $rowCount, (floor(100/$rowCount)) . '%');
+        foreach ($rows as $i => $row) {
+            $columnCount = count($rows[$i]['columns']);
+            $columnPercentages = array_fill(0, $columnCount, (floor(100/$columnCount)) . '%');
+            $rows[$i]['columnPercentages'] = implode(',', $columnPercentages);
+        }
+        $this->render('split', array(
+            'rows' => $rows,
+            'rowPercentages' => implode(',', $rowPercentages),
+        ));
+    }
+
 }

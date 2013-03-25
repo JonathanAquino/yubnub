@@ -28,6 +28,7 @@ class Controller {
         $template = file_get_contents($templatePath);
         $options = array();
         $options['partials_loader'] = new Mustache_Loader_FilesystemLoader(SERVER_ROOT);
+        $options['strict_callables'] = true;
         $mustacheEngine = new Mustache_Engine($options);
         echo $mustacheEngine->render($template, $args);
         exit;
