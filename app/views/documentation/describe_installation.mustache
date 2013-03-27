@@ -1,0 +1,678 @@
+{{> app/views/shared/header.mustache }}
+{{> app/views/shared/heading.mustache }}
+You can of course simply use YubNub like any other website. Just go to yubnub.org and type in a command.
+But the adventurous will want to try alternative ways to use YubNub.<br />
+<br />
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/firefox.gif"></td>
+        <td>
+            <b>Firefox search plugin.</b> <a href="http://www.jomdom.net">Aaron 'Jomdom' Ransley</a> has written a fantastic
+            <a href="http://yubnub.blogspot.com/2005/10/installing-yubnub-in-firefox-detailed.html">Firefox search plugin for YubNub</a>:
+            <div class="blockquote">
+              <a href="http://yubnub.blogspot.com/2005/10/installing-yubnub-in-firefox-detailed.html"><img src="/images/firefox_search_plugin.png"></a>
+            </div>
+            If you're using Firefox, simply go to the above website and click "YubNub" to install it into your search bar.
+            I'm so impressed. Way to go Aaron! (<a href="http://www.jroller.com/page/stueccles">Stuart Eccles</a>
+            has <a href="http://jonaquino.blogspot.com/2005/06/yubnub-my-entry-for-rails-day-24-hour.html#c111806548568003058">
+            <img src="http://www.jroller.com/resources/s/stueccles/yubnub.png"> also</a>
+            made a YubNub Firefox search plugin. Well done!) (Hm! <a href="http://www.jewsforjesus.org">Nathan Colgate Clark</a>
+            has also <a href="http://dev.spacetownusa.com/yubnub/"><img src="http://dev.spacetownusa.com/yubnub/yubnub.png"> written one</a>. Thanks Nate!)
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/ie7.png"></td>
+        <td>
+            <b>Internet Explorer 7 integration.</b> Thanks to David Monaghan for these instructions: <i>"I've got the newest IE7
+            here on Vista RC1 and I just installed YubNub into the search tool by going to <a href="http://www.microsoft.com/windows/ie/searchguide/en-en/default.mspx">this address</a>
+            (got there by clicking on find more providers) and entering the following into the create your own section:
+            http://yubnub.org/parser/parse?command=TEST</i><br />
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/ie.JPG"></td>
+        <td>
+            <b>Internet Explorer 6 integration.</b> IE users can turn their address bar into a YubNub command line using this
+            <a href="http://slashdot.org/comments.pl?sid=153340&cid=12867445">technique</a> written up by Mike Stay.
+            <b>Update:</b> Richard Frankel has created a little <a href="/yubnub-ie.reg">registry file</a> that uses Mike's
+            technique to install YubNub in Internet Explorer. I've examined the file and it is safe. Just click the link, and
+            afterwards you will be able to access YubNub in IE by typing "y", for example "y gmaps vancouver".<br />
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/safari.gif"></td>
+        <td>
+            <b>Safari integration.</b> A person who goes by the name of "line.at.infinity" has written up how to
+            <a href="http://slashdot.org/comments.pl?sid=153340&cid=12866050">integrate YubNub with Apple's Safari browser</a>.
+            <b>Update:</b> W. Van Hooste writes to say that the string given in those instructions does not work, and that
+            it is better to use the following: http://%@%@.yubnub.org/parser/parse?command=%@
+            <b>Update:</b> Noah Mittman has come up with an
+            <a href="http://yubnub.blogspot.com/2005/10/easier-yubnub-installation-in-safari.html">easier way</a>
+            to add YubNub to the Safari search bar.
+            <b>Update:</b> <a href="http://pownce.com/Nachtmensch/notes/497542/">Nachtmensch</a> writes:
+            <i>"Found this on the web: Kevin Ballard's <a href="http://kevin.sb.org/articles/2006/12/27/yubnubsearch-simbl-bundle">SIMBL Plugin for Safari</a> to use YubNub on the search field without hacking the Safari.app"</i>
+            <br />
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/opera.png"></td>
+        <td>
+            <b>Opera integration.</b> sports4mecc gave me the following tip:
+            In Opera 9, simply right-click on the YubNub search field then click
+            Create Search. <i>"The search engine you add will be
+            put at the bottom of the list, unless you make it default search engine.
+            (When the popup first comes up, choose "Details" on the right and check
+            the default search engine box.)".</i>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/chrome.png"></td>
+        <td>
+            <b>Google Chrome integration.</b> (Instructions courtesy of xybre)
+            <ol>
+                <li>Right click on the address bar</li>
+                <li>Select "Edit search engines"</li>
+                <li>Click "Add"</li>
+                <li>Put in "Yubnub for the Name" and your choice of keyword (I used "yn")</li>
+                <li>Put in "http://yubnub.org/parser/parse?command=%s" for the URL and click "Okay"</li>
+                <li>Scroll down and select the "Yubnub" entry in the list</li>
+                <li>Click "Make Default" and then click "Close"</li>
+            </ol>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/camino.png"></td>
+        <td>
+            <b>Camino integration.</b>  ycc2106 has
+            <a href="http://3spots.blogspot.com/2005/12/camino-yubnub-or-yubnub-sidebar.html">posted instructions</a>
+            for integrating YubNub with the Camino browser: <i>"Install
+            <a href="http://www.nadamac.de/camitools/camisearch.html">CamiSearch</a>
+            or the whole bunch of
+            <a href="http://www.nadamac.de/camitools/index.php">CamiTools</a>
+            and add to
+            Preferences &gt; CamiSearch &gt; Configure, add: http://yubnub.org/parser/parse?command=%s
+            &nbsp;&nbsp;&nbsp;"</i><br/>
+            <b><i>Update:</i></b> Klink says: <i>If you install <a href="http://pimpmycamino.com/parts/morecamino">MoreCamino</a>
+            and check "Search the web from the location bar" you can add YubNub to the list by putting in "http://www.yubnub.org/parser/parse?command=" as the URL. </i>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/maxthon.png"></td>
+        <td>
+            <b>Maxthon integration.</b>  Auric sent me these instructions for integrating YubNub with the Maxthon browser:
+            <div class="blockquote">
+                <ol>
+                    <li>Copy the following string:  http://yubnub.org/parser/parse?command=%s</li>
+                    <li>Go to Options > Maxthon Options... .</li>
+                    <li>Click on the Search tab.</li>
+                    <li>Press the "+" button at the top of the window and type "YubNub.org" in the highlighted box*.</li>
+                    <li>Click in the blank space to the right of the name you just inputted so that the entire line containing "YubNub.org" is highlighted.</li>
+                    <li>In the "Alias:" box, type the letter that you would like to use to direct Maxthon to search with YubNub.  For example, entering "y" would mean that typing in the address bar "y gim porsche" would cause Maxthon to use YubNub to search Google Images for "porsche."**</li>
+                    <li>In the "Engine:" box, paste in the copied address.</li>
+                    <li>Click the third button at the top of the window (the one that looks like a hand pointing to a list).</li>
+                    <li>Click "OK."</li>
+                    <li>Celebrate!</li>
+                </ol>
+                *Please note: in all cases, the quotation marks are inserted for
+                clarity; do not type them in any of the above steps! **For extra
+                speed, enter "*" as the alias, which will make Maxthon use
+                YubNub whenever you don't enter a URL into the address bar. For
+                example, typing "gim porsche" after using "*" for the alias
+                would make Maxthon search Google Images for "porsche." However,
+                Maxthon already uses the alias "*" with a search engine, so to
+                use this feature, you must remove that alias. To do this, follow
+                steps 2 through 10, omitting step 3 and deleting the "*" in the
+                "Alias:" box.
+            </div>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/konqueror.png"></td>
+        <td>
+            <b>Konqueror integration.</b> Zypres sent me this terse note on Konqueror integration:
+            <i>konqueror integration for lazy ppl: http://yubnub.org/parser/parse?command=\{@}</i>
+            <b><i>Update.</i></b> Paul Boren gives a more detailed explanation:
+            <i>"Konqueror integration.  From Konqueror's menu, select Settings -> Configure Konqueror
+            and choose Web Shortcuts.  Create a new shortcut with http://yubnub.org/parser/parse?command=\{@}
+            in the Search URI field.  Set YubNub as the default search engine with colon as the Keyword Delimiter.
+            Apply your changes, OK, and begin tapping into the power of YubNub."</i>
+        </td>
+    </tr>
+</table>
+<br />
+<table border="0">
+    <tr>
+        <td><img src="/images/omniweb.gif"></td>
+        <td>
+            <b>OmniWeb integration.</b> Instructions from David Rainsford:
+            <i>"By default it has the * shortcut  (wildcard) go to www.*.com – I have changed this in the
+            preferences to use  yubnub (set URL in the shortcut settings to http://yubnub.org/parser/parse?command=%@
+            instead of http://www.%@.com). I’ve attached a <a href="/images/omniweb_preferences.png">screenshot</a> of my preference screen for OmniWeb so you see
+            how it  works."</i>
+        </td>
+    </tr>
+</table>
+<br/>
+<b>To the adventurous:</b> Add YubNub to your Firefox address bar by typing about:config in
+the Location Bar then scrolling down the list and changing
+keyword.URL to <i>http://yubnub.org/parser/parse?command=</i> <span style="padding-left:6px">You</span> haven't lived until you've turned the address bar into a
+full-fledged command line. <i>(Thanks to Chuck Eglinton for helping me to word this more clearly)</i>
+<b>Update:</b> Hmm ... After a while, the Firefox address bar doesn't seem to recognize one-word
+YubNub commands. I recommend instead the Firefox search plugin, described above. For keyword.URL I suggest
+<a href="http://kb.mozillazine.org/Firefox_:_Tips_:_Location_Bar_Search">Google Browse-By-Name</a>. This does a Google search most of the time, but for especially common searches it takes you directly
+to the first search result. Works very well in practice.<br />
+<br />
+<b>YubNub Calculator.</b> John Gilman cleverly pointed out that you can type in 3*5 and YubNub will give you 15.
+This is because YubNub defaults to Google, and thus uses Google Calculator.<br />
+<br />
+<b>Source code</b> is now <a href="http://jonathanaquino.com/yubnub_source.tar.gz">available</a> (thanks to Ian's prodding).<br />
+<br />
+<b>YubNub Console (OSX)</b>. Amazingly, Dave Ely has created a <a href="http://homie.dijas.com/blog/2005/06/13/yubnub-console.html">Mac front-end for YubNub</a>:
+<div class="blockquote">
+  <a href="http://homie.dijas.com/blog/2005/06/13/yubnub-console.html"><img src="/images/yubnub_console.jpg"></a>
+</div>
+<b>YubNub Trip.</b> Glen Murphy has written a Windows program called <a href="http://trip.glenmurphy.com/">YubNub Trip</a>.
+Similar to Dave Ely's Mac program above, you summon YubNub Trip with a hotkey and type in YubNub commands. Thanks Glen!<br />
+<br />
+<b>Emacs integration.</b> You knew it had to happen at some point: <a href="/yubnub-emacs.txt">YubNub integration with the venerable
+Emacs text editor</a> (created by Richard Stallman in 1975). Brad Collins wrote this little gem.<br />
+<br />
+<b>Monad integration.</b> Lee Holmes describes how to <a href="http://www.leeholmes.com/blog/MSHAndYubNubACommunityCommandline.aspx">
+integrate YubNub</a> with <a href="http://en.wikipedia.org/wiki/MSH_(shell)">Monad</a>, Microsoft's new command-line interface.<br />
+<br />
+<b>Google Deskbar integration.</b> I was delighted with this tip from <a href="http://www.sternsquirt.com/">Michael Brindamour</a>:
+"It should be noted that the Google Deskbar can be modified to use this as well, by adding it as a customized search with a shortcut (I used ctrl-y)." <br />
+<br />
+<b>Quicksilver integration.</b> <a href="http://www.blogger.com/profile/2584878">Herr Theoretiker</a> has posted
+<a href="http://jonaquino.blogspot.com/2005/06/yubnub-my-entry-for-rails-day-24-hour.html#c111929414922717729">instructions</a> for integrating YubNub with Quicksilver, the
+beloved Mac OSX program launcher. <b>Update:</b> Herr Theoretiker sends this update: "I found a way to make it even easier: I've added a QS trigger to the "YubNub Search"
+bookmark, so it's now just a single keypress and a command-line entry to access YubNub." <b>Update:</b> Herr Theoretiker
+says: "I found out this morning that the newest versions of Quicksilver do not come with the Web Search plug-in (required
+for my QS-to-YubNub hack) pre-installed . . . the plug-in is required . . . it is installed by
+default in the Panther-compatible versions of QS."<br />
+<br />
+<b>Linux integration.</b> <a href="http://www.yubnub.org/parser/parse?command=g+bsittler">Benjamin Sittler</a> has written
+a <a href="http://www.yubnub.org/yubnub.sh">bash script</a> to invoke YubNub from the Linux command line. Benjamin
+<a href="http://jonaquino.blogspot.com/2005/06/yubnub-my-entry-for-rails-day-24-hour.html#c111932733668772089">adds</a>:
+"save it, change it's permissions to make it executable, and (optionally) set the BROWSER environment variable to
+point to the web browser of your choice (i use w3m because it's pipe-friendly) and install it in a directory
+on your PATH. works for linux, at least -- probably cygwin too." YubNub, meet Tux.<br />
+<br />
+<b>Surfraw integration.</b> I've been hearing a lot about <a href="http://surfraw.sourceforge.net/">Surfraw</a>,
+which is a Unix tool for accessing various web services (like a YubNub for the Unix command line). Iain Broadfoot
+has bridged the two worlds by writing a <a href="/yubnub-surfraw.txt">YubNub plugin for Surfraw</a>.<br />
+<br />
+<b>Safe Firefox Installation.</b> The safest way to install YubNub is to make a Firefox keyword for it. If you're using the Firefox web browser:
+<ul>
+<li>Right-click the input box at the top of the page (the one under the words "Type in a command")</li>
+<li>Click "Add a Keyword for this Search"</li>
+<li>For the Name, enter "YubNub", and for the Keyword, enter "y"</li>
+<li>Press OK</li>
+</ul>
+Now you can use YubNub directly from the address bar. For example, try typing "y gim porsche 911" into your address bar.
+Don't forget the "y" in front!<br />
+<div style="background: #eee; padding: 10px; margin: 10px">
+You may have noticed that I said that this is the "safest way" to install YubNub. Why safest? Because you must
+explicitly enter a "y" before the YubNub command. This prevents "command spoofing". <br />
+<br />
+For example, suppose someone made
+a "michael" command. If you typed "michael jordan" into YubNub, intending to do a search, you would instead
+go to the site of the person who made the "michael" command. Rats! But if you installed YubNub into your Firefox address
+bar as described above, typing "michael jordan" into your address bar would do a search for "michael jordan", as you
+intended. The only way to get to that other person's site would be to type "y michael".<br />
+<br />
+If you like to live on the edge like me, you can try one of the other installation methods, many of which do
+not require an initial keyword like "y".
+</div>
+<b>SlickRun integration.</b> <a href="http://www.bayden.com/SlickRun/">SlickRun</a> is another YubNub-like utility whose fans
+(zealots?) I've been hearing from. It's a free Windows program. xybre sent me an email about how to add YubNub to SlickRun:
+"Slickrun is a perfect component for using YubNub, simply define a
+keyword for use with Slickrun (in my case I used a foreward slash for
+ease of use, like IRC), and then use the command
+"http://yubnub.org/parser/parse?command=$w$" and it can be used to
+launch YN commands with extreme ease. Check it out. :D"<br />
+<br />
+<b>GNOME integration.</b> Nigel Tao wrote me: "FYI, my 'Deskbar Applet' for GNOME easily turns into a YubNub Deskbar,
+kind of like Google's Deskbar. <a href="http://browserbookapp.sourceforge.net/deskbar.html">Screenshots</a>.
+<a href="http://www.gnomefiles.org/app.php?soft_id=780">Homepage</a>.
+<a href="http://browserbookapp.sourceforge.net/deskbar-screencast.html">Video</a>.
+Caveat: current version requires an
+unstable version of gnome-python."<br />
+<br />
+<b>Replacing the address bar completely.</b> I was in awe when I read this profound idea sent to me by Michele Trimarchi:
+"i'm thinking about replace url bar of my firefox with yubnub searchbar.. why don't u simply forward to the site when
+someone don't insert a command but just a url?" Consider it done, Michele. Now you can enter a web address into YubNub
+(like "nba.com") and that's where you will go. <br />
+<br />
+So now you can use YubNub in four ways.
+You can type in a url like <span class="muted">porsche.com</span> and YubNub will go there. You can type in a YubNub command, like <span class="muted">gim porsche</span>
+which will do an image search for "porsche". You can type in some search terms, like <span class="muted">cars</span>, to do a Google search for
+"cars". And finally you can type in some well-known search terms, like <span class="muted">porsche</span>, and Google will take you straight to
+porsche.com (this is because YubNub defaults to Google's smart Browse-By-Name, not just plain Google).<br />
+<br />
+In effect, you can throw away your address bar and simply use your search bar. Below is a screenshot of Michele's idea --
+simply remove the address bar and rely solely on the search bar:
+<div class="blockquote">
+  <img src="/images/firefox_without_address_bar.png">
+</div>
+I'm going to try this for a little bit to see how it goes. The only thing is that the search bar is a bit small (at least
+on Firefox). Plus you don't
+get to see the current URL. Would someone be willing to write a YubNub Toolbar to overcome these limitations?<br />
+<br />
+(Incidentally the regex that YubNub uses to recognize URLs is
+<pre>    ^[^ ]+\.[a-z]{2,4}(/[^ ]*)?$</pre>
+If anyone sees any flaws in this, <a href="mailto:jonathan.aquino@gmail.com">let me know</a>)<br />
+<br />
+<b>Dave's Quick Search Deskbar.</b> Ryan Carpenter emailed me instructions for integrating YubNub with <a
+href="http://www.dqsd.net/">Dave's Quick Search Deskbar</a>
+(DQSD). DQSD is a Windows deskbar that launches searches. A lot of
+people (fanatics?) really like it. Ryan writes: "To use YubNub.org on
+Dave's Quick Search Deskbar, first follow the installation instructions
+on dqsd.net, then add the <a href="/yubnub-dqsd.xml">attached xml file</a> to the localsearches
+directory.  Then, reload DQSD by using its configure menu, or by
+typing an exclaimation point and Enter. You can use the YubNub search engine at any time by preceding your
+search with yn.  You can get some help on the YubNub/DQSD search by
+typing yn? And Enter." Thanks Ryan!<br />
+<br />
+<b>Android integration.</b> Anton Flügge has created a great <a href="https://market.android.com/details?id=de.antonfluegge.android.yubnubwidget">Android Yubnub search widget</a>.<br />
+<br />
+<b>YUBNUB.EXE.</b> <a href="http://www.opbarnes.com">Olan Patrick Barnes</a> has written
+<a href="http://www.opbarnes.com/blog/Programming/OPB/Utilities/yubnub.html">yubnub.exe</a>, a
+Windows command-line interface to YubNub (see below). I'm impressed! Olan is thinking about making a Mac version sometime.<br />
+
+<div class="blockquote">
+<table bgcolor="#e9e9e9"><tr><td>
+<pre>
+USAGE: yubnub [options] [yubnub command line]
+
+OPTIONS:
+   --help    - help
+   --browser - launch browser to run command (default).
+   --plain   - output results to console in plain text.
+</td></tr></table>
+</pre>
+</div>
+
+<b>Google integration (GreaseMonkey)</b> When <a href= "http://www.ardissone.org/archives/2005/06/23/yubnub-greasemonkey/">Leandro Ardissone</a>
+emailed me that he had written a GreaseMonkey script to integrate YubNub with Google, I knew I had to try out GreaseMonkey,
+even though it was 1:45 AM. And when I installed <a href="http://www.ardissone.org/code/greasemonkey/googleyubnub.user.js">Leandro's GreaseMonkey script</a>,
+I was stunned:
+<div class="blockquote">
+  <a href="http://www.ardissone.org/code/greasemonkey/googleyubnub.user.js"><img src="/images/yubnub_google.png"></a>
+</div>
+GreaseMonkey, I'm a believer! (Note that it only works for google.com -- not google.ca, etc.)
+<b>Update:</b> Leandro says it is easy to make it work with google.ca, etc.:
+"You can put the wildcards you want in the configuration of the Greasemonkey script, go to Tools &gt; Manage User Scripts...
+&gt; and Add a new Included Page like "http://www.google.*"".<br />
+<br />
+<b>YubNub Form Viewer.</b> Leandro Ardissone has <a href="http://www.ardissone.org/archives/2005/06/26/otra-utilidad-para-yubnub/">written a bookmarklet</a>
+that reveals the details of a form on a webpage. This information is useful if you are creating a YubNub command based on a
+submission form in a webpage. Just drag the "YubNub Form Details" link to your Bookmarks Toolbar then press it. Below I have
+gone to Google and pressed Leandro's bookmarklet:
+<div class="blockquote">
+  <a href="http://www.ardissone.org/archives/2005/06/26/otra-utilidad-para-yubnub/"><img src="/images/yubnub_form_details.png"></a>
+</div>
+<b>Dashboard widget (OSX).</b> Ciro Mondueri has made a pretty <a href="http://mondueri.com/widgets/dashnub/">Mac OS X Tiger widget
+to access YubNub!</a>
+<div class="blockquote">
+  <a href="http://mondueri.com/widgets/dashnub/"><img src="/images/dashnub.png"></a>
+</div>
+It's called "DashNub". Ciro is planning to add AJAX and namespaces to it. Cool!<br />
+<br />
+<b>SmartPhone/PocketPC integration.</b> If you have a SmartPhone or PocketPC and surf the web with
+<a href="http://www.southwaycorp.net/multiie.htm">MultiIE</a>, you can turn your address bar
+into a YubNub command line:
+<div class="blockquote">
+  <a href="http://www.southwaycorp.net/multiie.htm"><img src="/images/yubnub_multiie.png"></a>
+  <a href="http://www.southwaycorp.net/multiie.htm"><img src="/images/yubnub_multiie_options.png" style="padding-left:20px"></a>
+</div>
+Just go to MultiIE Options > Misc > Address Bar Macros > Open Button Custom 1, then type in the following:
+http://yubnub.org/parser/parse?command=#^;-YubNub (as shown in the picture on the right). You will then be
+able to enter a YubNub command (like "gim porsche 911") then click YubNub (as shown on the left).<br />
+<br />
+<b>Blackberry integration.</b> <a href="http://www.blogger.com/profile/47612">Wired Dude Dave</a>
+gives <a href="http://yubnub.blogspot.com/2005/07/yubnub-smartphonepocketpc-installation.html#112183428187613038">instructions</a>
+on how to add YubNub to your Blackberry mobile device: <i>I did something similar with
+<a href="http://www.thebogles.com/Berry411.htm">Berry411</a> (an awesome search client
+for the blackberry). I just edited a new "plugin" feature to have a search string look like
+http://yubnub.org/parser/parse?command=%s</i> <b>Update:</b> Berry411 creator Phillip Bogle has added YubNub
+to Berry411, so you can now type "yn: gim porsche" into your Blackberry. For more information, see
+<a href="http://www.thebogles.com/blog/2005/07/yubnub-goes-mobile.html">Phillip's post</a>. Here's a nice pic
+of YubNub on the Blackberry, from <a href="http://wired-dude.blogspot.com/2005/07/blackberry-running-yubnub-mobile.html">Wired Dude Dave</a>:
+<div class="blockquote">
+  <a href="http://wired-dude.blogspot.com/2005/07/blackberry-running-yubnub-mobile.html"><img src="/images/yubnub_blackberry.jpg"></a>
+</div>
+<br />
+<b>Windows/Linux/MacOSX/Python integration.</b> <a href="http://gnulinux.net/blog/index.php?blog=2">Steve Milner</a>
+has created a set of programs that allow access directly to YubNub directly from your computer (OS X, Linux or Windows).
+He calls it <a href="http://yubutils.sourceforge.net/">yubutils</a>, and it has three parts: a GUI for YubNub, a
+command-line interface, and a Python library:
+<div class="blockquote">
+  <a href="http://yubutils.sourceforge.net/"><img src="/images/yubutils1.jpg"></a><br /><br />
+  <a href="http://yubutils.sourceforge.net/"><img src="/images/yubutils2.jpg"></a><br /><br />
+  <a href="http://yubutils.sourceforge.net/"><img src="/images/yubutils3.jpg"></a><br />
+</div>
+<br />
+Andrew Pennebaker has also written a <a href="http://mcandre.wordpress.com/2006/12/10/python-yubnub-console">console-based utility</a> written in Python.
+<br />
+<br />
+<b>MacOSX YubNub console.</b> Ryan Rabac has written a nice-looking Mac OSX app for working with YubNub.
+He calls it <a href="http://raf2005.ath.cx/rafsoftware/yubnubberweb/index.html">YubNubber</a>:
+<div class="blockquote">
+  <a href="http://raf2005.ath.cx/rafsoftware/yubnubberweb/index.html"><img src="/images/yubnubber.png"></a>
+</div>
+<br />
+<b>Konfabulator integration (Windows).</b> Zheng has created a
+<a href="http://www.klogs.org/temp/YubNub.widget">Konfabulator widget</a> for YubNub.
+More details on his blog post
+(<a href="http://yubnub.org/parser/parse?command=autotr+http://www.klogs.org/archives/2005/07/konfabulatoraey.html">English</a>,
+<a href="http://www.klogs.org/archives/2005/07/konfabulatoraey.html">Chinese</a>).
+<div class="blockquote">
+  <a href="http://www.klogs.org/temp/YubNub.widget"><img src="/images/yubnub_konfabulator.jpg"></a>
+</div>
+<b>Opera integration 2.</b> Chaitanya Krishna sent me these alternative
+instructions for adding YubNub to Opera on Linux. The steps
+are probably similar for Windows:
+<div class="blockquote">
+1. cd ~/.opera<br />
+2. make a backup of the file search.ini:<br />
+<div class="blockquote">
+   cp search.ini search.ini.bk
+</div>
+3. open search.ini in a text editor<br />
+4. append these lines to the file<br />
+<div class="blockquote">
+[Search Engine 38]<br />
+Name=YubNub<br />
+URL=http://www.yubnub.org/parser/parse?command=%s<br />
+Query=<br />
+Key=y<br />
+Is post=0<br />
+Has endseparator=0<br />
+Encoding=utf-8<br />
+Search Type=0<br />
+Verbtext=17063<br />
+Position=-1<br />
+Nameid=0
+</div>
+5. Replace 38 with the next number in the search.ini file. Mine had 37 previously.<br />
+6. Restart Opera.<br />
+7. Typr y gim porsche 911 in the address bar and watch the magic.
+</div>
+<b>Update:</b> xybre reports success installing YubNub in Opera for Windows:
+<i>"I saw the Linux howto for Opera, I did it on Windows with a handy
+program called <a href="http://starzaki.eu.org/~hclan/operapl/en/download.html">Opsed</a>.
+It's wizard interface so it's easy to use. It also autodetects the location of the
+files, allows you to change the order and everything. And now I have
+Yubnub set as my default search in Opera too.. like with everything
+else. Hope this helps."</i> <b>Update:</b> xybre says:
+<i>"I forgot to mention, that if you have Yubnub first in the list (either
+with Opsed, or manually or otherwise) it will default to it when you
+type in text to the address bar that isn't a URL. You can also set up
+a keyword like in Firefox to be "y" for example."</i><br />
+<br />
+<b>Safari integration with the Sogudi extension.</b> <a href="http://hochmann.org">Thomas Hochmann</a> sent me these
+instructions:
+<div class="blockquote">
+The tip for integrating YubNub into the Safari search box is usable,
+but I prefer using the free 'Sogudi' extension for Safari. Here are
+some rough directions for how to use it - I figured I'd pass this on
+for others who want to use YubNub in the address bar without having to
+resort to the pagan Firefox for OS X. :)<br />
+<br />
+Sogudi allows you to add keyword shortcuts and searches that can be
+typed into the address bar. But even better than this is its ability
+to redirect to a default shortcut if you type something with more than
+one word. It defaults to Google, but it can be easily configured to
+direct commands to YubNub:<br />
+<br />
+<ol>
+<li> <a href="http://www.atamadison.com/w/kitzkikz.php?page=Sogudi">Download Sogudi</a> and install it.
+<li> Start Safari.
+<li> Click the Safari menu and select "Sogudi".
+<li> If there is a shortcut called "default", change its destination URL to: http://www.yubnub.org/parser/parse?command=@@@
+<li> If there isn't a shortcut called "default", simply create it, using the destination URL from #4.
+</ol>
+<br />
+Now whenever you type a multi-word entry in the address bar (such as
+"img tomiko van") it will go through YubNub. The only drawback is that
+this method does not work at all for single-word YubNub commands. As a
+workaround, I just created another Sogudi command called "y" so I can
+type "y nmts" to execute the "nmts" command.
+</div>
+Thanks, Thomas! <b><i>Update:</i></b> Robert Brook gives this tip: <i>
+I've found that I can use the default Sogudi trigger with single words by just adding a space at the beginning.
+For example: "img rails tutorial" bounces to http://images.google.com/images?q=rails+tutorial
+And " ls" (note leading space!) bounces to http://www.yubnub.org/kernel/ls?args=</i><br />
+<br />
+<b>YubNub search bar (browser-independent).</b> Inspired by Felipe
+Gomes' <a href="http://projects.felipc.com/gcl/">Google Command
+Line</a>, Sean O'Hagan has written a neat <a
+href="http://yubnub.org/parser/parse?command=man+cmdline">YubNub
+search-bar</a> that lives at the bottom of your browser. The neat
+thing about it is that it works in almost any browser, because it uses
+a simple HTML frame. To start it up, simply type <a
+href="http://yubnub.org/parser/parse?command=cmdline">cmdline</a> into
+YubNub. Then try typing "gim porsche" into the command-line at the
+bottom of the screen (or a URL like google.com). <b>Update:</b>
+Felipe Gomes has added YubNub to the original
+<a href="http://projects.felipc.com/gcl/">Google Command Line</a>.
+So now you can type "/yubnub gim porsche" into it.<br />
+<br />
+<b>PSP integration.</b> Brenden Mecleary has created a <a href="http://dia.phano.us/">
+YubNub page
+optimized for PlayStation Portables</a>. Brenden writes: "Yubnub seemed a
+good choice because (a) I think it's a really killer idea and
+(b) text entry on the PSP is a nightmare, so anything to save a
+few keystrokes is welcome, and YN seems well-suited to that.".<br />
+<br />
+<b>LaunchBar integration (Mac OSX)</b>. <a href="http://hochmann.org">Thomas Hochmann</a> writes:
+<div class="blockquote">
+<a href="http://www.obdev.at/products/launchbar/">LaunchBar</a> is an
+amazing little Mac OS X utility that lets you pull up documents,
+applications, Sherlock channels, iTunes playlists, web searches,
+etc. with a couple keystrokes. You can have it index any area of your
+hard drive you want, and add web search templates for Google,
+etc. It's basically like Spotlight but without the overhead, and with
+more web-oriented features.<br />
+<br />
+Here's how to add a YubNub command line to LaunchBar:<br />
+<br />
+<ol>
+<li> Summon LaunchBar using your favorite key combo.
+<li> Hit CMD-Y to bring up the Configuration window.
+<li> Click on "Search Templates" in the left pane. I use UTF-8 templates for all my LaunchBar shortcuts, but use whichever one you prefer.
+<li> Click the "Add" button.
+<li> Type "YubNub" for the name, and enter the following for the URL: http://www.yubnub.org/parser/parse?command=*
+<li> Close the window and save your changes when prompted.
+</ol>
+<br />
+Now you can bring up LaunchBar and type something like "yn" or "yub"
+and then hit space. Then you can type your YubNub command. So for
+myself, the process would go something like... CTRL-Space to bring up
+LaunchBar, type "yub" and hit space, and type in "wp
+fishsticks". <br />
+<br />
+<span style="color:black"><b>Update:</b> Don McAllister has
+published a <a href="http://donmc.libsyn.com/index.php?post_id=24677">screencast</a>
+on how to integrate YubNub commands with Launchbar.</span>
+</div>
+<b>K-Meleon integration.</b> Liam Kirsh provided these instructions: <i>"You have to go to Tools &gt; Web Search &gt; Configure and add YubNub to Web Search. Then close the window, and go to Tools &gt; Web Search &gt; Configure &gt; Keyword autosearch and select YubNub."</i><br />
+<br />
+<b>Yahoo! Toolbar integration.</b> Shantanu Oak sent me this tip:
+<i>"If you have the latest Yahoo Toolbar installed, you can use yahoo
+shortcuts from IE: Tools - Yahoo! services - Yahoo! Shortcuts.
+Click on Add... and type the name to the shortcut for e.g. quick.
+Now add the URL... http://www.yubnub.org/parser/parse?command=%s
+Now, if you want the pictures of flowers simply type...
+quick gim flowers"</i>. <b>Update:</b> Shantanu adds:
+<i>"One should also note that you can create Address bar on the taskbar.
+Right click anywhere on the taksbar and choose Toolbars - Address.
+Typing the command is easier now since the address bar is always
+visible on the taskbar even if you are working on something else like
+word or excel.
+If the focus is on the start button, hitting the tab key will activate
+the address bar and you can start typing the command."</i><br/>
+<br />
+<b>YubNub bookmarklet.</b> Brian Armknecht has written a
+<a href='javascript:q = "" + (window.getSelection ? window.getSelection() : document.getSelection ? document.getSelection() : document.selection.createRange().text); p = prompt("Yubnub search type? ... ", ""); if (q!=null) location="http://yubnub.org/parser/parse?command=" + escape(p).replace(/ /g, "+") + " " + escape(q).replace(/ /g, "+"); void 0'>bookmarklet for YubNub</a>
+(works on Firefox; doesn't seem to work on IE). Brian writes:
+<i>"There are occasions where I'd like to perform a YubNub command on some text
+on a webpage (e.g. a word I'd like to define, or an address I'd like to map).
+I created a new YubNub bookmarklet for this.  First highlight the text, then
+click the bookmarklet.  A dialogue box pops up to ask the YubNub command to be
+used.  It then performs that command on the highlighted text."</i>. Thanks Brian!
+<b>Update:</b> Yoo has created an interesting variant: the <a href="http://jy.xenweb.net/yubnub-bookmarklet.html">Three-In-One Yubnub Bookmarklet.</a><br />
+<br />
+<b>OpenSearch, IE7, A9.com integration</b>. <a href="http://www.code-words.com">Jeffrey Pratt</a> has put
+together an OpenSearch plugin for YubNub for IE7, A9.com, or whatever else supports OpenSearch. It's at
+<a href="http://code-words.com/opensearch/yubnub.xml">http://code-words.com/opensearch/yubnub.xml</a>.
+If you've got IE7 you can <a href="javascript:window.external.AddSearchProvider(' http://code-words.com/opensearch/yubnub.xml')">Install Now</a>.<br />
+<br />
+<b>NoteTab integration</b>. Mark Druskoff has written "a brief Clip to launch my YubNub commands straight out of Notetab":
+<div class="blockquote">
+    Yub SEC<br />
+    ^!Shell iexplore y ^?[Command=10k|S-1|prox|] ^?[field1=-co|] ^?[Company=] ^?[field2=-start|] ^?[startyear=] ^?[field3=-end|] ^?[endyear=]
+</div>
+<b>PageFlakes integration</b>. Christoph Janz and the PageFlakes team have written a <a href="http://community.pageflakes.com/blogs/christoph1/archive/2006/04/13/845.aspx">YubNub component</a> for PageFlakes.
+<b><i>Update:</i></b> Christoph sent me some buttons that you can stick on your site to help spread the word:
+<div style="padding-top:20px; padding-left:40px">
+    <a href="http://www.pageflakes.com/AddFlake.aspx?URL=__YUBNUB__"><img src="/images/YubNubButton1.gif" /></a>
+    <a href="http://www.pageflakes.com/AddFlake.aspx?URL=__YUBNUB__"><img src="/images/YubNubButton3.gif" /></a>
+    <a href="http://www.pageflakes.com/AddFlake.aspx?URL=__YUBNUB__"><img src="/images/YubNubButton2.gif" /></a>
+</div>
+<br />
+<br />
+<b>Google Toolbar 2 integration</b>. Ryan Carpenter sent me some <a href="/google-toolbar-2.xml">XML</a> for installing YubNub into Google Toolbar 2.<br />
+
+<br />
+<b>YubNub toolbars</b>. Two people have independently created Firefox toolbars for YubNub. One is <a href="http://rubnub.org/">RubNub for YubNub</a> created by Gabriel Kent. The other is
+Stephen Paul Weber's <a href="http://singpolyma-tech.blogspot.com/2006/04/yubnub-locationbar.html">Yubnub LocationBar</a> . <br />
+
+<br />
+<b>YubDOS</b>. W. Van Hooste has written <a href="http://wiki.lodbrok.be/?n=Main.YubDOS">YubDOS</a>, a batch file that lets you run YubNub from the Windows Run dialog (or command prompt) e.g. y gim porsche.
+
+<br />
+<br />
+<b>MSN integration</b>. superJC has added YubNub to an MSN bot called Virtual Secretary:
+<i>"I've discovered YubNub this week-end and found it so
+great that I decided to integrate a command in my MSN
+bot, Virtual Secretary (just add
+secretarybot@hotmail.com to your MSN Messenger
+contacts to use it).
+This bot can manage your favorites, agenda, contacts,
+notes... you can chat with it, it can send emails...
+and now it can execute YubNub commands: just by typing
+"yub" or "y" followed by the YubNub command. I display
+the URL and also the web page in the messenger
+activity window."</i>
+
+<br />
+<br />
+<b>Terminal Black theme</b>. 2stepsback sent me this <a href="/cmd.yubnub.org.html">interesting version</a> of the YubNub homepage.
+It's a white-on-black scheme that looks like the command-line from a desktop operating system.
+
+<br />
+<br />
+<b>Perl integration</b>. Uberdu has written a <a href="http://www.uberdu.com/blog/2007/02/11/very-simple-perl-script-for-running-yubnub-commands/">simple Perl script</a> for running YubNub commands.
+
+<br />
+<br />
+<b>AutoHotKey integration</b>. robsii says, <i>"This small script in autohotkey.ini opens a yubnub-inputbox when you press windows+enter.
+"</i>
+<div class="blockquote"><pre><code>#Return::
+ {
+  InputBox, UserInput,yubnub,,,,100
+  if Not ErrorLevel
+    run,http://www.yubnub.org/parser/parse?command=%UserInput%
+}
+return
+</code></pre></div>
+
+<br />
+<br />
+<b>Launchy integration</b>. Launchy is a popular Windows app launcher, and Jan Lellmann has written a
+<a href="http://www.fridgesoft.de/files/yubby.zip">YubNub plugin for Launchy</a>.
+Jan says, <i>"Launchy is nice tool by itself: Type Alt+Space, "firef", it suggests Firefox, return and Firefox starts up. A lot faster than clicking through the start menu.
+With the Yubnub plugin, you can launch a Yubnub command from everywhere:
+Alt+Space, Space (again), "simpsons", return and you'll get a browser
+window with the result."</i>
+
+<br />
+<br />
+<b>Firefox extension</b>. <a href="http://jaysherby.blogspot.com/2007/03/yubnub-command-line-firefox-extension.html">Jay Sherby</a> announced that he has written a <a href="http://yubnubcommandline.mozdev.org/">YubNub Firefox extension</a> with skins, history, and auto-hide.
+
+<br />
+<br />
+<b>Conkeror integration</b>. Charles-Albert Lehalle sent me the following "code to put in your conkeror.rcfile if you want to use yubnub as a webjump":
+<div class="blockquote"><pre><code>// yubnub.org
+function yubnub( args)
+{
+    var prefix = args[0];
+    readFromMiniBuffer(open_url_in_prompt(prefix,"yubnub command"), // prompt
+                       null,                                        // initval
+                       get_bm_strings(),                            // history
+                       function(url) { getBrowser().newBrowser("http://www.yubnub.org/parser/parse?command=" + url);}); // callback
+}
+add_command("y", yubnub, [["p"]]);
+</code></pre></div>
+<img src="/images/yubnub4conkeror.png" alt="YubNub in the Conkeror bar" />
+
+<br />
+<br />
+<b>iPhone integration</b>. Chanpory Rith has figured out how to get <a href="http://www.lifeclever.com/17-powerful-bookmarklets-for-your-iphone/">Yubnub to work on the iPhone</a>, using a bookmarklet.
+<b>Update:</b> Erica Sadun describes how to <a href="http://www.tuaw.com/2007/08/31/add-yubnub-to-iphone/">change</a> the default iPhone search engine to YubNub, using a binary editor.
+
+<br />
+<br />
+<b>Vista integration</b>. Jordan Hofker has written up instructions for <a href="http://jordan.hofker.org/2007/07/19/0x13d-sweet/">integrating YubNub</a> with the Windows Vista Start Menu using Start++.
+
+<br />
+<br />
+<b>wmii integration</b>. Sridhar Ratnakumar has found a <a href="http://srid.nearfar.org/post/11665551">YubNub plugin</a> for the wmii window manager for X11.
+
+<br />
+<br />
+<b>FastYub</b>. Michele Trimarchi's <a href="https://addons.mozilla.org/en-US/firefox/addon/1807">YubNub Firefox add-on</a>. Ctrl+K to pop it up (optionally, select some text first). Or select some text and right-click to pick a topten command.
+
+<br />
+<br />
+<b>Ubiquity integration</b>. Andre Kibbe describes <a href="http://tools-for-thought.com/2008/09/05/ubiquity-redux-15-more-commands-to-get-more-from-the-web/?&owa_from=feed&owa_sid=">how to integrate</a> Yubnub with the intriguing Firefox Ubiquity extension.
+
+<br />
+<br />
+<b>iPhone integration</b>. Andreas Moor and Ell Dove contributed the YubNub's <a href="http://yubnub.org/iphone.html">iPhone/iPod Touch page</a>.
+
+<br />
+<br />
+<br />
+<br />
+Exciting times! It takes a village to build a command line.<br />
+<br />
+-- Jon
+{{> app/views/shared/footer.mustache }}

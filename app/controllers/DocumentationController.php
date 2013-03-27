@@ -14,4 +14,40 @@ class DocumentationController extends Controller {
         ));
     }
 
+    /**
+     * Describes alternative ways to use Yubnub.
+     */
+    public function action_describe_installation() {
+        $this->render('describe_installation', array(
+            'pageTitle' => 'Installing YubNub'
+        ));
+    }
+
+    /**
+     * Documents advanced syntax for creating commands.
+     */
+    public function action_describe_advanced_syntax() {
+        $this->render('describe_advanced_syntax', array(
+            'pageTitle' => 'Advanced Syntax for Creating Commands'
+        ));
+    }
+
+    /**
+     * Displays a list of people who were instrumental in the creation of Yubnub.
+     */
+    public function action_display_acknowledgements() {
+        $this->render('display_acknowledgements', array(
+            'pageTitle' => 'Acknowledgements'
+        ));
+    }
+
+    /**
+     * Displays a list of Yubnub's best commands, as selected by Jeremy Hussell.
+     */
+    public function action_jeremys_picks() {
+        $this->render('jeremys_picks', array(
+            'pageTitle' => 'Jeremy’s Picks'
+        ));
+    }
+
 }
