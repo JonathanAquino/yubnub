@@ -198,4 +198,26 @@ class ExampleController extends Controller {
         ));
     }
 
+    /**
+     * Converts the given text to the phonetic alphabet (Alpha, Bravo, Zulu, ...)
+     *
+     * Example: phon hello world
+     * returns: Hotel Echo Lima Lima Oscar Whiskey Oscar Romeo Lima Delta
+     *
+     * Useful for conveying important information over the phone (like zip codes)
+     */
+    public function action_to_phonetics() {
+        $phonetics = 'Alpha Bravo Charlie Delta Echo Foxtrot Golf Hotel India Juliet Kilo Lima Mike November Oscar Papa Quebec Romeo Sierra Tango Uniform Victor Whiskey Xray Yankee Zulu';
+        $letterToPhoneticMap = array();
+        foreach (explode(' ', $phonetics) as $phonetic) {
+            $letterToPhoneticMap[$phonetic[0]] = $phonetic;
+        }
+        $phonetics = array();
+        foreach (str_split(strtoupper($_GET['text'])) as $letter) {
+            $phonetics[] = isset($letterToPhoneticMap[$letter])
+                ? $letterToPhoneticMap[$letter] : $letter;
+        }
+        echo implode(' ', $phonetics);
+    }
+
 }
