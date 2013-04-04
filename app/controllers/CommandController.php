@@ -20,4 +20,14 @@ class CommandController extends Controller {
         echo $js;
     }
 
+    /**
+     * Displays a form for creating a new command.
+     */
+    public function action_new() {
+        $this->render('new', array(
+            'pageTitle' => 'Create A New Command',
+            'name' => isset($_GET['name']) ? $_GET['name'] : ''
+        ));
+    }
+
 }
