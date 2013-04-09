@@ -30,4 +30,13 @@ class CommandController extends Controller {
         ));
     }
 
+    /**
+     * Processes the form for creating a new command.
+     */
+    public function action_add_command() {
+        $url = $_POST['command']['url'];
+        $commandService = new CommandService();
+        $url = $commandService->prefixWithHttpIfNecessary($url);
+    }
+
 }
