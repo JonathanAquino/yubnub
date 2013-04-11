@@ -35,7 +35,9 @@ class CommandController extends Controller {
      */
     public function action_add_command() {
         $url = $_POST['command']['url'];
+        $commandStore = new CommandStore($this->config->getPdo());
         $commandService = new CommandService();
+        $url = $commandService->surroundWithUrlCommandIfNecessary($url, $commandStore);
         $url = $commandService->prefixWithHttpIfNecessary($url);
     }
 
