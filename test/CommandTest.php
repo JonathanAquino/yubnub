@@ -33,12 +33,12 @@ Foo';
         $this->assertEquals('A%26W', $this->command->getRawurlencodedName());
     }
 
-    public function testGetDisplayUrl_HandlesAlternativeFormat1() {
+    public function testGetDisplayUrl_HandlesOldFormat() {
         $this->command->url = '{url tiny {url ierdp %s}}';
         $this->assertEquals('tiny {url ierdp %s}', $this->command->getDisplayUrl());
     }
 
-    public function testGetDisplayUrl_HandlesAlternativeFormat2() {
+    public function testGetDisplayUrl_HandlesNewFormat() {
         $this->command->url = '{url[no url encoding] gg %s site:nbr.tumblr.com}';
         $this->assertEquals('gg %s site:nbr.tumblr.com', $this->command->getDisplayUrl());
     }
