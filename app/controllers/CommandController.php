@@ -39,6 +39,17 @@ class CommandController extends Controller {
         $commandService = new CommandService();
         $url = $commandService->surroundWithUrlCommandIfNecessary($url, $commandStore);
         $url = $commandService->prefixWithHttpIfNecessary($url);
+        if (isset($_POST['test_button'])) {
+            $this->redirectTo($commandService->run($url, $_POST['test_command'],
+                    new Parser($commandStore)));
+            return;
+        }
+        if (isset($_POST['view_url_button'])) {
+            header('Content-type: text/plain');
+            echo $commandService->run($url, $_POST['test_command'],
+                    new Parser($commandStore));
+            return;
+        }
     }
 
 }

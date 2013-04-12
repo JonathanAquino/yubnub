@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Transforms a command into a URL to redirect to.
+ * Transforms a command into a URL.
  */
 class Parser {
 
@@ -39,6 +39,7 @@ class Parser {
      * @param string $commandString  the command plus arguments, e.g., gim porsche
      * @param string $defaultCommand  command to use if the first word is not
      *                                a recognized command
+     * @return string  the resulting URL
      */
     public function parse($commandString, $defaultCommand) {
         $commandString = trim($commandString);
@@ -80,6 +81,7 @@ class Parser {
      * @param string $commandString  the command plus arguments, e.g., gim porsche
      * @param string $defaultCommand  command to use if the first word is not
      *                                a recognized command
+     * @return string  the resulting URL
      */
     protected function parseProper($commandString, $defaultCommand) {
         $parts = preg_split('/\s+/', $commandString);
@@ -93,20 +95,20 @@ class Parser {
             $command = $this->commandStore->findCommand($defaultCommand);
             $args = $commandString;
         }
-        $debugging = false;
-        if ($debugging) {
-            header('Content-Type: text/plain');
-            echo $commandString . "\n";
-        }
+        return $this->run($command, $args);
+    }
+
+    /**
+     * Returns a URL corresponding to the given command object, after applying
+     * the arguments.
+     *
+     * @param Command $command  the Command to run
+     * @param string $args  the arguments (string of switches) to pass to the command
+     * @return string  the resulting URL
+     */
+    public function run($command, $args) {
         $url = $this->applyArgs($command, $args);
-        if ($debugging) {
-            echo $url . "\n";
-        }
         $url = $this->applySubcommands($url);
-        if ($debugging) {
-            echo $url . "\n";
-            echo "-----------\n";
-        }
         return $url;
     }
 

@@ -5,7 +5,7 @@ require_once 'app/helpers/CommandService.php';
 class CommandServiceTest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->commandService = new CommandService();
+        $this->commandService = new TestCommandService();
         $this->commandStore = $this->getMock('CommandStore', array('findCommand'), array(), '', false);
 
     }
@@ -61,5 +61,30 @@ class CommandServiceTest extends PHPUnit_Framework_TestCase {
                 $this->commandService->surroundWithUrlCommandIfNecessary('foo bar', $this->commandStore));
     }
 
+    public function testDropFirstWord_DropsFirstWord() {
+        $this->assertEquals('world, Jon!',
+                $this->commandService->dropFirstWord('Hello, world, Jon!'));
+    }
+
+    public function testDropFirstWord_ReturnsEmptyString_IfOnlyOneWord() {
+        $this->assertEquals('',
+                $this->commandService->dropFirstWord('Hello!'));
+    }
+
+    public function testDropFirstWord_ReturnsEmptyString_IfNoWords() {
+        $this->assertEquals('',
+                $this->commandService->dropFirstWord(''));
+    }
+
+    public function testDropFirstWord_TrimsInput() {
+        $this->assertEquals('world, Jon!',
+                $this->commandService->dropFirstWord(' Hello, world, Jon! '));
+    }
+
 }
 
+class TestCommandService extends CommandService {
+    public function dropFirstWord($s) {
+        return parent::dropFirstWord($s);
+    }
+}

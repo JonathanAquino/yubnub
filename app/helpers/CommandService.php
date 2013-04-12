@@ -52,4 +52,32 @@ class CommandService {
         return 'http://' . $url;
     }
 
+    /**
+     * Returns the URL resulting from applying a command string to a command
+     * definition($url).
+     *
+     * @param string $url  the command definition, e.g., http://google.com?q=%s
+     * @param string $commandString  the command, e.g., g porsche
+     * @param Parser $parser  an object that transforms a command into a URL
+     * @return string  the resulting URL, e.g., http://google.com?q=porsche
+     */
+    public function run($url, $commandString, $parser) {
+        $command = new Command();
+        $command->url = $url;
+        $args = $this->dropFirstWord($commandString);
+        return $parser->run($command, $args);
+    }
+
+    /**
+     * Removes the first word from the string.
+     *
+     * @param string $s  a string, e.g., Hello world
+     * @return string  the string with the first word removed, e.g., Hello
+     */
+    protected function dropFirstWord($s) {
+        $s = trim($s);
+        $parts = preg_split('/\s+/u', $s, 2);
+        return isset($parts[1]) ? $parts[1] : '';
+    }
+
 }
