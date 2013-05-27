@@ -54,6 +54,11 @@ class CommandController extends Controller {
             $this->redirectTo('/');
             return;
         }
+        $bannedUrlPatternStore = new BannedUrlPatternStore($this->config->getPdo());
+        if ($bannedUrlPatternStore->matches($url)) {
+            $this->redirectTo('/');
+            return;
+        }
     }
 
 }
