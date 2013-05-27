@@ -15,7 +15,7 @@
         onComplete: function(request) {
           var data = eval('(' + request.responseText + ')')
           if (data.exists) {
-            document.getElementById('name_taken_label').innerHTML = "Hmm ... <b>" + name + "</b> is already taken (<a style='color:red' href='/parser/parse?command=man+"+name+"'>description</a>). Would you be willing to pick another name?";
+            document.getElementById('error_message').innerHTML = "Hmm ... <b>" + name + "</b> is already taken (<a style='color:red' href='/parser/parse?command=man+"+name+"'>description</a>). Would you be willing to pick another name?";
             document.add_command_form.submit_button.disabled = true;
           }
         }
@@ -27,14 +27,16 @@
   function getName() {
     return trim(document.getElementById('command_name').value);
   }
-  function commandNameChanged() {
+  function commandNameChanged(clearErrorMessageIfNameValid) {
     name = getName();
     if (name.indexOf(' ') > -1) {
-      document.getElementById('name_taken_label').innerHTML = "Heya! Would you be willing to remove the spaces? I get confused. How about <b>" + name.replace(new RegExp(' ', 'ig'), '') + "</b> (all one word)?";
+      document.getElementById('error_message').innerHTML = "Heya! Would you be willing to remove the spaces? I get confused. How about <b>" + name.replace(new RegExp(' ', 'ig'), '') + "</b> (all one word)?";
       document.add_command_form.submit_button.disabled = true;
     }
     else {
-      document.getElementById('name_taken_label').innerHTML = "";
+      if (clearErrorMessageIfNameValid) {
+        document.getElementById('error_message').innerHTML = "";
+      }
       document.add_command_form.submit_button.disabled = false;
       timer.trigger();
     }
@@ -72,11 +74,11 @@
   <tr>
     <td></td>
     <!-- Use an nbsp (any character will do); otherwise the row gets 0 height [Jon Aquino 2005-06-17] -->
-    <td rowheight="20"><span id="name_taken_label" class="hint" style="color:red"></span>&nbsp;</td>
+    <td rowheight="20"><span id="error_message" class="hint" style="color:red">{{errorMessage}}</span>&nbsp;</td>
   </tr>
   <tr>
     <td><label for='command_name'>Command:</label></td>
-    <td><input id="command_name" name="command[name]" onkeydown="commandNameChanged()" onkeyup="commandNameChanged()" size="30" type="text" value="" />
+    <td><input id="command_name" name="command[name]" onkeydown="commandNameChanged(true)" onkeyup="commandNameChanged(true)" size="30" type="text" value="{{name}}" />
     {{^name}}
       <span class="hint">e.g. gim</span>
     {{/name}}
@@ -91,7 +93,7 @@
   </tr>
   <tr>
     <td><label for='command_url'>URL:</label></td>
-    <td><input id="command_url" name="command[url]" size="55" type="text" value="" /> <span class="hint">e.g. http://images.google.com/images?q=%s</span></td>
+    <td><input id="command_url" name="command[url]" size="55" type="text" value="{{url}}" /> <span class="hint">e.g. http://images.google.com/images?q=%s</span></td>
   </tr>
   <tr>
     <td></td>
@@ -126,7 +128,13 @@
   </tr>
   <tr>
     <td><label for='command_description'>Description:</label></td>
-    <td><textarea cols="70" id="command_description" name="command[description]" rows="8" wrap="off"></textarea></td>
+    <td><textarea cols="70" id="command_description" name="command[description]" rows="8" wrap="off">{{description}}</textarea></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      {{{captchaHtml}}}
+    </td>
   </tr>
   <tr>
     <td></td>
@@ -137,7 +145,7 @@
   </tr>
   </table>
   <script type="text/javascript">
-    commandNameChanged();
+    commandNameChanged(false);
   </script>
   <input type="text" name="x" id="x" size="1"/>
 </form>

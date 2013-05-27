@@ -48,6 +48,16 @@ class Controller {
     }
 
     /**
+     * Executes the specified action.
+     *
+     * @param string $action  the name of the action, e.g., 'new'
+     * @param array $args  parameters to pass to the action
+     */
+    public function forwardTo($action, $args = array()) {
+        call_user_func_array(array($this, "action_$action"), $args);
+    }
+
+    /**
      * Returns the name of the controller.
      *
      * @return string  the part of the class name before "Test", with first
