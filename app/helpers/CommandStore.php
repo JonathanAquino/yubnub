@@ -105,14 +105,74 @@ class CommandStore {
      */
     protected function createCommand($args) {
         $command = new Command();
-        $command->name = $args['name'];
-        $command->url = $args['url'];
-        $command->description = $args['description'];
-        $command->uses = $args['uses'];
-        $command->creationDate = $args['creation_date'];
-        $command->lastUseDate = $args['last_use_date'];
-        $command->goldenEggDate = $args['golden_egg_date'];
+        $command->id = ifseta($args, 'id');
+        $command->name = ifseta($args, 'name');
+        $command->url = ifseta($args, 'url');
+        $command->description = ifseta($args, 'description');
+        $command->uses = ifseta($args, 'uses');
+        $command->creationDate = ifseta($args, 'creation_date');
+        $command->lastUseDate = ifseta($args, 'last_use_date');
+        $command->goldenEggDate = ifseta($args, 'golden_egg_date');
         return $command;
+    }
+
+    /**
+     * Inserts or updates the command in the database.
+     *
+     * @param Command $command  the command to save
+     */
+    public function save($command) {
+        if ($command->id) {
+            $this->update($command);
+        } else {
+            $this->insert($command);
+        }
+    }
+
+    /**
+     * Inserts the command into the database.
+     *
+     * @param Command $command  the command to save
+     */
+    protected function insert($command) {
+        $insert = $this->pdo->prepare('INSERT INTO yubnub.commands '
+                . '(name, url, description, uses, creation_date, last_use_date, golden_egg_date) '
+                . 'VALUES '
+                . '(:name, :url, :description, :uses, :creationDate, :lastUseDate, :goldenEggDate)');
+        $insert->bindValue(':name', $command->name, PDO::PARAM_STR);
+        $insert->bindValue(':url', $command->url, PDO::PARAM_STR);
+        $insert->bindValue(':description', $command->description, PDO::PARAM_STR);
+        $insert->bindValue(':uses', $command->uses, PDO::PARAM_INT);
+        $insert->bindValue(':creationDate', $command->creationDate, PDO::PARAM_STR);
+        $insert->bindValue(':lastUseDate', $command->lastUseDate, PDO::PARAM_STR);
+        $insert->bindValue(':goldenEggDate', $command->goldenEggDate, PDO::PARAM_STR);
+        $insert->execute();
+    }
+
+    /**
+     * Updates the command in the database.
+     *
+     * @param Command $command  the command to save
+     */
+    protected function update($command) {
+        $update = $this->pdo->prepare('UPDATE yubnub.commands SET '
+                . 'name = :name, '
+                . 'url = :url, '
+                . 'description = :description, '
+                . 'uses = :uses, '
+                . 'creation_date = :creationDate, '
+                . 'last_use_date = :lastUseDate, '
+                . 'golden_egg_date = :goldenEggDate '
+                . 'WHERE id = :id');
+        $update->bindValue(':name', $command->name, PDO::PARAM_STR);
+        $update->bindValue(':url', $command->url, PDO::PARAM_STR);
+        $update->bindValue(':description', $command->description, PDO::PARAM_STR);
+        $update->bindValue(':uses', $command->uses, PDO::PARAM_INT);
+        $update->bindValue(':creationDate', $command->creationDate, PDO::PARAM_STR);
+        $update->bindValue(':lastUseDate', $command->lastUseDate, PDO::PARAM_STR);
+        $update->bindValue(':goldenEggDate', $command->goldenEggDate, PDO::PARAM_STR);
+        $update->bindValue(':id', $command->id, PDO::PARAM_INT);
+        $update->execute();
     }
 
 }

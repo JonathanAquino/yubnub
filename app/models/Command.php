@@ -8,6 +8,9 @@ class Command {
     /** The maximum length of the excerpt. */
     const EXCERPT_LENGTH = 500;
 
+    /** The primary key, e.g., 3 */
+    public $id;
+
     /** The command name, e.g., g */
     public $name;
 

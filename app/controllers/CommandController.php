@@ -59,12 +59,14 @@ class CommandController extends Controller {
             $this->redirectTo('/');
             return;
         }
-        $commandStore->createCommand(array(
-            'name' => $_POST['command']['name'],
-            'url' => $url,
-            'description' => $_POST['command']['description'],
-            'creationDate' => $commandService->getDate(),
-        ));
+        $command = new Command();
+        $command->name = $_POST['command']['name'];
+        $command->url = $url;
+        $command->description = $_POST['command']['description'];
+        $command->creationDate = $commandService->getDate();
+        $command->uses = 0;
+        $commandStore->save($command);
+        $this->redirectTo('/');
     }
 
 }
