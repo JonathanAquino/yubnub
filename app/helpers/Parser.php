@@ -49,7 +49,12 @@ class Parser {
             return $this->prefixWithHttp($commandString);
         }
         $this->commandCount = 0;
-        return $this->parseProper($commandString, $defaultCommand);
+        $url = $this->parseProper($commandString, $defaultCommand, $command);
+        $commandService = new CommandService();
+        $command->uses++;
+        $command->lastUseDate = $commandService->getDate();
+        $this->commandStore->save($command);
+        return $url;
     }
 
     /**
@@ -81,9 +86,10 @@ class Parser {
      * @param string $commandString  the command plus arguments, e.g., gim porsche
      * @param string $defaultCommand  command to use if the first word is not
      *                                a recognized command
+     * @param Command $command  (output) the Command used
      * @return string  the resulting URL
      */
-    protected function parseProper($commandString, $defaultCommand) {
+    protected function parseProper($commandString, $defaultCommand, &$command = null) {
         $parts = preg_split('/\s+/', $commandString);
         $name = $parts[0];
         $args = implode(' ', array_slice($parts, 1));
