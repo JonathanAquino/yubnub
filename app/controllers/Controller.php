@@ -8,13 +8,17 @@ class Controller {
     /** Configuration variables for the current environment. */
     protected $config;
 
+    /** Provides access to a single PDO instance that is created only when needed. */
+    protected $pdoSingleton;
+
     /**
      * Creates the controller.
      *
      * @param Config $config  configuration variables for the current environment
      */
-    public function __construct($config) {
+    public function __construct($config, $pdoSingleton) {
         $this->config = $config;
+        $this->pdoSingleton = $pdoSingleton;
     }
 
     /**

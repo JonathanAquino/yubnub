@@ -24,7 +24,7 @@ class Dispatcher {
      */
     public function dispatch($url) {
         list($controllerClass, $action) = $this->parse($url);
-        $controller = new $controllerClass($this->config);
+        $controller = new $controllerClass($this->config, new PdoSingleton($this->config));
         $controller->$action();
     }
 

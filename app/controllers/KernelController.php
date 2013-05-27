@@ -18,7 +18,7 @@ class KernelController extends Controller {
     public function action_ls() {
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page-1) * self::PAGE_SIZE;
-        $commandStore = new CommandStore($this->config->getPdo());
+        $commandStore = new CommandStore($this->pdoSingleton->getPdo());
         $q = isset($_GET['args']) ? $_GET['args'] : '';
         $extra = 1;
         $commands = $commandStore->findCommands(array(
@@ -48,7 +48,7 @@ class KernelController extends Controller {
     public function action_golden_eggs() {
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page-1) * self::PAGE_SIZE;
-        $commandStore = new CommandStore($this->config->getPdo());
+        $commandStore = new CommandStore($this->pdoSingleton->getPdo());
         $q = isset($_GET['args']) ? $_GET['args'] : '';
         $extra = 1;
         $commands = $commandStore->findGoldenEggs(array(
@@ -77,7 +77,7 @@ class KernelController extends Controller {
     public function action_most_used_commands() {
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $start = ($page-1) * self::PAGE_SIZE;
-        $commandStore = new CommandStore($this->config->getPdo());
+        $commandStore = new CommandStore($this->pdoSingleton->getPdo());
         $extra = 1;
         $commands = $commandStore->findCommands(array(
                 'start' => $start,
@@ -106,7 +106,7 @@ class KernelController extends Controller {
         if (strlen($name) == 0) {
             $this->redirectTo('/kernel/man?args=man');
         }
-        $commandStore = new CommandStore($this->config->getPdo());
+        $commandStore = new CommandStore($this->pdoSingleton->getPdo());
         $command = $commandStore->findCommand($name);
         if (!$command) {
             $this->render('no_manual_entry', array(

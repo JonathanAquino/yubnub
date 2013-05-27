@@ -18,7 +18,7 @@ class CommandController extends Controller {
      *     - name - the name of the command to look for
      */
     public function action_exists() {
-        $commandStore = new CommandStore($this->config->getPdo());
+        $commandStore = new CommandStore($this->pdoSingleton->getPdo());
         $command = $commandStore->findCommand($_GET['name']);
         $js = json_encode(array('exists' => $command ? true : false));
         header('Content-Type: text/javascript');
@@ -49,7 +49,7 @@ class CommandController extends Controller {
     public function action_add_command() {
         require_once SERVER_ROOT . '/lib/Recaptcha/recaptchalib.php';
         $url = $_POST['command']['url'];
-        $commandStore = new CommandStore($this->config->getPdo());
+        $commandStore = new CommandStore($this->pdoSingleton->getPdo());
         $commandService = new CommandService();
         $url = $commandService->surroundWithUrlCommandIfNecessary($url, $commandStore);
         $url = $commandService->prefixWithHttpIfNecessary($url);
@@ -68,7 +68,7 @@ class CommandController extends Controller {
             $this->redirectTo('/');
             return;
         }
-        $bannedUrlPatternStore = new BannedUrlPatternStore($this->config->getPdo());
+        $bannedUrlPatternStore = new BannedUrlPatternStore($this->pdoSingleton->getPdo());
         if ($bannedUrlPatternStore->matches($url)) {
             $this->redirectTo('/');
             return;
