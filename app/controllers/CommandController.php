@@ -50,6 +50,10 @@ class CommandController extends Controller {
                     new Parser($commandStore));
             return;
         }
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirectTo('/');
+            return;
+        }
     }
 
 }
