@@ -4,7 +4,7 @@
 yubnub ()
 {
 local u;
-u="http://www.yubnub.org/parser/parse?command=$(echo -n :"$*" | sed '1 s/://' | od -tx1 | sed -e 's/^[0-7]*//' | tr -d '\n' | tr ' ' '%')";
+u="http://yubnub.org/parser/parse?command=$(echo -n :"$*" | sed '1 s/://' | od -tx1 | sed -e 's/^[0-7]*//' | tr -d '\n' | tr ' ' '%')";
 local b;
 b="${BROWSER:-"w3m:lynx"}";
 local oIFS;

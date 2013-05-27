@@ -112,7 +112,7 @@ But the adventurous will want to try alternative ways to use YubNub.<br />
             Preferences &gt; CamiSearch &gt; Configure, add: http://yubnub.org/parser/parse?command=%s
             &nbsp;&nbsp;&nbsp;"</i><br/>
             <b><i>Update:</i></b> Klink says: <i>If you install <a href="http://pimpmycamino.com/parts/morecamino">MoreCamino</a>
-            and check "Search the web from the location bar" you can add YubNub to the list by putting in "http://www.yubnub.org/parser/parse?command=" as the URL. </i>
+            and check "Search the web from the location bar" you can add YubNub to the list by putting in "http://yubnub.org/parser/parse?command=" as the URL. </i>
         </td>
     </tr>
 </table>
@@ -216,8 +216,8 @@ says: "I found out this morning that the newest versions of Quicksilver do not c
 for my QS-to-YubNub hack) pre-installed . . . the plug-in is required . . . it is installed by
 default in the Panther-compatible versions of QS."<br />
 <br />
-<b>Linux integration.</b> <a href="http://www.yubnub.org/parser/parse?command=g+bsittler">Benjamin Sittler</a> has written
-a <a href="http://www.yubnub.org/yubnub.sh">bash script</a> to invoke YubNub from the Linux command line. Benjamin
+<b>Linux integration.</b> <a href="http://yubnub.org/parser/parse?command=g+bsittler">Benjamin Sittler</a> has written
+a <a href="http://yubnub.org/yubnub.sh">bash script</a> to invoke YubNub from the Linux command line. Benjamin
 <a href="http://jonaquino.blogspot.com/2005/06/yubnub-my-entry-for-rails-day-24-hour.html#c111932733668772089">adds</a>:
 "save it, change it's permissions to make it executable, and (optionally) set the BROWSER environment variable to
 point to the web browser of your choice (i use w3m because it's pipe-friendly) and install it in a directory
@@ -409,7 +409,7 @@ are probably similar for Windows:
 <div class="blockquote">
 [Search Engine 38]<br />
 Name=YubNub<br />
-URL=http://www.yubnub.org/parser/parse?command=%s<br />
+URL=http://yubnub.org/parser/parse?command=%s<br />
 Query=<br />
 Key=y<br />
 Is post=0<br />
@@ -455,7 +455,7 @@ direct commands to YubNub:<br />
 <li> <a href="http://www.atamadison.com/w/kitzkikz.php?page=Sogudi">Download Sogudi</a> and install it.
 <li> Start Safari.
 <li> Click the Safari menu and select "Sogudi".
-<li> If there is a shortcut called "default", change its destination URL to: http://www.yubnub.org/parser/parse?command=@@@
+<li> If there is a shortcut called "default", change its destination URL to: http://yubnub.org/parser/parse?command=@@@
 <li> If there isn't a shortcut called "default", simply create it, using the destination URL from #4.
 </ol>
 <br />
@@ -468,7 +468,7 @@ type "y nmts" to execute the "nmts" command.
 Thanks, Thomas! <b><i>Update:</i></b> Robert Brook gives this tip: <i>
 I've found that I can use the default Sogudi trigger with single words by just adding a space at the beginning.
 For example: "img rails tutorial" bounces to http://images.google.com/images?q=rails+tutorial
-And " ls" (note leading space!) bounces to http://www.yubnub.org/kernel/ls?args=</i><br />
+And " ls" (note leading space!) bounces to http://yubnub.org/kernel/ls?args=</i><br />
 <br />
 <b>YubNub search bar (browser-independent).</b> Inspired by Felipe
 Gomes' <a href="http://projects.felipc.com/gcl/">Google Command
@@ -508,7 +508,7 @@ Here's how to add a YubNub command line to LaunchBar:<br />
 <li> Hit CMD-Y to bring up the Configuration window.
 <li> Click on "Search Templates" in the left pane. I use UTF-8 templates for all my LaunchBar shortcuts, but use whichever one you prefer.
 <li> Click the "Add" button.
-<li> Type "YubNub" for the name, and enter the following for the URL: http://www.yubnub.org/parser/parse?command=*
+<li> Type "YubNub" for the name, and enter the following for the URL: http://yubnub.org/parser/parse?command=*
 <li> Close the window and save your changes when prompted.
 </ol>
 <br />
@@ -528,7 +528,7 @@ on how to integrate YubNub commands with Launchbar.</span>
 <i>"If you have the latest Yahoo Toolbar installed, you can use yahoo
 shortcuts from IE: Tools - Yahoo! services - Yahoo! Shortcuts.
 Click on Add... and type the name to the shortcut for e.g. quick.
-Now add the URL... http://www.yubnub.org/parser/parse?command=%s
+Now add the URL... http://yubnub.org/parser/parse?command=%s
 Now, if you want the pictures of flowers simply type...
 quick gim flowers"</i>. <b>Update:</b> Shantanu adds:
 <i>"One should also note that you can create Address bar on the taskbar.
@@ -609,7 +609,7 @@ It's a white-on-black scheme that looks like the command-line from a desktop ope
  {
   InputBox, UserInput,yubnub,,,,100
   if Not ErrorLevel
-    run,http://www.yubnub.org/parser/parse?command=%UserInput%
+    run,http://yubnub.org/parser/parse?command=%UserInput%
 }
 return
 </code></pre></div>
@@ -637,7 +637,7 @@ function yubnub( args)
     readFromMiniBuffer(open_url_in_prompt(prefix,"yubnub command"), // prompt
                        null,                                        // initval
                        get_bm_strings(),                            // history
-                       function(url) { getBrowser().newBrowser("http://www.yubnub.org/parser/parse?command=" + url);}); // callback
+                       function(url) { getBrowser().newBrowser("http://yubnub.org/parser/parse?command=" + url);}); // callback
 }
 add_command("y", yubnub, [["p"]]);
 </code></pre></div>
