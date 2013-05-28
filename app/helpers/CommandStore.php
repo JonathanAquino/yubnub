@@ -31,15 +31,15 @@ class CommandStore {
         $q = isset($args['q']) ? $args['q'] : '';
         $where = '';
         if (strlen($q) > 0) {
-            $where = "WHERE name LIKE :q1 OR description LIKE :q2 OR url LIKE :q3";
+            $where = "WHERE lowercase_name LIKE :q1 OR lower(description) LIKE :q2 OR lower(url) LIKE :q3";
         }
         $query = $this->pdo->prepare('SELECT * FROM yubnub.commands ' . $where . ' ORDER BY ' . $args['orderBy'] . ' LIMIT :start, :count');
         $query->bindValue(':start', $args['start'], PDO::PARAM_INT);
         $query->bindValue(':count', $args['count'], PDO::PARAM_INT);
         if (strlen($q) > 0) {
-            $query->bindValue(':q1', '%' . $q . '%', PDO::PARAM_STR);
-            $query->bindValue(':q2', '%' . $q . '%', PDO::PARAM_STR);
-            $query->bindValue(':q3', '%' . $q . '%', PDO::PARAM_STR);
+            $query->bindValue(':q1', '%' . mb_strtolower($q) . '%', PDO::PARAM_STR);
+            $query->bindValue(':q2', '%' . mb_strtolower($q) . '%', PDO::PARAM_STR);
+            $query->bindValue(':q3', '%' . mb_strtolower($q) . '%', PDO::PARAM_STR);
         }
         $query->execute();
         $commands = array();
@@ -63,15 +63,15 @@ class CommandStore {
         $q = isset($args['q']) ? $args['q'] : '';
         $where = 'WHERE golden_egg_date IS NOT NULL';
         if (strlen($q) > 0) {
-            $where .= " AND (name LIKE :q1 OR description LIKE :q2 OR url LIKE :q3)";
+            $where = "WHERE lowercase_name LIKE :q1 OR lower(description) LIKE :q2 OR lower(url) LIKE :q3";
         }
         $query = $this->pdo->prepare('SELECT * FROM yubnub.commands ' . $where . ' ORDER BY ' . $args['orderBy'] . ' LIMIT :start, :count');
         $query->bindValue(':start', $args['start'], PDO::PARAM_INT);
         $query->bindValue(':count', $args['count'], PDO::PARAM_INT);
         if (strlen($q) > 0) {
-            $query->bindValue(':q1', '%' . $q . '%', PDO::PARAM_STR);
-            $query->bindValue(':q2', '%' . $q . '%', PDO::PARAM_STR);
-            $query->bindValue(':q3', '%' . $q . '%', PDO::PARAM_STR);
+            $query->bindValue(':q1', '%' . mb_strtolower($q) . '%', PDO::PARAM_STR);
+            $query->bindValue(':q2', '%' . mb_strtolower($q) . '%', PDO::PARAM_STR);
+            $query->bindValue(':q3', '%' . mb_strtolower($q) . '%', PDO::PARAM_STR);
         }
         $query->execute();
         $commands = array();
@@ -88,8 +88,8 @@ class CommandStore {
      * @return Command  the Command, or null if not found
      */
     public function findCommand($name) {
-        $query = $this->pdo->prepare('SELECT * FROM yubnub.commands WHERE name = :name');
-        $query->bindValue(':name', $name, PDO::PARAM_STR);
+        $query = $this->pdo->prepare('SELECT * FROM yubnub.commands WHERE lowercase_name = :lowercaseName');
+        $query->bindValue(':lowercaseName', mb_strtolower($name), PDO::PARAM_STR);
         $query->execute();
         if ($query->rowCount() > 0) {
             $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -136,10 +136,11 @@ class CommandStore {
      */
     protected function insert($command) {
         $insert = $this->pdo->prepare('INSERT INTO yubnub.commands '
-                . '(name, url, description, uses, creation_date, last_use_date, golden_egg_date) '
+                . '(name, lowercase_name, url, description, uses, creation_date, last_use_date, golden_egg_date) '
                 . 'VALUES '
-                . '(:name, :url, :description, :uses, :creationDate, :lastUseDate, :goldenEggDate)');
+                . '(:name, :lowercaseName, :url, :description, :uses, :creationDate, :lastUseDate, :goldenEggDate)');
         $insert->bindValue(':name', $command->name, PDO::PARAM_STR);
+        $insert->bindValue(':lowercaseName', mb_strtolower($command->name), PDO::PARAM_STR);
         $insert->bindValue(':url', $command->url, PDO::PARAM_STR);
         $insert->bindValue(':description', $command->description, PDO::PARAM_STR);
         $insert->bindValue(':uses', $command->uses, PDO::PARAM_INT);
@@ -157,6 +158,7 @@ class CommandStore {
     protected function update($command) {
         $update = $this->pdo->prepare('UPDATE yubnub.commands SET '
                 . 'name = :name, '
+                . 'lowercase_name = :lowercaseName, '
                 . 'url = :url, '
                 . 'description = :description, '
                 . 'uses = :uses, '
@@ -165,6 +167,7 @@ class CommandStore {
                 . 'golden_egg_date = :goldenEggDate '
                 . 'WHERE id = :id');
         $update->bindValue(':name', $command->name, PDO::PARAM_STR);
+        $update->bindValue(':lowercaseName', mb_strtolower($command->name), PDO::PARAM_STR);
         $update->bindValue(':url', $command->url, PDO::PARAM_STR);
         $update->bindValue(':description', $command->description, PDO::PARAM_STR);
         $update->bindValue(':uses', $command->uses, PDO::PARAM_INT);
