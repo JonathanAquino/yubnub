@@ -9,10 +9,10 @@ with the following URL...
 ...they will be taken to...
 <div class="blockquote">http://images.google.com/images?q=porsche+911</div>
 Below are some advanced tricks that you can use when making a new command. If you have any suggestions for advanced
-YubNub syntax, <a href="mailto:jona@jona.ca">send me an email</a>.
+Yubnub syntax, <a href="mailto:jona@jona.ca">send me an email</a>.
 
 <h2>Multiple Parameters</h2>
-Finally YubNub now has multiple parameters. This is best explained with an example. Andrew MacDaniel
+Finally Yubnub now has multiple parameters. This is best explained with an example. Andrew MacDaniel
 wanted to make a <a href="http://www.google.com/lochp">Google Local</a> command called "gloc".
 Google Local takes two parameters: a "what" and a "where". You can now make such a command using
 the following URL:<br/>
@@ -21,7 +21,7 @@ Note the two parameters: <span style="color:red">${what}</span> and <span style=
 <div class="blockquote">gloc -what <span style="color:red">pizza</span> -where <span style="color:red">Poughkeepsie, NY</span></div>
 ...and they will be taken to...
 <div class="blockquote">http://www.google.com/local?sc=1&hl=en&q=<span style="color:red">pizza</span>&near=<span style="color:red">Poughkeepsie%2C+NY</span>&btnG=Google+Search&rl=1</div>
-Neat, hey? <i>Note the dashes on "-what" and "-where". This is a tribute to YubNub's command-line heritage. In the
+Neat, hey? <i>Note the dashes on "-what" and "-where". This is a tribute to Yubnub's command-line heritage. In the
 command-line world, these are called "switches". "-what" and "-where" would be referred to as the "what switch" and the
 "where switch".</i>
 
@@ -36,8 +36,8 @@ Now if the user does not specify a "what"...
 Similarly, if they do not specify a "where", it will default to "Washington, DC".
 
 <h2>Converting GET to POST</h2>
-Sometimes you can't turn a web submission form into a YubNub command because it is a POST form (the source code says
-<i>method="post"</i>) rather than a GET form (the regular kind). Well, Sean O'Hagan has made a way to create YubNub
+Sometimes you can't turn a web submission form into a Yubnub command because it is a POST form (the source code says
+<i>method="post"</i>) rather than a GET form (the regular kind). Well, Sean O'Hagan has made a way to create Yubnub
 commands from POST forms. All you have to do is include the following text somewhere in your URL: [post]<br />
 <br />
 For example, here is the URL for the stlclib command, which searches the St. Louis County Library:
@@ -56,9 +56,9 @@ Some commands need it to be "&amp;" (like <a href="http://yubnub.org/kernel/man?
 others need it to be "?" (like <a href="http://yubnub.org/kernel/man?args=desa">desa</a>).
 
 <h2>Using a Character Other Than + for Spaces</h2>
-Normally YubNub will convert spaces to + signs, like in the example above ("porsche 911" is converted to "porsche+911").
+Normally Yubnub will convert spaces to + signs, like in the example above ("porsche 911" is converted to "porsche+911").
 This is what most websites expect (like Google and Yahoo). But there are some websites that expect %20 instead of + signs --
-for example, the National Library of Singapore. To tell YubNub to use %20 instead of + for spaces, include the following
+for example, the National Library of Singapore. To tell Yubnub to use %20 instead of + for spaces, include the following
 text somewhere in your URL: [use %20 for spaces].<br/>
 <br/>
 For example, if you make a command called nlb with the following URL...
@@ -67,15 +67,15 @@ For example, if you make a command called nlb with the following URL...
 <div class="blockquote">nlb harry potter</div>
 ...they will be taken to...
 <div class="blockquote">http://vistaweb.nlb.gov.sg/cgi-bin/cw_cgi?10100+REDIRX+useDatabase_3002_w_harry<span style="color:red">%20</span>potter</div>
-Note that YubNub converted "harry potter" to "harry%20potter" instead of "harry+potter". <br />
+Note that Yubnub converted "harry potter" to "harry%20potter" instead of "harry+potter". <br />
 <br />
 <b>Update:</b> You can now use other characters besides %20. For example, to use - signs, say [use - for spaces].
 
 <h2>Turning off URL Encoding</h2>
-Normally YubNub will apply "URL encoding" to parameters. For example, "gim Mork &amp; Mindy" gets turned into
+Normally Yubnub will apply "URL encoding" to parameters. For example, "gim Mork &amp; Mindy" gets turned into
 http://images.google.com/images?q=Mork<span style="color:red">+%26+</span>Mindy (note that the &amp; became +%26+).
 This is what works for most websites. However, W. Van Hooste pointed out that this does not work for the Internet
-Archive Wayback Machine. To tell YubNub to turn off URL encoding, include the following text somewhere in your URL:
+Archive Wayback Machine. To tell Yubnub to turn off URL encoding, include the following text somewhere in your URL:
 [no url encoding]<br />
 <br />
 For example, if you make a command called arch with the following URL...

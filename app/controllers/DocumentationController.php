@@ -19,7 +19,7 @@ class DocumentationController extends Controller {
      */
     public function action_describe_installation() {
         $this->render('describe_installation', array(
-            'pageTitle' => 'Installing YubNub'
+            'pageTitle' => 'Installing Yubnub'
         ));
     }
 

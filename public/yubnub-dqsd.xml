@@ -1,16 +1,16 @@
 <search function="yn">
-  <name>YubNub.com</name>
+  <name>Yubnub</name>
   <category>Search The Web</category>
   <contributor>Ryan Carpenter</contributor>
-  <link>http://www.YubNub.org/</link>
+  <link>http://www.yubnub.org/</link>
   <description>
-    YubNub calls itself a (social) command line for the web.  It is essentially a web-based version of DQSD in which searches are added and edited by all users at once.<br/>
-    Making YubNub your default DQSD search (by adding "defaultsearch='yn';" to <a href="view-source:file:///C:/Program%20Files/Quick%20Search%20Deskbar/localprefs.js">localprefs.js</a>) will still direct your searches to Google, but give you access to the expanded set of searches on YubNub.org.<br/>
+    Yubnub calls itself a (social) command line for the web.  It is essentially a web-based version of DQSD in which searches are added and edited by all users at once.<br/>
+    Making Yubnub your default DQSD search (by adding "defaultsearch='yn';" to <a href="view-source:file:///C:/Program%20Files/Quick%20Search%20Deskbar/localprefs.js">localprefs.js</a>) will still direct your searches to Google, but give you access to the expanded set of searches on Yubnub.<br/>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>ls</td><td> - </td><td>(list) Show all of the searches availible on YubNub.org</td></tr>
-      <tr><td>ge</td><td> - </td><td>(golden eggs) Show the most useful searches on YubNub.org</td></tr>
-      <tr><td>man</td><td> - </td><td>Display help for a YubNub command</td></tr>
+      <tr><td>ls</td><td> - </td><td>(list) Show all of the searches availible on Yubnub</td></tr>
+      <tr><td>ge</td><td> - </td><td>(golden eggs) Show the most useful searches on Yubnub</td></tr>
+      <tr><td>man</td><td> - </td><td>Display help for a Yubnub command</td></tr>
       <tr><td>less</td><td> - </td><td>Like the less command for GNU/Linux and other *nix variants. Shows the straight source code for any file on the Internet.</td></tr>
       <tr><td>vil</td><td> - </td><td>Search McAfee's Virus Info Library for a virus, worm or hoax.</td></tr>
       <tr><td>trailer</td><td> - </td><td>Uses Google to search Apple for the most likely movie trailer.</td></tr>
@@ -19,7 +19,7 @@
       <tr><td>psize</td><td> - </td><td>Page size checker for the given url. Gives a list of the sizes of the found linked elements. Smart enough to detect page compression and when it does will show compresssed and uncompressed sizes (real, not estimated).</td></tr>
       <tr><td>sc</td><td> - </td><td>Shoutcast search engine call</td></tr>
     </table>
-    YubNub switches do not require a / character, they only need to be the first word entered.
+    Yubnub switches do not require a / character, they only need to be the first word entered.
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>yn ls</td></tr>

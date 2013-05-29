@@ -2,8 +2,8 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
   <!-- Created on Tue, 06 Jan 2009 14:48:07 GMT -->
-  <ShortName>YubNub</ShortName>
-  <Description>YubNub.org - a (social) command line for the web</Description>
+  <ShortName>Yubnub</ShortName>
+  <Description>Yubnub - a (social) command line for the web</Description>
   <Url type="text/html" method="get" template="http://yubnub.org/parser/parse?command={searchTerms}"/>
   <Url type="application/x-suggestions+json" template="http://ynfuska.ning.com/suggest/?cmd={searchTerms}"/>
   <Image width="16" height="16">http://mycroft.mozdev.org/updateos.php/id0/yubnub_org.ico</Image>

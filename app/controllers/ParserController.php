@@ -20,7 +20,7 @@ class ParserController extends Controller {
         // According to the access log, Yahoo Pipes seems to be bringing the site down. [Jon Aquino 2009-07-03]
         if (strpos($_SERVER['HTTP_USER_AGENT'], 'Yahoo Pipes') > -1) {
             header('HTTP/1.0 403 Forbidden');
-            echo 'YubNub is currently blocking Yahoo Pipes. Contact jonathan.aquino@gmail.com for more info.';
+            echo 'Yubnub is currently blocking Yahoo Pipes. Contact jonathan.aquino@gmail.com for more info.';
             exit;
         }
         $parser = new Parser(new CommandStore($this->pdoSingleton->getPdo()));

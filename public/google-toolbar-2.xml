@@ -2,8 +2,8 @@
   <button>
     <search>http://yubnub.org/parser/parse?command={query}</search>
     <site>http://yubnub.org/</site>
-    <title>YubNub</title>
-    <description>YubNub - A (Social) Command Line for the Web</description>
+    <title>Yubnub</title>
+    <description>Yubnub - A (Social) Command Line for the Web</description>
     <icon mode="base64">
 /9j/4AAQSkZJRgABAQAAAQABAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcg
 SlBFRyB2NjIpLCBxdWFsaXR5ID0gODAK/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcU
