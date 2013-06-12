@@ -101,6 +101,9 @@ class Parser {
             $command = $this->commandStore->findCommand($defaultCommand);
             $args = $commandString;
         }
+        if (ifseta($_GET, 'debug')) {
+            header('Content-Type: text/plain');
+        }
         return $this->run($command, $args);
     }
 
@@ -113,6 +116,11 @@ class Parser {
      * @return string  the resulting URL
      */
     public function run($command, $args) {
+        if (ifseta($_GET, 'debug')) {
+            echo "--------------------------------------------------------------------------------\n";
+            echo 'RUN ' . $command->name . ' WITH ARGS ' . $args . ":\n";
+            echo $command->url . "\n";
+        }
         $url = $this->applyArgs($command, $args);
         $url = $this->applySubcommands($url);
         return $url;
@@ -171,8 +179,13 @@ class Parser {
         }
         $url = $this->parseProper($subcommandString, null);
         $response = $this->get($url);
+        if (ifseta($_GET, 'debug')) {
+            echo "--------------------------------------------------------------------------------\n";
+            echo "RESPONSE: \n";
+            echo $response . "\n";
+        }
         if (strlen($response) > self::MAX_SUBCOMMAND_RESPONSE_SIZE) {
-            throw new Exception('Response body size exceeds limit: ' . $url);
+            throw new Exception('Response body size (' . strlen($response) . ') exceeds limit (' . self::MAX_SUBCOMMAND_RESPONSE_SIZE . '): ' . $url);
         }
         return $response;
     }
