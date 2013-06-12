@@ -160,7 +160,7 @@ class Parser {
      * @param array $matches  regular-expression matches from #applySubcommands
      */
     protected function parseSubcommand($matches) {
-        $subcommandString = $matches[1];
+        $subcommandString = trim($matches[1]);
         $this->commandCount += 1;
         if ($this->commandCount > $this->maxCommandCount) {
             throw new Exception('Too many subcommands: ' . $subcommandString);
