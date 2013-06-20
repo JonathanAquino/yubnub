@@ -94,5 +94,11 @@ Foo';
         $this->assertSame('http://google.com/?a=A%20B', $url);
     }
 
+    public function testApplySwitches_UsesXForSpaces() {
+        $this->command->url = 'http://google.com/?a=%s[use X for spaces]';
+        $url = $this->command->applySwitches(array('%s' => 'A B'));
+        $this->assertSame('http://google.com/?a=AXB', $url);
+    }
+
 }
 

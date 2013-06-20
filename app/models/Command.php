@@ -96,6 +96,7 @@ class Command {
         $url = $this->url;
         $urlencodeValues = true;
         $rawurlencodeValues = false;
+        $spaceReplacement = null;
         if (strpos($url, '[no url encoding]') !== false) {
             $url = str_replace('[no url encoding]', '', $url);
             $urlencodeValues = false;
@@ -103,8 +104,14 @@ class Command {
             $url = str_replace('[use %20 for spaces]', '', $url);
             $rawurlencodeValues = true;
             $urlencodeValues = false;
+        } elseif (preg_match('/\[use (.{1,4}) for spaces\]/', $url, $matches)) {
+            $url = str_replace($matches[0], '', $url);
+            $spaceReplacement = $matches[1];
         }
         foreach ($switches as $name => $value) {
+            if ($spaceReplacement !== null) {
+                $value = str_replace(' ', $spaceReplacement, $value);
+            }
             if ($urlencodeValues) {
                 $value = urlencode($value);
             } elseif ($rawurlencodeValues) {

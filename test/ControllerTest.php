@@ -5,7 +5,7 @@ require_once 'app/controllers/Controller.php';
 class ControllerTest extends PHPUnit_Framework_TestCase {
 
     public function setUp() {
-        $this->controller = new TestController(null);
+        $this->controller = new TestController(null, null);
     }
 
     public function testGetName() {
