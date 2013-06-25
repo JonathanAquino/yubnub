@@ -6,7 +6,7 @@ class MyConfig implements Config {
 
     /** @implements */
     public function getErrorReportingLevel() {
-        return E_ALL|E_STRCT;
+        return E_ALL|E_STRICT;
     }
 
     /** @implements */
