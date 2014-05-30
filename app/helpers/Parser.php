@@ -94,6 +94,7 @@ class Parser {
      * @return string  the resulting URL
      */
     protected function parseProper($commandString, $defaultCommand, &$command = null) {
+        $commandString = $this->applySubcommands($commandString);
         $parts = preg_split('/\s+/', $commandString);
         $name = $parts[0];
         $args = implode(' ', array_slice($parts, 1));
