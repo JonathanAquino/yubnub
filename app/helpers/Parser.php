@@ -54,7 +54,11 @@ class Parser {
         $command->uses++;
         $command->lastUseDate = $commandService->getDate();
         $this->commandStore->save($command);
-        return $url;
+        if (ifseta($_GET, 'debug')) {
+            echo 'Result: ' . $url;
+            exit;
+        } 
+       return $url;
     }
 
     /**
