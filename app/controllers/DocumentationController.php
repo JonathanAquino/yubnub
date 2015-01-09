@@ -50,4 +50,13 @@ class DocumentationController extends Controller {
         ));
     }
 
+    /**
+     * Displays a tip jar.
+     */
+    public function action_tip_jar() {
+        $this->render('tip_jar', array(
+            'pageTitle' => 'Tip Jar'
+        ));
+    }
+
 }
