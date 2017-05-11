@@ -35,6 +35,8 @@ class KernelController extends Controller {
             'commands' => $commands,
             'previousPage' => $page > 1 ? $page - 1 : null,
             'nextPage' => $hasNextPage ? $page + 1 : null,
+            'previousPageUrl' => $page > 1 ? '?page=' . ($page - 1) . '&args=' . urlencode($q) : null,
+            'nextPageUrl' => $hasNextPage ? '?page=' . ($page + 1) . '&args=' . urlencode($q) : null,
         ));
     }
 
@@ -65,6 +67,8 @@ class KernelController extends Controller {
             'commands' => $commands,
             'previousPage' => $page > 1 ? $page - 1 : null,
             'nextPage' => $hasNextPage ? $page + 1 : null,
+            'previousPageUrl' => $page > 1 ? '?page=' . ($page - 1) . '&args=' . urlencode($q) : null,
+            'nextPageUrl' => $hasNextPage ? '?page=' . ($page + 1) . '&args=' . urlencode($q) : null,
         ));
     }
 
@@ -92,6 +96,8 @@ class KernelController extends Controller {
             'commands' => $commands,
             'previousPage' => $page > 1 ? $page - 1 : null,
             'nextPage' => $hasNextPage ? $page + 1 : null,
+            'previousPageUrl' => $page > 1 ? '?page=' . ($page - 1) : null,
+            'nextPageUrl' => $hasNextPage ? '?page=' . ($page + 1) : null,
         ));
     }
 

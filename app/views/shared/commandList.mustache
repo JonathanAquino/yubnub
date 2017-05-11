@@ -27,9 +27,10 @@
   <span class="implementation hint">{{getDisplayUrl}}</span><br />
   <br />
 {{/commands}}
-{{#previousPage}}
-<a href="?page={{.}}" style="padding-top:30px; padding-right: 15px; font-size:22px"><b>Previous Page</b></a>
-{{/previousPage}}
-{{#nextPage}}
-<a href="?page={{.}}" style="padding-top:30px; font-size:22px"><b>Next Page</b></a>
-{{/nextPage}}
+{{#previousPageUrl}}
+<a href="{{.}}" style="padding-top:30px; padding-right: 15px; font-size:22px"><b>Previous Page</b></a>
+{{/previousPageUrl}}
+{{#nextPageUrl}}
+<a href="{{.}}" style="padding-top:30px; font-size:22px"><b>Next Page</b></a>
+{{/nextPageUrl}}
+
