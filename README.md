@@ -24,3 +24,31 @@ and use db/yubnub.sql to create the three tables.
 Then copy config/SampleConfig.php to config/MyConfig.php (which is .gitignore'd), and edit
 its username and password to match those for your yubnub database.
 
+Apache Configuration
+--------------------
+
+This is what I have in my /etc/apache2/sites-available/yubnub.org file:
+
+    <VirtualHost *:80>
+      # Admin email, Server Name (domain name), and any aliases
+      ServerAdmin webmaster@yubnub.org
+      ServerName  www.yubnub.org
+      ServerAlias yubnub.org
+
+      # Index file and Document Root (where the public files are located)
+      DocumentRoot /home/jon/public/yubnub.org/public
+
+      # From http://framework.zend.com/wiki/display/ZFDEV/Configuring+Your+URL+Rewriter
+      RewriteEngine off
+      <Location />
+          RewriteEngine on
+          RedirectMatch 302 ^/$ https://yubnub.org/
+          RewriteRule "well-known" "-" [L]
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule !\.(js|ico|gif|jpg|png|css|html|xml|JPG|xls|doc|txt|reg|sh|sxc|sxw)$ /index.php
+      </Location>
+
+      # Log file locations
+      LogLevel warn
+    </VirtualHost>
