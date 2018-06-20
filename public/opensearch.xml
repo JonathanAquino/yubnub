@@ -4,13 +4,13 @@
   <!-- Created on Tue, 06 Jan 2009 14:48:07 GMT -->
   <ShortName>Yubnub</ShortName>
   <Description>Yubnub - a (social) command line for the web</Description>
-  <Url type="text/html" method="get" template="http://yubnub.org/parser/parse?command={searchTerms}"/>
+  <Url type="text/html" method="get" template="https://yubnub.org/parser/parse?command={searchTerms}"/>
   <Url type="application/x-suggestions+json" template="http://ynfuska.ning.com/suggest/?cmd={searchTerms}"/>
   <Image width="16" height="16">http://mycroft.mozdev.org/updateos.php/id0/yubnub_org.ico</Image>
 
   <Developer>Jason Karns</Developer>
   <InputEncoding>UTF-8</InputEncoding>
-  <moz:SearchForm>http://yubnub.org/parser/parse</moz:SearchForm>
+  <moz:SearchForm>https://yubnub.org/parser/parse</moz:SearchForm>
   <moz:UpdateUrl>http://mycroft.mozdev.org/updateos.php/id0/yubnub_org.xml</moz:UpdateUrl>
   <moz:IconUpdateUrl>http://mycroft.mozdev.org/updateos.php/id0/yubnub_org.ico</moz:IconUpdateUrl>
   <moz:UpdateInterval>7</moz:UpdateInterval>
