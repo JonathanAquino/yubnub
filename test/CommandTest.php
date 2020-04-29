@@ -100,5 +100,25 @@ Foo';
         $this->assertSame('http://google.com/?a=AXB', $url);
     }
 
+    public function testHasArgs_ReturnsFalse_IfNoArgs() {
+        $this->command->url = 'http://google.com/';
+        $this->assertFalse($this->command->hasArgs());
+    }    
+
+    public function testHasArgs_ReturnsTrue_IfPercentS() {
+        $this->command->url = 'http://google.com/?a=%s[use X for spaces]';
+        $this->assertTrue($this->command->hasArgs());
+    }        
+
+    public function testHasArgs_ReturnsFalse_IfBadPercentS() {
+        $this->command->url = 'http://google.com/?a=%stars[use X for spaces]';
+        $this->assertFalse($this->command->hasArgs());
+    }        
+    
+    public function testHasArgs_ReturnsTrue_IfSwitches() {
+        $this->command->url = 'http://google.com/?a=${foo}&b=${bar}';
+        $this->assertTrue($this->command->hasArgs());
+    }            
+
 }
 

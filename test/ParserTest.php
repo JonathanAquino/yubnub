@@ -97,7 +97,7 @@ class ParserTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('baz', $parser->parseSubcommand(array('{foo bar}', 'foo bar')));
     }
 
-public function testParseSubcommand_ThrowsException_IfResponseBodyExceedsLimit() {
+    public function testParseSubcommand_ThrowsException_IfResponseBodyExceedsLimit() {
         $parser = $this->getMock('TestParser', array('parseProper', 'get'));
         $parser->expects($this->once())->method('parseProper')
                 ->with($this->equalTo('foo bar'))
@@ -109,10 +109,66 @@ public function testParseSubcommand_ThrowsException_IfResponseBodyExceedsLimit()
         $parser->parseSubcommand(array('{foo bar}', 'foo bar'));
     }
 
+    public function testParseProper_CallsRun_WithFoundCommandWithArgs() {
+        $weatherCommand = new Command();
+        $weatherCommand->url = 'http://weather.com/?q=%s';
+        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
+        $commandStore->expects($this->once())->method('findCommand')
+                ->with($this->equalTo('weather'))
+                ->will($this->returnValue($weatherCommand));
+        $parser = $this->getMock('TestParser', array('run'));
+        $parser->commandStore = $commandStore;
+        $parser->expects($this->once())->method('run')
+                ->with($this->equalTo($weatherCommand), $this->equalTo('hello world'))
+                ->will($this->returnValue(null));
+        $parser->parseProper('weather hello world', 'y', $c);
+    }   
+
+    public function testParseProper_CallsRun_WithFoundCommandWithoutArgs() {
+        $cnnCommand = new Command();
+        $cnnCommand->url = 'http://cnn.com';
+        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
+        $commandStore->expects($this->once())->method('findCommand')
+                ->with($this->equalTo('cnn'))
+                ->will($this->returnValue($cnnCommand));
+        $parser = $this->getMock('TestParser', array('run'));
+        $parser->commandStore = $commandStore;
+        $parser->expects($this->once())->method('run')
+                ->with($this->equalTo($cnnCommand), $this->equalTo(''))
+                ->will($this->returnValue(null));
+        $parser->parseProper('cnn', 'y', $c);
+    }       
+    
+    public function testParseProper_CallsRun_WithDefaultCommand_IfCommandStringHasArgsButCommandDoesNot() {
+        $cnnCommand = new Command();
+        $cnnCommand->url = 'http://cnn.com';
+        $yahooCommand = new Command();
+        $yahooCommand->url = 'http://yahoo.com/?q=%s';        
+        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
+        $commandStore->expects($this->at(0))->method('findCommand')
+                ->with($this->equalTo('cnn'))
+                ->will($this->returnValue($cnnCommand));
+        $commandStore->expects($this->at(1))->method('findCommand')
+                ->with($this->equalTo('y'))
+                ->will($this->returnValue($yahooCommand));                
+        $parser = $this->getMock('TestParser', array('run'));
+        $parser->commandStore = $commandStore;
+        $parser->expects($this->once())->method('run')
+                ->with($this->equalTo($yahooCommand), $this->equalTo('cnn hello world'))
+                ->will($this->returnValue(null));
+        $parser->parseProper('cnn hello world', 'y', $c);
+    }       
+
+}
+
+class TestCommandStore extends CommandStore {
+    public function __construct() {
+    }    
 }
 
 class TestParser extends Parser {
     protected $maxCommandCount = 2;
+    public $commandStore;
     public function __construct() {
     }
     public function applyArgs($command, $args) {
@@ -129,5 +185,8 @@ class TestParser extends Parser {
     }
     public function parseSubcommand($matches) {
         return parent::parseSubcommand($matches);
+    }
+    public function parseProper($commandString, $defaultCommand, &$command = null) {
+        return parent::parseProper($commandString, $defaultCommand, $command);
     }
 }

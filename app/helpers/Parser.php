@@ -99,6 +99,9 @@ class Parser {
         $name = $parts[0];
         $args = implode(' ', array_slice($parts, 1));
         $command = $this->commandStore->findCommand($name);
+        if ($command && !$command->hasArgs() && $args) {
+            $command = null;
+        }
         if (!$command && !$defaultCommand) {
             throw new Exception('Could not find command ' . $name);
         }

@@ -69,6 +69,13 @@ class Command {
     }
 
     /**
+     * Returns whether the Command defines %s or a switch like -foo
+     */
+    public function hasArgs() {
+        return count($this->getSwitches()) > 1 || preg_match('/%s\b/', $this->url);
+    }
+
+    /**
      * Returns the switches present in the URL.
      *
      * @return array  a map of switch name to default value; example:
