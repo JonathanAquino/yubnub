@@ -52,3 +52,11 @@ This is what I have in my /etc/apache2/sites-available/yubnub.org file:
       # Log file locations
       LogLevel warn
     </VirtualHost>
+
+Versions
+--------
+
+This code works with the following software versions:
+
+* PHP 5.3.10
+* PHPUnit 3.7.14
