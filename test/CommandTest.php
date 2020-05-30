@@ -109,16 +109,15 @@ Foo';
         $this->command->url = 'http://google.com/?a=%s[use X for spaces]';
         $this->assertTrue($this->command->hasArgs());
     }        
-
-    public function testHasArgs_ReturnsFalse_IfBadPercentS() {
-        $this->command->url = 'http://google.com/?a=%stars[use X for spaces]';
-        $this->assertFalse($this->command->hasArgs());
-    }        
     
     public function testHasArgs_ReturnsTrue_IfSwitches() {
         $this->command->url = 'http://google.com/?a=${foo}&b=${bar}';
         $this->assertTrue($this->command->hasArgs());
     }            
 
+    public function testHasArgs_ReturnsTrue_ForMlpngCommand() {
+        $this->command->url = 'http://lista.mercadolivre.com.br/%s_OrderId_PRICE_ItemTypeID_N_G_OrderId_PRICE_U';
+        $this->assertTrue($this->command->hasArgs());
+    }
 }
 

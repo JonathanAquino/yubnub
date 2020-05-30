@@ -72,7 +72,7 @@ class Command {
      * Returns whether the Command defines %s or a switch like -foo
      */
     public function hasArgs() {
-        return count($this->getSwitches()) > 1 || preg_match('/%s\b/', $this->url);
+        return count($this->getSwitches()) > 1 || preg_match('/%s/', $this->url);
     }
 
     /**
