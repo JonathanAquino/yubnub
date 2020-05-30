@@ -157,6 +157,26 @@ class ParserTest extends PHPUnit_Framework_TestCase {
                 ->with($this->equalTo($yahooCommand), $this->equalTo('cnn hello world'))
                 ->will($this->returnValue(null));
         $parser->parseProper('cnn hello world', 'y', $c);
+    }   
+    
+    public function testParseProper_CallsRun_WithDefaultCommand_IfCommandHasArgsButCommandStringDoesNot() {
+        $cnnCommand = new Command();
+        $cnnCommand->url = 'http://cnn.com/?q=%s';
+        $yahooCommand = new Command();
+        $yahooCommand->url = 'http://yahoo.com/?q=%s';        
+        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
+        $commandStore->expects($this->at(0))->method('findCommand')
+                ->with($this->equalTo('cnn'))
+                ->will($this->returnValue($cnnCommand));
+        $commandStore->expects($this->at(1))->method('findCommand')
+                ->with($this->equalTo('y'))
+                ->will($this->returnValue($yahooCommand));                
+        $parser = $this->getMock('TestParser', array('run'));
+        $parser->commandStore = $commandStore;
+        $parser->expects($this->once())->method('run')
+                ->with($this->equalTo($yahooCommand), $this->equalTo('cnn'))
+                ->will($this->returnValue(null));
+        $parser->parseProper('cnn', 'y', $c);
     }       
 
 }
