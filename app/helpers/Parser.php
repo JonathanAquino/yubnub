@@ -102,9 +102,6 @@ class Parser {
         if ($command && !$command->hasArgs() && $args) {
             $command = null;
         }
-        if ($command && $command->hasArgs() && !$args) {
-            $command = null;
-        }        
         if (!$command && !$defaultCommand) {
             throw new Exception('Could not find command ' . $name);
         }
