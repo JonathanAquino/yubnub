@@ -18,9 +18,9 @@
         {{#lastUseDate}}{{lastUseDate}}{{/lastUseDate}}
         {{^lastUseDate}}{{creationDate}}{{/lastUseDate}}
     </div>
+    <div class="hint" style="padding-top:15px">Is this command broken? <a class="hint" href="mailto:jon@yubnub.org?subject=Yubnub - Broken Command: {{getRawurlencodedName}}&body=Hey Jon, this command is broken: {{getRawurlencodedName}}. Please change the URL to: PUT NEW URL HERE">
+    Tell Jon if you know how to fix it</a>.</div>
     {{^goldenEggDate}}
-      <div class="hint" style="padding-top:15px">Like this command? <a class="hint" href="mailto:jon@yubnub.org?subject=Nomination for a Yubnub Golden Egg: {{getRawurlencodedName}}&body=Hey Jon, there's a great command that I want to see on the Golden Egg list: {{getRawurlencodedName}}">
-      Nominate it</a> for a <a class="hint" href="/parser/parse?command=ge">Yubnub Golden Egg</a></div>
       <div class="hint">Do you find this command offensive? <a class="hint" href="mailto:jon@yubnub.org?subject=Yubnub - I find this command offensive: {{getRawurlencodedName}}&body=Jon, please review this command: {{getRawurlencodedName}}">
       Let Jon know</a>.</div>
     {{/goldenEggDate}}
