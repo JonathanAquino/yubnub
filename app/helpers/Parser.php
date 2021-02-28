@@ -6,7 +6,7 @@
 class Parser {
 
     /** Max number of bytes allowed for the response body of a subcommand. */
-    const MAX_SUBCOMMAND_RESPONSE_SIZE = 200;
+    const MAX_SUBCOMMAND_RESPONSE_SIZE = 10000;
 
     /**
      * The number of commands executed. A command can contain one or more
