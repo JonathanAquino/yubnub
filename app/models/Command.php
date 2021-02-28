@@ -116,6 +116,11 @@ class Command {
             $spaceReplacement = $matches[1];
         }
         foreach ($switches as $name => $value) {
+            if ($name != '%s') {
+                // Remove initial -
+                $name = mb_substr($name, 1);
+            }
+            $originalValue = $value;
             if ($spaceReplacement !== null) {
                 $value = str_replace(' ', $spaceReplacement, $value);
             }
@@ -124,14 +129,34 @@ class Command {
             } elseif ($rawurlencodeValues) {
                 $value = rawurlencode($value);
             }
+            // We only want to do urlencoding and space replacement on switches in URLs, not in subcommands.
+            // So first we will insert special "SUBCOMMANDSWITCH" markers in front of subcommand switches.
+            // We will replace the *unmarked* switches with the urlencoded/space-replaced value.
+            // We will then remove the "SUBCOMMANDSWITCH" markers and replace the remaining switches
+            // with the original (non-urlencoded, non-space-replaced) value.
+            // This idea comes from Strategy 1 in https://stackoverflow.com/a/48727748/2391566
+
+            // Insert SUBCOMMANDSWITCH markers.
             if ($name == '%s') {
-                $url = str_replace('%s', $value, $url);
+                $url = preg_replace('/(\{[^}]*)(%s)/', '${1}SUBCOMMANDSWITCH${2}', $url);
             } else {
-                // Remove initial -
-                $name = mb_substr($name, 1);
-                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', $value, $url);
+                $url = preg_replace('/(\{[^}]*)(\$\{' . preg_quote($name) . '(=.*?)?\})/', '${1}SUBCOMMANDSWITCH${2}', $url);
             }
-        }
+            // Replace unmarked switches with the urlencoded/space-replaced value.
+            if ($name == '%s') {
+                $url = preg_replace('/(?<!SUBCOMMANDSWITCH)%s/', $value, $url);
+            } else {
+                $url = preg_replace('/(?<!SUBCOMMANDSWITCH)\$\{' . preg_quote($name) . '(=.*?)?\}/', $value, $url);
+            }
+            // Remove SUBCOMMANDSWITCH markers.
+            $url = str_replace('SUBCOMMANDSWITCH', '', $url);
+            // Replace marked switches with the original, pristine value.
+            if ($name == '%s') {
+                $url = preg_replace('/%s/', $originalValue, $url);
+            } else {
+                $url = preg_replace('/\$\{' . preg_quote($name) . '(=.*?)?\}/', $originalValue, $url);
+            }
+       }
         // Clear unused switches.
         $url = preg_replace('/\$\{.*?\}/', '', $url);
         return $url;

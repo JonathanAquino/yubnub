@@ -100,6 +100,12 @@ Foo';
         $this->assertSame('http://google.com/?a=AXB', $url);
     }
 
+    public function testApplySwitches_DoesNotUrlencodeInSubcommands() {
+        $this->command->url = 'http://foo.com/a=%sb=${count}&c={normalize %s ${count}}';
+        $url = $this->command->applySwitches(array('%s' => '1/2', '-count' => '3/4'));
+        $this->assertSame('http://foo.com/a=1%2F2b=3%2F4&c={normalize 1/2 3/4}', $url);
+    }
+
     public function testHasArgs_ReturnsFalse_IfNoArgs() {
         $this->command->url = 'http://google.com/';
         $this->assertFalse($this->command->hasArgs());
