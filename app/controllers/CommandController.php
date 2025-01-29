@@ -37,7 +37,7 @@ class CommandController extends Controller {
             'name' => isset($_POST['command']['name']) ? $_POST['command']['name'] : ifseta($_GET, 'name'),
             'url' => isset($_POST['command']['url']) ? $_POST['command']['url'] : null,
             'description' => isset($_POST['command']['description']) ? $_POST['command']['description'] : null,
-            'captchaHtml' => '<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            'captchaHtml' => '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha" async defer></script>
                               <div class="g-recaptcha" data-sitekey="' . self::RECAPTCHA_PUBLIC_KEY . '"></div>',
             'errorMessage' => $errorMessage,
         ));
@@ -97,7 +97,7 @@ class CommandController extends Controller {
      * @param string $recaptchaResponse The value of g-recaptcha-response.
      */
     protected function recaptchaMatches($privateKey, $ipAddress, $recaptchaResponse) {
-        $result = $this->post('https://www.google.com/recaptcha/api/siteverify', array(
+        $result = $this->post('https://challenges.cloudflare.com/turnstile/v0/siteverify', array(
             'secret' => $privateKey,
             'response' => $recaptchaResponse,
             'remoteip' => $ipAddress
