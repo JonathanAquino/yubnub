@@ -68,6 +68,14 @@ class Parser {
      * @return boolean  whether the command looks like a URL
      */
     protected function looksLikeUrl($commandString) {
+        // Check for URLs with known protocol schemes
+        $knownSchemes = array('http://', 'https://', 'ftp://', 'ftps://', 'about:', 'irc://');
+        foreach ($knownSchemes as $scheme) {
+            if (stripos($commandString, $scheme) === 0) {
+                return true;
+            }
+        }
+        // Check for traditional domain.extension pattern (without protocol)
         return preg_match('/^[^ ]+\.[a-z]{2,4}(\/[^ ]*)?$/', $commandString) ? true : false;
     }
 
@@ -75,13 +83,14 @@ class Parser {
      * Prefixes the given URL with http:// if needed.
      *
      * @param string $url  a URL or partial URL, such as google.com
-     * @return string  the URL with http:// prefixed: http://google.com
+     * @return string  the URL with http:// prefixed if needed: http://google.com
      */
     protected function prefixWithHttp($url) {
-        if (mb_strpos($url, '://') == false) {
-            return 'http://' . $url;
+        // Don't modify URLs that already have a protocol scheme
+        if (mb_strpos($url, '://') !== false || mb_strpos($url, 'about:') === 0) {
+            return $url;
         }
-        return $url;
+        return 'http://' . $url;
     }
 
     /**

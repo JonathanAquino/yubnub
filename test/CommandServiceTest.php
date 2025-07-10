@@ -85,6 +85,36 @@ class CommandServiceTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('2013-05-27 10:25:29', $this->commandService->getDate(1369675529));
     }
 
+    public function testPrefixWithHttp_DoesNothing_IfInputBeginsWithAbout() {
+        $this->assertSame('about:downloads',
+                $this->commandService->prefixWithHttpIfNecessary('about:downloads'));
+    }
+
+    public function testPrefixWithHttp_DoesNothing_IfInputBeginsWithFtp() {
+        $this->assertSame('ftp://files.example.com',
+                $this->commandService->prefixWithHttpIfNecessary('ftp://files.example.com'));
+    }
+
+    public function testPrefixWithHttp_DoesNothing_IfInputBeginsWithIrc() {
+        $this->assertSame('irc://irc.freenode.net',
+                $this->commandService->prefixWithHttpIfNecessary('irc://irc.freenode.net'));
+    }
+
+    public function testSurroundWithUrlCommand_DoesNothing_IfInputBeginsWithAbout() {
+        $this->assertSame('about:config',
+                $this->commandService->surroundWithUrlCommandIfNecessary('about:config', $this->commandStore));
+    }
+
+    public function testSurroundWithUrlCommand_DoesNothing_IfInputBeginsWithFtp() {
+        $this->assertSame('ftp://example.com',
+                $this->commandService->surroundWithUrlCommandIfNecessary('ftp://example.com', $this->commandStore));
+    }
+
+    public function testSurroundWithUrlCommand_DoesNothing_IfInputBeginsWithIrc() {
+        $this->assertSame('irc://irc.example.com',
+                $this->commandService->surroundWithUrlCommandIfNecessary('irc://irc.example.com', $this->commandStore));
+    }
+
 }
 
 class TestCommandService extends CommandService {

@@ -14,11 +14,12 @@ class CommandService {
      * @param CommandStore $commandStore  data-access object for Command objects.
      */
     public function surroundWithUrlCommandIfNecessary($url, $commandStore) {
-        if (mb_strpos($url, 'http://') === 0) {
-            return $url;
-        }
-        if (mb_strpos($url, 'https://') === 0) {
-            return $url;
+        // Check for URLs with known protocol schemes
+        $knownSchemes = array('http://', 'https://', 'ftp://', 'ftps://', 'about:', 'irc://');
+        foreach ($knownSchemes as $scheme) {
+            if (stripos($url, $scheme) === 0) {
+                return $url;
+            }
         }
         if (mb_strpos($url, '{') === 0) {
             return $url;
@@ -40,11 +41,12 @@ class CommandService {
      *                     http://yahoo.com, yahoo.com, or {y test}
      */
     public function prefixWithHttpIfNecessary($url) {
-        if (mb_strpos($url, 'http://') === 0) {
-            return $url;
-        }
-        if (mb_strpos($url, 'https://') === 0) {
-            return $url;
+        // Check for URLs with known protocol schemes
+        $knownSchemes = array('http://', 'https://', 'ftp://', 'ftps://', 'about:', 'irc://');
+        foreach ($knownSchemes as $scheme) {
+            if (stripos($url, $scheme) === 0) {
+                return $url;
+            }
         }
         if (mb_strpos($url, '{') === 0) {
             return $url;

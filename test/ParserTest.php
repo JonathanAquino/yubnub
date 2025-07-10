@@ -157,6 +157,44 @@ class ParserTest extends PHPUnit_Framework_TestCase {
                 ->with($this->equalTo($yahooCommand), $this->equalTo('cnn hello world'))
                 ->will($this->returnValue(null));
         $parser->parseProper('cnn hello world', 'y', $c);
+    }
+
+    public function testLooksLikeUrl_RecognizesAboutUrls() {
+        $this->assertTrue($this->parser->looksLikeUrl('about:downloads'));
+        $this->assertTrue($this->parser->looksLikeUrl('about:config'));
+        $this->assertTrue($this->parser->looksLikeUrl('about:blank'));
+    }
+
+    public function testLooksLikeUrl_RecognizesFtpUrls() {
+        $this->assertTrue($this->parser->looksLikeUrl('ftp://example.com'));
+        $this->assertTrue($this->parser->looksLikeUrl('ftps://secure.example.com'));
+    }
+
+    public function testLooksLikeUrl_RecognizesIrcUrls() {
+        $this->assertTrue($this->parser->looksLikeUrl('irc://irc.freenode.net'));
+    }
+
+    public function testLooksLikeUrl_DoesNotRecognizeCommandsWithColons() {
+        $this->assertFalse($this->parser->looksLikeUrl('foo:bar'));
+        $this->assertFalse($this->parser->looksLikeUrl('my:command'));
+        $this->assertFalse($this->parser->looksLikeUrl('test:123'));
+    }
+
+    public function testPrefixWithHttp_LeavesAboutUrlsUnchanged() {
+        $this->assertEquals('about:downloads', $this->parser->prefixWithHttp('about:downloads'));
+        $this->assertEquals('about:config', $this->parser->prefixWithHttp('about:config'));
+    }
+
+    public function testPrefixWithHttp_LeavesProtocolUrlsUnchanged() {
+        $this->assertEquals('http://example.com', $this->parser->prefixWithHttp('http://example.com'));
+        $this->assertEquals('https://example.com', $this->parser->prefixWithHttp('https://example.com'));
+        $this->assertEquals('ftp://example.com', $this->parser->prefixWithHttp('ftp://example.com'));
+        $this->assertEquals('irc://irc.example.com', $this->parser->prefixWithHttp('irc://irc.example.com'));
+    }
+
+    public function testPrefixWithHttp_AddsHttpToPlainDomains() {
+        $this->assertEquals('http://example.com', $this->parser->prefixWithHttp('example.com'));
+        $this->assertEquals('http://google.com/search', $this->parser->prefixWithHttp('google.com/search'));
     }       
 
 }
