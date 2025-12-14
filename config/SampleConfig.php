@@ -24,5 +24,15 @@ class MyConfig implements Config {
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
     }
 
+    /** @implements */
+    public function getCaptchaPublicKey() {
+        return 'your-turnstile-public-key-here';
+    }
+
+    /** @implements */
+    public function getCaptchaPrivateKey() {
+        return 'your-turnstile-private-key-here';
+    }
+
 }
 

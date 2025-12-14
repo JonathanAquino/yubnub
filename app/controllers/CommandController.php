@@ -5,12 +5,6 @@
  */
 class CommandController extends Controller {
 
-    /** The Recaptcha public key. */
-    const RECAPTCHA_PUBLIC_KEY = '6Ldd_OESAAAAALWIBOnwbLLVPorSYP0nT5aM_V1g';
-
-    /** The Recaptcha private key. */
-    const RECAPTCHA_PRIVATE_KEY = '6Ldd_OESAAAAADfHpAwNKubLB4inurAXd1-1zYIt';
-
     /**
      * Returns whether the given command exists.
      *
@@ -38,7 +32,7 @@ class CommandController extends Controller {
             'url' => isset($_POST['command']['url']) ? $_POST['command']['url'] : '',
             'description' => isset($_POST['command']['description']) ? $_POST['command']['description'] : '',
             'captchaHtml' => '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha" async defer></script>
-                              <div class="g-recaptcha" data-sitekey="' . self::RECAPTCHA_PUBLIC_KEY . '"></div>',
+                              <div class="g-recaptcha" data-sitekey="' . $this->config->getCaptchaPublicKey() . '"></div>',
             'errorMessage' => $errorMessage,
         ));
     }
@@ -72,7 +66,7 @@ class CommandController extends Controller {
             $this->redirectTo('/');
             return;
         }
-        $recaptchaMatches = $this->recaptchaMatches(self::RECAPTCHA_PRIVATE_KEY,
+        $recaptchaMatches = $this->recaptchaMatches($this->config->getCaptchaPrivateKey(),
                                 $_SERVER['REMOTE_ADDR'],
                                 $_POST['g-recaptcha-response']);
         if (!$recaptchaMatches) {

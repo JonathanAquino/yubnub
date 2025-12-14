@@ -25,5 +25,19 @@ interface Config {
      */
     public function createPdo();
 
+    /**
+     * Returns the ReCaptcha/Turnstile public key.
+     *
+     * @return string  the public site key
+     */
+    public function getCaptchaPublicKey();
+
+    /**
+     * Returns the ReCaptcha/Turnstile private key.
+     *
+     * @return string  the private secret key
+     */
+    public function getCaptchaPrivateKey();
+
 }
 
