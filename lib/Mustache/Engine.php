@@ -42,6 +42,9 @@ class Mustache_Engine
     private $charset = 'UTF-8';
     private $logger;
     private $strictCallables = false;
+    private $tokenizer;
+    private $parser;
+    private $compiler;
 
     /**
      * Mustache class constructor.

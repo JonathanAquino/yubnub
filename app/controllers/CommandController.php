@@ -31,12 +31,12 @@ class CommandController extends Controller {
      *
      * @param string $errorMessage  an error message if the submission failed
      */
-    public function action_new($errorMessage = null) {
+    public function action_new($errorMessage = '') {
         $this->render('new', array(
             'pageTitle' => 'Create A New Command',
-            'name' => isset($_POST['command']['name']) ? $_POST['command']['name'] : ifseta($_GET, 'name'),
-            'url' => isset($_POST['command']['url']) ? $_POST['command']['url'] : null,
-            'description' => isset($_POST['command']['description']) ? $_POST['command']['description'] : null,
+            'name' => isset($_POST['command']['name']) ? $_POST['command']['name'] : ifseta($_GET, 'name', ''),
+            'url' => isset($_POST['command']['url']) ? $_POST['command']['url'] : '',
+            'description' => isset($_POST['command']['description']) ? $_POST['command']['description'] : '',
             'captchaHtml' => '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?compat=recaptcha" async defer></script>
                               <div class="g-recaptcha" data-sitekey="' . self::RECAPTCHA_PUBLIC_KEY . '"></div>',
             'errorMessage' => $errorMessage,

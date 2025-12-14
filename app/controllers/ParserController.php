@@ -38,7 +38,7 @@ class ParserController extends Controller {
      * Outputs the URL that the given command resolves to.
      */
     public function action_url() {
-        $command = isset($_GET['command']) ? trim($_GET['command']) : null;
+        $command = isset($_GET['command']) ? trim($_GET['command']) : '';
         $parser = new Parser(new CommandStore($this->pdoSingleton->getPdo()));
         header('Content-Type: text/plain');
         echo $parser->parse($command, null);
