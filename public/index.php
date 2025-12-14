@@ -1,5 +1,5 @@
 <?php
-define(SERVER_ROOT, realpath('..'));
+define('SERVER_ROOT', realpath('..'));
 require_once SERVER_ROOT . '/config/Config.php';
 require_once SERVER_ROOT . '/config/MyConfig.php';
 require_once SERVER_ROOT . '/app/helpers/functions.php';
