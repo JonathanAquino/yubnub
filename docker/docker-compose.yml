@@ -1,0 +1,46 @@
+services:
+  # PHP 8.3 + Apache for YubNub
+  yubnub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yubnub-dev
+    ports:
+      - "8080:80"
+    volumes:
+      - ..:/var/www/html
+      - ./apache.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - yubnub-network
+
+  # MySQL 8.0
+  mysql:
+    image: mysql:8.0
+    container_name: yubnub-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=yubnub_dev_password
+      - MYSQL_DATABASE=yubnub
+      - MYSQL_USER=yubnub
+      - MYSQL_PASSWORD=yubnub_dev_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ../db/yubnub.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - yubnub-network
+
+networks:
+  yubnub-network:
+    driver: bridge
+
+volumes:
+  mysql-data:

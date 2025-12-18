@@ -15,6 +15,22 @@ more recent (2013) and is of better quality.
 Installation
 ------------
 
+### Docker (Recommended)
+
+The easiest way to run YubNub locally is with Docker. See [DEVELOPMENT.md](DEVELOPMENT.md) for complete instructions.
+
+Quick start:
+```bash
+cp config/DockerConfig.php config/MyConfig.php
+cd docker
+docker-compose up -d --build
+docker exec yubnub-dev composer install
+```
+
+Then visit http://localhost:8080
+
+### Manual Installation
+
 This is a simple website that consists of PHP files (beginning with public/index.php)
 and a MySQL database.
 
@@ -58,5 +74,6 @@ Versions
 
 This code works with the following software versions:
 
-* PHP 5.3.10
-* PHPUnit 3.7.14
+* PHP 8.3
+* MySQL 8.0
+* PHPUnit 9.x
