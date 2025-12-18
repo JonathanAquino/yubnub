@@ -12,7 +12,7 @@ class ParserController extends Controller {
      *     - command - the command string, e.g., g porsche
      */
     public function action_parse() {
-        $command = isset($_GET['command']) ? trim($_GET['command']) : null;
+        $command = isset($_GET['command']) ? trim($_GET['command']) : '';
         $defaultCommand = isset($_GET['default']) ? trim($_GET['default']) : 'g';
         if (strlen($command) == 0) {
             $this->redirectTo('/');

@@ -13,7 +13,8 @@ class CommandController extends Controller {
      */
     public function action_exists() {
         $commandStore = new CommandStore($this->pdoSingleton->getPdo());
-        $command = $commandStore->findCommand($_GET['name']);
+        $name = isset($_GET['name']) ? $_GET['name'] : '';
+        $command = $commandStore->findCommand($name);
         $js = json_encode(array('exists' => $command ? true : false));
         header('Content-Type: text/javascript');
         header('X-JSON: ' . $js);

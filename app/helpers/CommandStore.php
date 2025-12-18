@@ -89,7 +89,7 @@ class CommandStore {
      */
     public function findCommand($name) {
         $query = $this->pdo->prepare('SELECT * FROM yubnub.commands WHERE lowercase_name = :lowercaseName');
-        $query->bindValue(':lowercaseName', mb_strtolower($name), PDO::PARAM_STR);
+        $query->bindValue(':lowercaseName', mb_strtolower($name ?? ''), PDO::PARAM_STR);
         $query->execute();
         if ($query->rowCount() > 0) {
             $row = $query->fetch(PDO::FETCH_ASSOC);

@@ -29,10 +29,11 @@ class ExampleController extends Controller {
      *         Spanish ............ es
      */
     public function action_tr() {
-        $args = preg_split('/\s+/', trim($_GET['args']));
+        $argsStr = isset($_GET['args']) ? $_GET['args'] : '';
+        $args = preg_split('/\s+/', trim($argsStr));
         $this->render('tr', array(
-            'from' => $args[0],
-            'to' => $args[1],
+            'from' => isset($args[0]) ? $args[0] : '',
+            'to' => isset($args[1]) ? $args[1] : '',
             'text' => implode(' ', array_slice($args, 2)),
         ));
     }
@@ -213,7 +214,8 @@ class ExampleController extends Controller {
             $letterToPhoneticMap[$phonetic[0]] = $phonetic;
         }
         $phonetics = array();
-        foreach (str_split(strtoupper($_GET['text'])) as $letter) {
+        $text = isset($_GET['text']) ? $_GET['text'] : '';
+        foreach (str_split(strtoupper($text)) as $letter) {
             $phonetics[] = isset($letterToPhoneticMap[$letter])
                 ? $letterToPhoneticMap[$letter] : $letter;
         }
