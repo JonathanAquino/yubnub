@@ -83,14 +83,16 @@ class CommandService {
     }
 
     /**
-     * Returns the current date in the format used by the database.
+     * Returns the current date in Pacific timezone in the format used by the database.
      *
      * @param integer $time  the current time, or null to obtain it automatically
-     * @return string  the current date, e.g., 2005-02-04 20:39:14
+     * @return string  the current date in Pacific timezone, e.g., 2005-02-04 20:39:14
      */
     public function getDate($time = null) {
         $time = $time ? $time : time();
-        return date('Y-m-d H:i:s', $time);
+        $dt = new DateTime('@' . $time);
+        $dt->setTimezone(new DateTimeZone('America/Los_Angeles'));
+        return $dt->format('Y-m-d H:i:s');
     }
 
 }

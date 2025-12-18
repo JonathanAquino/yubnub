@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
+require_once 'app/helpers/functions.php';
 require_once 'app/helpers/CommandStore.php';
 require_once 'app/models/Command.php';
 

@@ -83,6 +83,7 @@ class CommandServiceTest extends TestCase {
     }
 
     public function testGetDate() {
+        // Timestamp 1369675529 = 2013-05-27 10:25:29 Pacific (PDT)
         $this->assertEquals('2013-05-27 10:25:29', $this->commandService->getDate(1369675529));
     }
 

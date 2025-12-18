@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
+require_once 'app/helpers/functions.php';
 require_once 'app/helpers/Parser.php';
 require_once 'app/models/Command.php';
 
@@ -110,7 +111,7 @@ class ParserTest extends TestCase {
                 ->willReturn('http://foo.com/');
         $parser->expects($this->once())->method('get')
                 ->with($this->equalTo('http://foo.com/'))
-                ->willReturn(str_repeat('a', 201));
+                ->willReturn(str_repeat('a', 10001));  // MAX_SUBCOMMAND_RESPONSE_SIZE is 10000
         $this->expectException(Exception::class);
         $parser->parseSubcommand(array('{foo bar}', 'foo bar'));
     }
