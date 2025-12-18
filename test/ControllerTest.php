@@ -1,10 +1,12 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/controllers/Controller.php';
 
-class ControllerTest extends PHPUnit_Framework_TestCase {
+class ControllerTest extends TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->controller = new TestController(null, null);
     }
 

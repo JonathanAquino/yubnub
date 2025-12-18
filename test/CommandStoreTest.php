@@ -1,11 +1,13 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/helpers/CommandStore.php';
 require_once 'app/models/Command.php';
 
-class CommandStoreTest extends PHPUnit_Framework_TestCase {
+class CommandStoreTest extends TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->commandStore = new TestComandStore(null);
     }
 

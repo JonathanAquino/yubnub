@@ -1,10 +1,12 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/models/Command.php';
 
-class CommandTest extends PHPUnit_Framework_TestCase {
+class CommandTest extends TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->command = new Command();
     }
 

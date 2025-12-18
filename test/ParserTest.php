@@ -1,11 +1,13 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/helpers/Parser.php';
 require_once 'app/models/Command.php';
 
-class ParserTest extends PHPUnit_Framework_TestCase {
+class ParserTest extends TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->parser = new TestParser();
         $this->command = new Command();
     }
@@ -18,44 +20,42 @@ class ParserTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testApplySubcommands_ThrowsException_IfTooManyCommands() {
-        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['parseProper', 'get'])
+                ->getMock();
         $parser->expects($this->exactly(2))->method('parseProper')
                 ->with($this->equalTo('foo bar'))
-                ->will($this->returnValue('http://foo.com/'));
+                ->willReturn('http://foo.com/');
         $parser->expects($this->exactly(2))->method('get')
                 ->with($this->equalTo('http://foo.com/'))
-                ->will($this->returnValue('baz'));
-        $this->setExpectedException('Exception');
+                ->willReturn('baz');
+        $this->expectException(Exception::class);
         $parser->applySubcommands('http://google.com?a={foo bar}&b={foo bar}&c={foo bar}');
     }
 
     public function testApplySubcommands_DoesNotThrowException_IfNotTooManyCommands() {
-        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['parseProper', 'get'])
+                ->getMock();
         $parser->expects($this->exactly(2))->method('parseProper')
                 ->with($this->equalTo('foo bar'))
-                ->will($this->returnValue('http://foo.com/'));
+                ->willReturn('http://foo.com/');
         $parser->expects($this->exactly(2))->method('get')
                 ->with($this->equalTo('http://foo.com/'))
-                ->will($this->returnValue('baz'));
+                ->willReturn('baz');
         $expectedUrl = 'http://google.com?a=baz&b=baz';
         $actualUrl = $parser->applySubcommands('http://google.com?a={foo bar}&b={foo bar}');
         $this->assertEquals($expectedUrl, $actualUrl);
     }
 
     public function testApplySubcommands_HandlesNestedSubcommands() {
-        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
-        $parser->expects($this->at(0))->method('parseProper')
-                ->with($this->equalTo('bar'))
-                ->will($this->returnValue('http://baz.com/'));
-        $parser->expects($this->at(1))->method('get')
-                ->with($this->equalTo('http://baz.com/'))
-                ->will($this->returnValue('baz'));
-        $parser->expects($this->at(2))->method('parseProper')
-                ->with($this->equalTo('foo baz'))
-                ->will($this->returnValue('http://qux.com/'));
-        $parser->expects($this->at(3))->method('get')
-                ->with($this->equalTo('http://qux.com/'))
-                ->will($this->returnValue('qux'));
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['parseProper', 'get'])
+                ->getMock();
+        $parser->expects($this->exactly(2))->method('parseProper')
+                ->willReturnOnConsecutiveCalls('http://baz.com/', 'http://qux.com/');
+        $parser->expects($this->exactly(2))->method('get')
+                ->willReturnOnConsecutiveCalls('baz', 'qux');
         $expectedUrl = 'http://google.com?a=qux';
         $actualUrl = $parser->applySubcommands('http://google.com?a={foo {bar}}');
         $this->assertEquals($expectedUrl, $actualUrl);
@@ -78,84 +78,98 @@ class ParserTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testParseSubcommand_AppliesUrlOptimization() {
-        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['parseProper', 'get'])
+                ->getMock();
         $parser->expects($this->once())->method('parseProper')
                 ->with($this->equalTo('foo bar'))
-                ->will($this->returnValue('http://foo.com/'));
+                ->willReturn('http://foo.com/');
         $parser->expects($this->never())->method('get');
         $this->assertEquals('http://foo.com/', $parser->parseSubcommand(array('{url foo bar}', 'url foo bar')));
     }
 
     public function testParseSubcommand_DoesNotApplyUrlOptimization() {
-        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['parseProper', 'get'])
+                ->getMock();
         $parser->expects($this->once())->method('parseProper')
                 ->with($this->equalTo('foo bar'))
-                ->will($this->returnValue('http://foo.com/'));
+                ->willReturn('http://foo.com/');
         $parser->expects($this->once())->method('get')
                 ->with($this->equalTo('http://foo.com/'))
-                ->will($this->returnValue('baz'));
+                ->willReturn('baz');
         $this->assertEquals('baz', $parser->parseSubcommand(array('{foo bar}', 'foo bar')));
     }
 
     public function testParseSubcommand_ThrowsException_IfResponseBodyExceedsLimit() {
-        $parser = $this->getMock('TestParser', array('parseProper', 'get'));
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['parseProper', 'get'])
+                ->getMock();
         $parser->expects($this->once())->method('parseProper')
                 ->with($this->equalTo('foo bar'))
-                ->will($this->returnValue('http://foo.com/'));
+                ->willReturn('http://foo.com/');
         $parser->expects($this->once())->method('get')
                 ->with($this->equalTo('http://foo.com/'))
-                ->will($this->returnValue(str_repeat('a', 201)));
-        $this->setExpectedException('Exception');
+                ->willReturn(str_repeat('a', 201));
+        $this->expectException(Exception::class);
         $parser->parseSubcommand(array('{foo bar}', 'foo bar'));
     }
 
     public function testParseProper_CallsRun_WithFoundCommandWithArgs() {
         $weatherCommand = new Command();
         $weatherCommand->url = 'http://weather.com/?q=%s';
-        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
+        $commandStore = $this->getMockBuilder(TestCommandStore::class)
+                ->onlyMethods(['findCommand'])
+                ->getMock();
         $commandStore->expects($this->once())->method('findCommand')
                 ->with($this->equalTo('weather'))
-                ->will($this->returnValue($weatherCommand));
-        $parser = $this->getMock('TestParser', array('run'));
+                ->willReturn($weatherCommand);
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['run'])
+                ->getMock();
         $parser->commandStore = $commandStore;
         $parser->expects($this->once())->method('run')
                 ->with($this->equalTo($weatherCommand), $this->equalTo('hello world'))
-                ->will($this->returnValue(null));
+                ->willReturn(null);
         $parser->parseProper('weather hello world', 'y', $c);
-    }   
+    }
 
     public function testParseProper_CallsRun_WithFoundCommandWithoutArgs() {
         $cnnCommand = new Command();
         $cnnCommand->url = 'http://cnn.com';
-        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
+        $commandStore = $this->getMockBuilder(TestCommandStore::class)
+                ->onlyMethods(['findCommand'])
+                ->getMock();
         $commandStore->expects($this->once())->method('findCommand')
                 ->with($this->equalTo('cnn'))
-                ->will($this->returnValue($cnnCommand));
-        $parser = $this->getMock('TestParser', array('run'));
+                ->willReturn($cnnCommand);
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['run'])
+                ->getMock();
         $parser->commandStore = $commandStore;
         $parser->expects($this->once())->method('run')
                 ->with($this->equalTo($cnnCommand), $this->equalTo(''))
-                ->will($this->returnValue(null));
+                ->willReturn(null);
         $parser->parseProper('cnn', 'y', $c);
-    }       
-    
+    }
+
     public function testParseProper_CallsRun_WithDefaultCommand_IfCommandStringHasArgsButCommandDoesNot() {
         $cnnCommand = new Command();
         $cnnCommand->url = 'http://cnn.com';
         $yahooCommand = new Command();
-        $yahooCommand->url = 'http://yahoo.com/?q=%s';        
-        $commandStore = $this->getMock('TestCommandStore', array('findCommand'));        
-        $commandStore->expects($this->at(0))->method('findCommand')
-                ->with($this->equalTo('cnn'))
-                ->will($this->returnValue($cnnCommand));
-        $commandStore->expects($this->at(1))->method('findCommand')
-                ->with($this->equalTo('y'))
-                ->will($this->returnValue($yahooCommand));                
-        $parser = $this->getMock('TestParser', array('run'));
+        $yahooCommand->url = 'http://yahoo.com/?q=%s';
+        $commandStore = $this->getMockBuilder(TestCommandStore::class)
+                ->onlyMethods(['findCommand'])
+                ->getMock();
+        $commandStore->expects($this->exactly(2))->method('findCommand')
+                ->willReturnOnConsecutiveCalls($cnnCommand, $yahooCommand);
+        $parser = $this->getMockBuilder(TestParser::class)
+                ->onlyMethods(['run'])
+                ->getMock();
         $parser->commandStore = $commandStore;
         $parser->expects($this->once())->method('run')
                 ->with($this->equalTo($yahooCommand), $this->equalTo('cnn hello world'))
-                ->will($this->returnValue(null));
+                ->willReturn(null);
         $parser->parseProper('cnn hello world', 'y', $c);
     }
 

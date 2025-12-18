@@ -1,13 +1,14 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/helpers/CommandService.php';
 
-class CommandServiceTest extends PHPUnit_Framework_TestCase {
+class CommandServiceTest extends TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->commandService = new TestCommandService();
-        $this->commandStore = $this->getMock('CommandStore', array('findCommand'), array(), '', false);
-
+        $this->commandStore = $this->createMock(CommandStore::class);
     }
 
     public function testPrefixWithHttp_DoesNothing_IfInputBeginsWithHttp() {

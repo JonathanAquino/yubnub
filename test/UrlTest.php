@@ -1,8 +1,10 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/helpers/Url.php';
 
-class UrlTest extends PHPUnit_Framework_TestCase {
+class UrlTest extends TestCase {
 
     public function testToString_ReturnsOriginalUrl() {
         $url = new Url('http://foo.com/?a=1&b=2');

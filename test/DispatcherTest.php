@@ -1,10 +1,12 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require_once 'app/helpers/Dispatcher.php';
 
-class DispatcherTest extends PHPUnit_Framework_TestCase {
+class DispatcherTest extends TestCase {
 
-    public function setUp() {
+    protected function setUp(): void {
         $this->dispatcher = new TestDispatcher(null);
     }
 
@@ -14,7 +16,7 @@ class DispatcherTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testParse_ThrowsException_IfCannotParsePath() {
-        $this->setExpectedException('Exception');
+        $this->expectException(Exception::class);
         $this->dispatcher->parse('foo/bar?a=1');
     }
 }
